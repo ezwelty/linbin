@@ -1,0 +1,11 @@
+Package: linbin
+Version: 0.1-0
+Date: 2013-01-01
+Title: Binning and plotting of linearly referenced data
+Authors@R: c(person("Ethan Z.", "Welty", role = c("aut", "cre"), email = "ethan.welty@gmail.com"), person("Christian E.", "Torgersen", role = c("ctb")))
+Author: Ethan Z. Welty, under the direction of Christian E. Torgersen. Demo datasets contributed by Samuel J. Brenkman and Jeffrey J. Duda. Beta testing and feature suggestions contributed by David J. Lawrence, Jeremy M. Cram, and Katie ?.
+Maintainer: Ethan Z. Welty <ethan.welty+linbin@gmail.com>
+Type: Package
+Depends: R (>= 2.10)
+License: GPL (>= 2)
+Description: Although originally developed for flattening, resampling, and visualizing data from surveys of braided rivers, linbin is intended for any interval data referenced to a linear coordinate system. Abitrarily complex, overlapping combinations of point and line events are split, merged, and resampled as desired to construct 1-dimensional transects of survey parameters. Batch binning and plotting allows the user to quickly visualize multivariate data at multiple scales, useful for identifying patterns within and between variables, and investigating the influence of scale of observation on data interpretation.
