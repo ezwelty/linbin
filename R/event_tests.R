@@ -7,7 +7,7 @@
 #' @seealso \code{\link{events}}, \code{\link{as_events}}, and \code{\link{read_events}} for creating valid event tables.
 #' @export
 #' @examples
-#' verbose = TRUE
+#' verbose <- TRUE
 #' is_events(c(1, 3), verbose)
 #' is_events(data.frame(from = 1, t = 3), verbose)
 #' is_events(data.frame(from = 1, from = 1, to = 3), verbose)
@@ -15,12 +15,12 @@
 #' is_events(data.frame(from = 1, to = NA), verbose)
 #' is_events(data.frame(from = 3, to = 1), verbose)
 #' is_events(data.frame(from = 1, to = 3), verbose)   # TRUE
-is_events = function(x, verbose = FALSE) {
+is_events <- function(x, verbose = FALSE) {
   if (!is.data.frame(x)) {
     if (verbose) cat("x is not a data.frame\n")
     return(FALSE)
   }
-  occurrence = lapply(rgrep_exact(c("from", "to"), names(x)), length)
+  occurrence <- lapply(rgrep_exact(c("from", "to"), names(x)), length)
   if (any(occurrence == 0)) {
     if (verbose) cat("columns from and to are missing\n")
     return(FALSE)
@@ -53,7 +53,7 @@ is_events = function(x, verbose = FALSE) {
 #' @param verbose logical value indicating whether to print the reason for test failure.
 #' @seealso \code{\link{seq_bin_events}} and \code{\link{group_nonoverlapping_events}} for creating valid bin event tables.
 #' @keywords internal
-is_bin_events = function(x, group.col = NULL, verbose = FALSE) {
+is_bin_events <- function(x, group.col = NULL, verbose = FALSE) {
   if (!is_events(x, verbose = verbose)) {
     if (verbose) cat("x is not an event table\n")
     return(FALSE)
@@ -64,10 +64,10 @@ is_bin_events = function(x, group.col = NULL, verbose = FALSE) {
   }
   if (!is.null(group.col)) {
     if (is.character(group.col))
-      group.col = match(group.col, names(x))
-    overlaps = unlist(lapply(split(x, x[group.col]), has_overlapping_events))
+      group.col <- match(group.col, names(x))
+    overlaps <- unlist(lapply(split(x, x[group.col]), has_overlapping_events))
   } else {
-    overlaps = has_overlapping_events(x)
+    overlaps <- has_overlapping_events(x)
   }
   if (any(overlaps)) {
     if (verbose) cat("x contains overlapping events\n")
@@ -84,17 +84,17 @@ is_bin_events = function(x, group.col = NULL, verbose = FALSE) {
 #' @export
 #' @rdname sorted_events
 #' @examples
-#' e = events(c(1, 1, 3, 2), c(2, 1, 4, 3))
+#' e <- events(c(1, 1, 3, 2), c(2, 1, 4, 3))
 #' is_unsorted_events(e)
 #' sort_events(e)
-sort_events = function(e) {  
-  ind = order(e$from, e$to)
+sort_events <- function(e) {  
+  ind <- order(e$from, e$to)
   return(e[ind, , drop = FALSE])
 }
 #' @export
 #' @rdname sorted_events
-is_unsorted_events = function(e) {
-  n = nrow(e)
+is_unsorted_events <- function(e) {
+  n <- nrow(e)
   if (n < 2)
     return(FALSE)
   else
@@ -112,9 +112,9 @@ is_unsorted_events = function(e) {
 #' @keywords internal
 #' @rdname overlapping_events
 #' @examples
-#' e = events(c(0, 2, 3), c(3, 4, 5))
+#' e <- events(c(0, 2, 3), c(3, 4, 5))
 #' cbind(group = group_nonoverlapping_events(e), e)  # adjacent lines do not overlap
-#' e = events(c(0, 0, 0, 1, 1), c(0, 0, 1, 1, 2))    
+#' e <- events(c(0, 0, 0, 1, 1), c(0, 0, 1, 1, 2))    
 #' cbind(group = group_nonoverlapping_events(e), e)  # equal points do overlap
 #' has_overlapping_events(events(c(0, 2), c(2, 4)))  # adjacent lines
 #' has_overlapping_events(events(c(0, 2), c(3, 4)))  # has overlapping lines
@@ -123,36 +123,36 @@ is_unsorted_events = function(e) {
 group_nonoverlapping_events = function(e) {
   # Sort bins as needed
   if (is_unsorted_events(e)) {
-    ids = order(e$from, e$to)
-    e = e[ids, c("from", "to")]
-    reorder = TRUE
+    ids <- order(e$from, e$to)
+    e <- e[ids, c("from", "to")]
+    reorder <- TRUE
   } else {
-    reorder = FALSE
+    reorder <- FALSE
   }
   # Loop through bins, assigning each to a group
-  N = nrow(e)
-  groups = numeric(N)
-  s = 1
-  i = 1
-  n = 0
+  N <- nrow(e)
+  groups <- numeric(N)
+  s <- 1
+  i <- 1
+  n <- 0
   repeat {
     # assign bin to set
-    groups[i] = s
-    n = n + 1
+    groups[i] <- s
+    n <- n + 1
     if (n == N)
       # all bins assigned
       break
-    k = i + 1
+    k <- i + 1
     # move forward to nearest, unassigned, non-overlapping bin
     while ((e$from[k] < e$to[i] || groups[k] > 0 || (e$from[k] == e$from[i] && e$to[k] == e$to[i])) && k <= N)
-      k = k + 1
+      k <- k + 1
     if (k > N) {
       # start new set
-      s = s + 1 
+      s <- s + 1 
       # back to top
-      i = match(0, groups)
+      i <- match(0, groups)
     } else {
-      i = k
+      i <- k
     }
   }
   # Reorder as needed
@@ -164,13 +164,13 @@ group_nonoverlapping_events = function(e) {
 }
 #' @export
 #' @rdname overlapping_events
-has_overlapping_events = function(e) {
-  ne = nrow(e)
+has_overlapping_events <- function(e) {
+  ne <- nrow(e)
   if (ne < 2)
     return(FALSE)
   if (is_unsorted_events(e))
-    events = sort_events(e)
-  overlines = e$from[-1] < e$to[-ne]
-  overpoints = e$from[-1] == e$from[-ne] & e$to[-1] == e$to[-ne]
+    events <- sort_events(e)
+  overlines <- e$from[-1] < e$to[-ne]
+  overpoints <- e$from[-1] == e$from[-ne] & e$to[-1] == e$to[-ne]
   return(any(overlines | overpoints))
 }

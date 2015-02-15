@@ -14,7 +14,7 @@
 #' events(1, 5)
 #' events(1:5)
 #' events(c(0, 15, 25), c(10, 30, 35), x = 1, y = c('a', 'b', 'c'))
-events = function(from = numeric(), to = numeric(), ...) {
+events <- function(from = numeric(), to = numeric(), ...) {
   # Attempt to coerce if only one non-empty argument
   if (!length(to) && !length(list(...)) && length(from)) {
     return(as_events(from))
@@ -38,7 +38,7 @@ events = function(from = numeric(), to = numeric(), ...) {
 #' as_events(1:5)
 #' as_events(cbind(1:5, 1:5), 1, 2)
 #' as_events(data.frame(x = 1, start = 1:5, stop = 1:5), "start", "stop")
-as_events = function(x, ...) {
+as_events <- function(x, ...) {
   if (is.null(x)) {
     return(data.frame(from = integer(), to = integer()))
   } else {
@@ -47,7 +47,7 @@ as_events = function(x, ...) {
 }
 #' @describeIn as_events Expands a numeric vector into two columns of event endpoints.
 #' @export
-as_events.numeric = function(x, ...) {
+as_events.numeric <- function(x, ...) {
   len <- length(x)
   if (len > 1) {
     # Interpret as sequential event endpoints
@@ -64,12 +64,12 @@ as_events.numeric = function(x, ...) {
 }
 #' @describeIn as_events Converts the matrix to a data frame, then calls the \code{data.frame} method.
 #' @export
-as_events.matrix = function(x, from.col = 1, to.col = 2, ...) {
+as_events.matrix <- function(x, from.col = 1, to.col = 2, ...) {
   return(as_events(as.data.frame(x), from.col = from.col, to.col = to.col, ...))
 }
 #' @describeIn as_events Renames \code{from.col} and \code{to.col} to "from" and "to" as needed. Since these column names must be unique, other columns cannot also be called "from" or "to".
 #' @export
-as_events.data.frame = function(x, from.col = 1, to.col = 2, ...) {
+as_events.data.frame <- function(x, from.col = 1, to.col = 2, ...) {
   # Ensure endpoint columns exist and are unique
   if (is.character(from.col)) {
     from.col <- which(names(x) %in% from.col)
@@ -92,7 +92,7 @@ as_events.data.frame = function(x, from.col = 1, to.col = 2, ...) {
     stop("from.col and to.col cannot contain non-finite values (NA, NaN, and Inf)")
   }
   # Order endpoints (to > from)
-  need.flip = x$to < x$from
+  need.flip <- x$to < x$from
   if (any(need.flip)) {
     x[need.flip, c("from", "to")] <- x[need.flip, c("to", "from")]
   }
@@ -113,7 +113,7 @@ as_events.data.frame = function(x, from.col = 1, to.col = 2, ...) {
 #' @seealso \code{\link{read.table}}.
 #' @seealso \code{\link{events}} and \code{\link{as_events}} for creating event tables from existing objects.
 #' @export
-read_events = function(file, from.col = 1, to.col = 2, sep = "", header = TRUE, ...) {
+read_events <- function(file, from.col = 1, to.col = 2, sep = "", header = TRUE, ...) {
   x <- read.table(file, sep = sep, header = header, ...)
   return(as_events(x, from.col, to.col))
 }
@@ -130,76 +130,76 @@ read_events = function(file, from.col = 1, to.col = 2, sep = "", header = TRUE, 
 #' @seealso \code{\link{event_range}}, \code{\link{event_coverage}}, and \code{\link{fill_event_gaps}} for building a custom \code{bin.coverage}.
 #' @export
 #' @examples
-#' e = events(c(0, 20, 40), c(10, 30, 45))
-#' no.gaps = event_range(e)
-#' has.gaps = event_coverage(e)
+#' e <- events(c(0, 20, 40), c(10, 30, 45))
+#' no.gaps <- event_range(e)
+#' has.gaps <- event_coverage(e)
 #' seq_bin_events(no.gaps, bin.length = 10)                  # unequal length (last is shorter)
 #' seq_bin_events(no.gaps, bin.length = 10, adaptive = TRUE) # equal length (11.25)
 #' seq_bin_events(no.gaps, bin.count = 4)                    # equal length (11.25)
 #' seq_bin_events(has.gaps, bin.count = 4, adaptive = FALSE) # equal coverage (11.25), straddling gaps
 #' seq_bin_events(has.gaps, bin.count = 4, adaptive = TRUE)  # unequal coverage, fitted to gaps
 #' seq_bin_events(no.gaps, bin.count = c(2, 4))              # "group" column added
-seq_bin_events = function(bin.coverage, bin.count = NULL, bin.length = NULL, adaptive = FALSE) {
+seq_bin_events <- function(bin.coverage, bin.count = NULL, bin.length = NULL, adaptive = FALSE) {
   
   # Check inputs
   if (!is_bin_events(bin.coverage))
     stop('bin.coverage is not a bin event table')
   # Flatten event table, calculate total coverage
-  total.length = sum(bin.coverage$to - bin.coverage$from)
+  total.length <- sum(bin.coverage$to - bin.coverage$from)
   if (!is.null(bin.count))
-    bin.length = total.length / round(as.numeric(bin.count))
+    bin.length <- total.length / round(as.numeric(bin.count))
   
   # Generate bins for each bin length
-  seq.bins = lapply(bin.length, function(bin.length) {
+  seq.bins <- lapply(bin.length, function(bin.length) {
     if (!adaptive) {
       # Build initial from and to values for the bins
-      from = min(bin.coverage$from)
-      to = from + total.length
-      binseq = seq(from, to, bin.length)
+      from <- min(bin.coverage$from)
+      to <- from + total.length
+      binseq <- seq(from, to, bin.length)
       if ((total.length / bin.length) %% 1 != 0)
         # Add smaller bin to reach end of coverage
-        binseq[length(binseq) + 1] = to
+        binseq[length(binseq) + 1] <- to
       # Reinject gaps into bins
-      gaps = event_gaps(bin.coverage)
+      gaps <- event_gaps(bin.coverage)
       if (nrow(gaps)) {
-        gap.length = gaps$to - gaps$from
+        gap.length <- gaps$to - gaps$from
         # shift gaps by previous gaps' length
-        gaps = gaps - c(0, cumsum(gap.length)[-nrow(gaps)])
+        gaps <- gaps - c(0, cumsum(gap.length)[-nrow(gaps)])
         # Locate start of gaps in bin sequence
-        pos = findInterval(gaps$from, binseq, rightmost.closed = TRUE)
-        temp = numeric(length(binseq))
-        temp[unique(pos) + 1] = aggregate(gap.length, by = list(pos), sum)$x
-        binseq = binseq + cumsum(temp)
+        pos <- findInterval(gaps$from, binseq, rightmost.closed = TRUE)
+        temp <- numeric(length(binseq))
+        temp[unique(pos) + 1] <- aggregate(gap.length, by = list(pos), sum)$x
+        binseq <- binseq + cumsum(temp)
       }
       return(cbind(binseq[-length(binseq)], binseq[-1]))
     } else {
       # Fit bins to intervals of coverage
-      seg.length = bin.coverage$to - bin.coverage$from
+      seg.length <- bin.coverage$to - bin.coverage$from
       # Find evenly dividing length closest to nominal length
-      r = seg.length / bin.length
+      r <- seg.length / bin.length
       # Require at least one bin
-      r[r < 1] = 1
-      l1 = seg.length / ceiling(r)
-      l2 = seg.length / floor(r)
-      d1 = abs(l1 - bin.length)
-      d2 = abs(l2 - bin.length)
-      smaller.d2 = d2 < d1
-      l1[smaller.d2] = l2[smaller.d2]
-      binmat = do.call(rbind, lapply(seq_len(nrow(bin.coverage)), 
+      r[r < 1] <- 1
+      l1 <- seg.length / ceiling(r)
+      l2 <- seg.length / floor(r)
+      d1 <- abs(l1 - bin.length)
+      d2 <- abs(l2 - bin.length)
+      smaller.d2 <- d2 < d1
+      l1[smaller.d2] <- l2[smaller.d2]
+      binmat <- do.call(rbind, lapply(seq_len(nrow(bin.coverage)), 
                                      function(i) {
-                                       binseq = seq(bin.coverage$from[i], bin.coverage$to[i], l1[i])
-                                       cbind(binseq[-length(binseq)], binseq[-1])
+                                       binseq <- seq(bin.coverage$from[i], bin.coverage$to[i], l1[i])
+                                       return(cbind(binseq[-length(binseq)], binseq[-1]))
                                      }))
       return(binmat)
     }
   })
   # Format to event.table with group id
   if (length(seq.bins) > 1) {
-    seq.bins = Map(cbind, seq_along(seq.bins), seq.bins)
-    seq.bins = as_events(do.call(rbind, seq.bins), from.col = 2, to.col = 3)
+    seq.bins <- Map(cbind, seq_along(seq.bins), seq.bins)
+    seq.bins <- as_events(do.call(rbind, seq.bins), from.col = 2, to.col = 3)
     names(seq.bins)[1] = "group"
   } else {
-    seq.bins = as_events(do.call(rbind, seq.bins), 1, 2)
+    seq.bins <- as_events(do.call(rbind, seq.bins), 1, 2)
   }
   return(seq.bins)
 }

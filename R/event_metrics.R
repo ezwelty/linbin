@@ -8,7 +8,7 @@
 #' @examples
 #' event_range(events(1:5))            # no gaps
 #' event_range(events(c(1,5), c(1,5))) # gaps
-event_range = function(e) {
+event_range <- function(e) {
   return(as_events(range(e$from, e$to)))
 }
 
@@ -28,19 +28,19 @@ event_range = function(e) {
 #' e = events(c(0, 2, 2, 2, 8, 10), c(0, 2, 2, 6, 10, 10))
 #' event_coverage(e, closed = TRUE)  # retains isolated points, drops duplicate points and points adjacent to lines
 #' event_coverage(e, closed = FALSE) # retains isolated points and points adjacent to lines, drops duplicate points
-event_coverage = function(e, closed = TRUE) {
-  e.range = event_range(e)
-  e.gaps = event_gaps(e, closed = closed)
-  e.coverage = event_gaps(e.gaps, closed = FALSE, range = e.range)
+event_coverage <- function(e, closed = TRUE) {
+  e.range <- event_range(e)
+  e.gaps <- event_gaps(e, closed = closed)
+  e.coverage <- event_gaps(e.gaps, closed = FALSE, range = e.range)
   # restore isolated boundary point events
-  add = e.range != event_range(e.coverage)
+  add <- e.range != event_range(e.coverage)
   # restore adjacent boundary point events
   if (!closed) {
-    add[1] = add[1] || any(rowSums(e[c("from", "to")] == e.range[[1]]) == 2)
-    add[2] = add[2] || any(rowSums(e[c("from", "to")] == e.range[[2]]) == 2)
+    add[1] <- add[1] || any(rowSums(e[c("from", "to")] == e.range[[1]]) == 2)
+    add[2] <- add[2] || any(rowSums(e[c("from", "to")] == e.range[[2]]) == 2)
   }
   if (any(add))
-    e.coverage = rbind(if_else(add[[1]], rep(e.range[[1]], 2), NULL), e.coverage, if_else(add[[2]], rep(e.range[[2]], 2), NULL))
+    e.coverage <- rbind(if_else(add[[1]], rep(e.range[[1]], 2), NULL), e.coverage, if_else(add[[2]], rep(e.range[[2]], 2), NULL))
   return(e.coverage)
 }
 
@@ -58,41 +58,39 @@ event_coverage = function(e, closed = TRUE) {
 #' event_gaps(events(1:5))                       # no gaps
 #' event_gaps(events(1:5), closed = FALSE)       # gaps at breaks
 #' event_gaps(events(1:5), range = events(0, 6)) # gaps to edge of range  
-event_gaps = function(e, closed = TRUE, range = NULL) {
+event_gaps <- function(e, closed = TRUE, range = NULL) {
   # Crop to bounds if not event range
   if (!is.null(range)) {
-    range = event_range(range)
+    range <- event_range(range)
     if (!nrow(e))
       # no data in range
       return(range)
-    e.range = event_range(e)
+    e.range <- event_range(e)
     if (!(range$from <= e.range$from && range$to >= e.range$to))
       # bounds intersect event range
-      e = crop_events(e, range)
+      e <- crop_events(e, range)
     if (range$from < e.range$from)
       # bounds extend past event range (from)
-      e = rbind(rep(range$from, 2), e[c("from", "to")])
+      e <- rbind(rep(range$from, 2), e[c("from", "to")])
     if (range$to > e.range$to)
       # bounds extend past event range (to)
-      e = rbind(e[c("from", "to")], rep(range$to, 2))
+      e <- rbind(e[c("from", "to")], rep(range$to, 2))
   }
   # Track overlaps by extending events by cumulative max
   if (is_unsorted_events(e))
-    e = sort_events(e)
-  e$to = cummax(e$to)
+    e <- sort_events(e)
+  e$to <- cummax(e$to)
   # Gaps occur when from[i+1] > to[i] if closed intervals
   # (and when == if open intervals)
   if (closed) { 
-    isgap = which(e$from[-1] > e$to[-nrow(e)])
+    isgap <- which(e$from[-1] > e$to[-nrow(e)])
   } else { 
-    isgap = which(e$from[-1] >= e$to[-nrow(e)])
+    isgap <- which(e$from[-1] >= e$to[-nrow(e)])
   }
   # Build gaps event table
   # (remove possible duplicate point gaps)
   return(unique(events(e$to[isgap], e$from[isgap + 1])))
 }
-
-# FIXME: add cut.points = FALSE switch to cut_events.
 
 #' Event Overlaps
 #' 
@@ -105,17 +103,17 @@ event_gaps = function(e, closed = TRUE, range = NULL) {
 #' @seealso \code{\link{event_coverage}}.
 #' @export
 #' @examples
-#' e = events(c(0, 10, 15, 25, 30), c(10, 20, 25, 40, 30))
+#' e <- events(c(0, 10, 15, 25, 30), c(10, 20, 25, 40, 30))
 #' event_overlaps(e)
-event_overlaps = function(e) {
+event_overlaps <- function(e) {
   # Sort event table
   if (is_unsorted_events(e)) {
-    e = sort_events(e)
+    e <- sort_events(e)
   }
   # Cut events at event endpoints
   # (don't cut new points out points, just cut lines)
-  e.cut = cut_events(e, c(e$from, e$to))
-  temp = aggregate(e.cut$from, by = e.cut[c("from","to")], FUN = length)
-  names(temp)[3] = "n"
+  e.cut <- cut_events(e, c(e$from, e$to))
+  temp <- aggregate(e.cut$from, by = e.cut[c("from","to")], FUN = length)
+  names(temp)[3] <- "n"
   return(temp)
 }

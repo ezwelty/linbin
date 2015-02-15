@@ -27,63 +27,62 @@
 #' @seealso \code{\link{seq_bin_events}} for generating groups of sequential bins, \code{\link{sample_events}} to populate bins with event data.
 #' @export
 #' @examples
-#' e = events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
-#' b = seq_bin_events(event_coverage(e), c(8, 4, 2, 1))
-#' bins = sample_events(e, b, list(sum, 'length'), scaled.cols = 'length')
+#' e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
+#' b <- seq_bin_events(event_coverage(e), c(8, 4, 2, 1))
+#' bins <- sample_events(e, b, list(sum, 'length'), scaled.cols = 'length')
 #' plot_events(bins, group.col = 'group', data.cols = 'length', dim = c(2,2))
-plot_events = function(e, group.col = NULL, groups = NULL, data.cols = NULL, dim = NULL, byrow = FALSE, main = NULL, xlim = NULL, ylim = NULL, xticks = NULL, yticks = NULL, xlabels = NULL, ylabels = NULL, plot.grid = FALSE, sigfigs = c(3, 3), col = NULL, border = par("fg"), lty = par("lty"), lwd = par("lwd"), xpd = FALSE, mar = c(2.1, 2.75, 1.5, 0.5),  oma = rep(2, 4), ...) {
+plot_events <- function(e, group.col = NULL, groups = NULL, data.cols = NULL, dim = NULL, byrow = FALSE, main = NULL, xlim = NULL, ylim = NULL, xticks = NULL, yticks = NULL, xlabels = NULL, ylabels = NULL, plot.grid = FALSE, sigfigs = c(3, 3), col = NULL, border = par("fg"), lty = par("lty"), lwd = par("lwd"), xpd = FALSE, mar = c(2.1, 2.75, 1.5, 0.5),  oma = rep(2, 4), ...) {
   
   ### Initialize
   if (is.null(group.col)) {
     # all events in one group
-    group.seq = numeric(nrow(e))
-    groups = 0
+    group.seq <- numeric(nrow(e))
+    groups <- 0
   } else {
-    group.seq = e[[group.col]]
+    group.seq <- e[[group.col]]
     if (is.null(groups)) {
       # all event groups
-      groups = unique(group.seq)
-      groups = groups[!is.na(groups)]
+      groups <- unique(group.seq)
+      groups <- groups[!is.na(groups)]
     } else {
       # user-specified event groups
-      groups = unique(groups)
+      groups <- unique(groups)
     }
   }
   if (is.null(data.cols)) {
-    group.col = if_else(is.character(group.col), group.col, names(e)[group.col])
-    data.cols = c(list(), setdiff(names(e), c("from", "to", group.col)))
+    group.col <- if_else(is.character(group.col), group.col, names(e)[group.col])
+    data.cols <- c(list(), setdiff(names(e), c("from", "to", group.col)))
   } else {
-    data.cols = rapply(as.list(data.cols), rgrep_exact, x = names(e), classes = "character", how = "replace")
-    ind2name = function(x) names(e)[ind]
-    data.cols = rapply(as.list(data.cols), ind2name, classes = "numeric", how = "replace")
+    data.cols <- rapply(as.list(data.cols), rgrep_exact, x = names(e), classes = "character", how = "replace")
+    # FIXME: Make new helper function
+    ind2name <- function(x) names(e)[ind]
+    data.cols <- rapply(as.list(data.cols), ind2name, classes = "numeric", how = "replace")
     data.cols = lapply(data.cols, unlist)
   }
   if (is.null(col)) {
-    col = grey.colors(length(data.cols))
+    col <- grey.colors(length(data.cols))
   }
   
   # grid dimensions
-  nr = length(data.cols)
-  nc = length(groups)
-  n = nr * nc
+  nr <- length(data.cols)
+  nc <- length(groups)
+  n <- nr * nc
   if (!byrow) {
-    par(mfcol = if_else(is.null(dim), c(nr, nc), dim))
+    par(mfcol <- if_else(is.null(dim), c(nr, nc), dim))
   } else {
-    par(mfrow = if_else(is.null(dim), c(nr, nc), dim))
+    par(mfrow <- if_else(is.null(dim), c(nr, nc), dim))
   }
-  par(mar = mar, oma = oma)
-  #xlab = if_else(is.null(xlab), xlab, rep_len(xlab, n))
-  #ylab = if_else(is.null(ylab), ylab, rep_len(ylab, n))
-  main = rep_len(if_else(is.null(main), sapply(data.cols, paste, collapse = "+"), main), n)
+  par(mar <- mar, oma = oma)
+  main <- rep_len(if_else(is.null(main), sapply(data.cols, paste, collapse = "+"), main), n)
   
   ### Plot each combination
-  j = 1
+  j <- 1
   for (group in groups) {
-    ind = group == group.seq
+    ind <- group == group.seq
     # For each set of variables
     for (i in seq_along(data.cols)) {
       plot_events_single(e[ind, , drop = FALSE], data.cols[[i]], main = main[j], xlim = xlim, ylim = ylim, xticks = xticks, yticks = yticks, sigfigs = sigfigs, col = col, border = border, lty = lty, lwd = lwd, xpd = xpd, plot.grid = plot.grid, xlabels = xlabels, ylabels = ylabels, xlab = "", ylab = "", ...)
-      j = j + 1
+      j <- j + 1
     }
   }
 }
@@ -110,21 +109,18 @@ plot_events = function(e, group.col = NULL, groups = NULL, data.cols = NULL, dim
 #' @param ... additional arguments passed to \code{\link{plot}}.
 #' @seealso \code{\link{plot_events}}.
 #' @keywords internal
-#' @examples
-#' e = events(from = c(0, 10, 20, 30), to = c(10, 20, 30, 40), x = c(2, -1, -1, NA) * 100, y = c(1, 1, -1, 0))
-#' plot_events_single(e, c("x", "y"), plot.grid = TRUE, yticks = axTicks, xticks = axTicks, main = "Hello")
-plot_events_single = function(e, cols, xlim = NULL, ylim = NULL, xticks = NULL, yticks = NULL, xlabels = NULL, ylabels = NULL, main = NULL, xlab = NULL, ylab = NULL, plot.grid = FALSE, sigfigs = c(3, 3), col = grey.colors(length(cols)), border = par("fg"), lty = par("lty"), lwd = par("lwd"), xpd = FALSE, ...) {
+plot_events_single <- function(e, cols, xlim = NULL, ylim = NULL, xticks = NULL, yticks = NULL, xlabels = NULL, ylabels = NULL, main = NULL, xlab = NULL, ylab = NULL, plot.grid = FALSE, sigfigs = c(3, 3), col = grey.colors(length(cols)), border = par("fg"), lty = par("lty"), lwd = par("lwd"), xpd = FALSE, ...) {
   
   # Compute plot limits
   if (is.null(xlim)) {
-    xlim = c(min(e$from), max(e$to))
+    xlim <- c(min(e$from), max(e$to))
   }
   if (is.null(ylim)) {
-    sum.neg = function(x, ...) sum(x[x < 0], ...)
-    sum.pos = function(x, ...) sum(x[x > 0], ...)
-    y.neg = apply(e[cols], 1, sum.neg, na.rm = TRUE)
-    y.pos = apply(e[cols], 1, sum.pos, na.rm = TRUE)
-    ylim = range(c(0, y.neg, y.pos))
+    sum.neg <- function(x, ...) sum(x[x < 0], ...)
+    sum.pos <- function(x, ...) sum(x[x > 0], ...)
+    y.neg <- apply(e[cols], 1, sum.neg, na.rm = TRUE)
+    y.pos <- apply(e[cols], 1, sum.pos, na.rm = TRUE)
+    ylim <- range(c(0, y.neg, y.pos))
   }
   
   # Initialize plot
@@ -132,35 +128,35 @@ plot_events_single = function(e, cols, xlim = NULL, ylim = NULL, xticks = NULL, 
   
   # Axis ticks
   if (is.null(xticks)) {
-    xticks = xlim
+    xticks <- xlim
   } else if (identical(xticks, axTicks)) {
-    xticks = axTicks(1)
+    xticks <- axTicks(1)
   }
   if (is.null(yticks)) {
-    yticks = unique(c(0, ylim))
+    yticks <- unique(c(0, ylim))
   } else if (identical(yticks, axTicks)) {
-    yticks = unique(c(0, axTicks(2)))
+    yticks <- unique(c(0, axTicks(2)))
   }
   if (length(sigfigs) == 1) {
-    sigfigs = rep(sigfigs, 2)
+    sigfigs <- rep(sigfigs, 2)
   }
   if (is.null(xlabels)) {
     if (is.null(sigfigs)) {
-      xlabels = xticks
+      xlabels <- xticks
     } else {
-      xlabels = prettyNum(signif(xticks, sigfigs[1]), big.mark = ",")
+      xlabels <- prettyNum(signif(xticks, sigfigs[1]), big.mark = ",")
     }
   } else {
-    xlabels = rep_len(xlabels, length(xticks))
+    xlabels <- rep_len(xlabels, length(xticks))
   }
   if (is.null(ylabels)) {
     if (is.null(sigfigs)) {
-      ylabels = yticks
+      ylabels <- yticks
     } else {
-      ylabels = prettyNum(signif(yticks, sigfigs[2]), big.mark = ",")
+      ylabels <- prettyNum(signif(yticks, sigfigs[2]), big.mark = ",")
     }
   } else {
-    ylabels = rep_len(ylabels, length(yticks))
+    ylabels <- rep_len(ylabels, length(yticks))
   }
   
   # Draw axes, ticks, and labels
@@ -176,25 +172,20 @@ plot_events_single = function(e, cols, xlim = NULL, ylim = NULL, xticks = NULL, 
   
   # Plot stacked barplots
   # (for each set of bars, stack positive on positive and negative on negative)
-  nc = length(cols)
-  ne = nrow(e)
-  col = if_else(is.null(col), col, rep_len(col, nc))
-  border = if_else(is.null(border), border, rep_len(border, nc))
-  lwd = if_else(is.null(lwd), lwd, rep_len(lwd, nc))
-  lty = if_else(is.null(lty), lty, rep_len(lty, nc))
-  base.pos = rep(0, ne)
-  base.neg = rep(0, ne)
+  nc <- length(cols)
+  ne <- nrow(e)
+  col <- if_else(is.null(col), col, rep_len(col, nc))
+  border <- if_else(is.null(border), border, rep_len(border, nc))
+  lwd <- if_else(is.null(lwd), lwd, rep_len(lwd, nc))
+  lty <- if_else(is.null(lty), lty, rep_len(lty, nc))
+  base.pos <- rep(0, ne)
+  base.neg <- rep(0, ne)
   for (i in seq_len(nc)) {
-    h = e[[cols[i]]]
-    y0 = ifelse(h > 0, base.pos, base.neg)
-    y1 = y0 + h
+    h <- e[[cols[i]]]
+    y0 <- ifelse(h > 0, base.pos, base.neg)
+    y1 <- y0 + h
     rect(e$from, y0, e$to, y1, col = col[i], border = border[i], lwd = lwd[i], lty = lty[i], xpd = xpd)
-    base.pos = ifelse(!is.na(h) & h > 0, base.pos + h, 0)
-    base.neg = ifelse(!is.na(h) & h < 0, base.neg + h, 0)
+    base.pos <- ifelse(!is.na(h) & h > 0, base.pos + h, 0)
+    base.neg <- ifelse(!is.na(h) & h < 0, base.neg + h, 0)
   }
-}
-
-plot_event_endpoints = function(e, ...) {
-  e = cbind(e, 1)
-  plot_events_single(e, length(e), col = "grey", border = par("bg"), lwd = 3, xticks = axTicks, xlab = '', ylab = '', xlim = c(0, 100), ...)
 }

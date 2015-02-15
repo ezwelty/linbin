@@ -8,7 +8,7 @@
 #' @param simplify if \code{TRUE}, the result is simplified from a list to a vector or matrix if appropriate.
 #' @return List, matrix, or vector of the indices of the elements of \code{x} that yielded a match to each element of \code{patterns}.
 #' @keywords internal
-rgrep_exact = function(patterns, x, ..., simplify = FALSE) {
+rgrep_exact <- function(patterns, x, ..., simplify = FALSE) {
   sapply(patterns, function(pattern) grep(paste0("^", pattern, "$"), as.character(x), ...), simplify = simplify, USE.NAMES = FALSE)
 }
 
@@ -19,7 +19,7 @@ rgrep_exact = function(patterns, x, ..., simplify = FALSE) {
 #' @param x an R object.
 #' @return \code{FALSE} if \code{x} is a numeric vector containing only whole numbers, \code{TRUE} otherwise.
 #' @keywords internal
-is_not_integer = function(x) {
+is_not_integer <- function(x) {
   return(!is.numeric(x) || length(x) == 0 || any((x %% 1) != 0))
 }
 
@@ -32,7 +32,7 @@ is_not_integer = function(x) {
 #' @param no value returned if \code{test} is \code{FALSE}
 #' @seealso \code{\link{ifelse}}
 #' @keywords internal
-if_else = function(test, yes, no) {
+if_else <- function(test, yes, no) {
   if (test) {
     return(yes)
   } else {
