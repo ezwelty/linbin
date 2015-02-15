@@ -1,10 +1,9 @@
 citHeader("To cite package 'linbin' in publications, use either or both of the following:")
 
-# R package 
+# CRAN
 year = sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE) 
 vers = paste("R package version", meta$Version)
-title = paste(meta$Package, ": ", meta$Title, sep="")
-  
+title = paste(meta$Package, ": ", meta$Title, sep="")  
 citEntry(
 	entry = "Manual",
 	title = title,
@@ -13,14 +12,15 @@ citEntry(
 	note = vers,
 	textVersion = paste("Ethan Z. Welty (", year, "). ", title, ". ", vers, ".", sep=""))
 
-# Fisheries Journal			
+# NAJFM
 citEntry(
 	entry = "Article",
-	title = "A multiscale approach to longitudinal analysis of spatially explicit riverscape survey data",
+	title = "Multiscale analysis of river networks using the linbin R package",
 	author = personList(as.person("Ethan Z. Welty"), 
 						          as.person("Christian E. Torgersen"), 
 						          as.person("Samuel J. Brenkman"), 
-						          as.person("Jeffrey D. Duda ")), 
-	year = 2013,
+						          as.person("Jeffrey D. Duda "),
+                      as.person("Jonathan B. Armstrong")), 
+	year = 2015,
 	journal = "North American Journal of Fisheries Management",
-	textVersion = "Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, and Jeffrey D. Duda (2013). A multiscale approach to longitudinal analysis of spatially explicit riverscape survey data. North American Journal of Fisheries Management.")
+	textVersion = "Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey D. Duda, and Jonathan B. Armstrong. 2015. Multiscale analysis of river networks using the linbin R package. North American Journal of Fisheries Management.")

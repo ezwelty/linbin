@@ -1,0 +1,202 @@
+---
+title: "Introduction to linbin"
+author: "Ethan Z. Welty"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to linbin}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, 
+  comment = '>',
+  fig.align = 'center',
+  fig.show = 'hold'
+)
+```
+
+```{r, echo=FALSE}
+library(linbin)
+```
+
+### Event Tables
+
+Event tables are custom data frames used throughout linbin to store and manipulate linearly referenced data. Each row includes an event's endpoints `from` and `to` (which can be equal, to describe a point, or non-equal, to describe a line) and the values of any variables measured on that interval. The built in `simple` data frame is an event table with line and point events, gaps and overlaps.
+
+```{r}
+e = simple
+```
+
+```{r, echo = FALSE, results = 'asis'}
+knitr::kable(e)
+```
+
+The central purpose of this package is to summarize event variables over sampling intervals, or "bins", and plot the results. Batch binning and plotting allows the user to quickly visualize multivariate data at multiple scales, useful for identifying patterns within and between variables, and investigating the influence of scale of observation on data interpretation. For example, using the `simple` event table above, we can compute sequential bins fitted to the range of the events with `seq_bin_events()`, compute bin statistics from the events falling within each bin with `sample_events()`, and plot the results with `plot_events()`.
+
+```{r, results = 'asis'}
+bins = seq_bin_events(event_range(e), bin.count = 5)
+e.bins = sample_events(e, bins, list(mean, "x"), list(mean, "y", by = "factor", na.rm = TRUE))
+```
+
+```{r, echo = FALSE, results = 'asis'}
+row.names(e.bins) = NULL
+knitr::kable(e.bins)
+```
+
+```{r, fig.width = 4, fig.height = 4}
+plot_events(e.bins, xticks = axTicks, col = "grey", border = par("bg"))
+```
+
+Below, we describe in more detail the core steps and functions of a typical linbin workflow.  
+
+### Create an Event Table : `events()`, `as_events()`, `read_events()`
+
+Event tables can be created from scratch with `events()`:
+
+```{r}
+events(from = c(0, 15, 25), to = c(10, 30, 35), x = 1, y = c('a', 'b', 'c'))
+```
+
+Coerced from existing objects with `as_events()`:
+
+```{r}
+as_events(1:3) # vector
+as_events(cbind(1:3, 2:4)) # matrix
+as_events(data.frame(start = 1:3, x = 1, stop = 2:4), "start", "stop") # data.frame
+```
+
+Or read directly from a text file with the equivalent syntax `read_events(file, from.col, to.col)`.
+
+### Design the Bins : `event_range()`, `event_coverage()`, `event_overlaps()`, `fill_event_gaps()`, `seq_bin_events()`, ...
+
+`seq_bin_events()` generates groups of sequential bins fitted to the specified intervals. Different results can be obtained by varying to what, and how, the bins are fitted. The simplest approach to fitting bins to data is to use the `event_range()`, the interval bounding the range of the data. An alternative is the `event_coverage()`, the intervals over which the number of events remains greater than zero — the inverse of `event_gaps()`. For finer control, `event_overlaps()` returns the number of overlapping events on each interval. `fill_event_gaps()` fills gaps less than a maximum length to prevent small gaps in coverage from being preserved in the bins. Using the `simple` event table as an example:
+
+```{r, echo = FALSE, fig.width = 4, fig.height = 4}
+metrics = rbind(
+  cbind(event_range(e), n = 1, g = 1),
+  cbind(event_coverage(e, closed = FALSE), n = 1, g = 2),
+  cbind(event_overlaps(e), g = 4),
+  cbind(event_gaps(e), n = 1, g = 3))
+plot_events(metrics, group.col = "g", data.cols = "n", dim = c(4, 1), xlim = c(0, 100), col = 'grey', main = c("Range", "Coverage", "Overlaps", "Gaps"), lwd = 0.5, mar = rep(1.5, 4), oma = rep(1, 4))
+```
+
+These various metrics can be used to generate bins serving particular needs. Some strategies are listed below as examples, and applied to the built in `elwha` event table to plot longitudinal profiles of mean wetted width throughout the Elwha River (Washington, USA).
+
+```{r}
+e = elwha
+```
+
+  (a) Minimally flatten the event data to 1-dimensions by using bins spanning the intervals of event overlap. In the absence of overlaps, these are equal to the events themselves.
+  
+```{r}
+bins = event_overlaps(e)
+```
+
+```{r, fig.width = 4.5, fig.height = 1.25}
+e.bins = sample_events(e, bins, list(weighted.mean, "mean.width", "unit.length"), scaled.cols = "unit.length")
+plot_events(e.bins, data.cols = "mean.width", col = "grey", border = "#666666", 
+            ylim = c(0, 56), main = "", oma = rep(1, 4), mar = rep(0, 4), 
+            xticks = NA, yticks = NA, cex.axis = 0.75, xpd = NA)
+```
+
+  (b) Divide the range of the data into equal-length bins. A conventional approach that yields regular bins, but ignores the presence of any gaps in the data.
+  
+```{r}
+bins = seq_bin_events(event_range(e), bin.count = 33)
+```
+
+```{r, echo = FALSE, fig.width = 4.5, fig.height = 1.25}
+e.bins = sample_events(e, bins, list(weighted.mean, "mean.width", "unit.length"), scaled.cols = "unit.length")
+plot_events(e.bins, data.cols = "mean.width", col = "grey", border = "#666666", ylim = c(0, 56), xpd = NA, main = "", oma = c(1, 1, 1,1), mar = rep(0, 4), cex.axis = 0.75, xticks = NA, yticks = NA)
+```
+  
+  (c) Divide the coverage of the data into equal-coverage bins. By straddling gaps, each bin contains an equal length of sampled data, minimizing sampling bias.
+    
+```{r}
+bins = seq_bin_events(event_coverage(e), bin.count = 20)
+```
+
+```{r, echo = FALSE, fig.width = 4.5, fig.height = 1.25}
+e.bins = sample_events(e, bins, list(weighted.mean, "mean.width", "unit.length"), scaled.cols = "unit.length")
+plot_events(e.bins, data.cols = "mean.width", col = "grey", border = "#666666", ylim = c(0, 56), xpd = NA, main = "", oma = c(1, 1, 1,1), mar = rep(0, 4), cex.axis = 0.75, xticks = NA, yticks = NA)
+```
+  
+  (d) Vary the lengths of bins locally to fit the coverage of the data. By explicitly preserving gaps, this strategy minimizes edge effects and can ensure that the bin endpoints correspond to important features (e.g., tributary confluences in river networks).
+      
+```{r}
+e.filled = fill_event_gaps(e, max.length = 1) # fill any small gaps first
+bins = seq_bin_events(event_coverage(e.filled), bin.count = 20, adaptive = TRUE)
+```
+
+```{r, echo = FALSE, fig.width = 4.5, fig.height = 1.25}
+e.bins = sample_events(e, bins, list(weighted.mean, "mean.width", "unit.length"), scaled.cols = "unit.length")
+plot_events(e.bins, data.cols = "mean.width", col = "grey", border = "#666666", ylim = c(0, 56), xpd = NA, main = "", oma = c(1, 1, 1,1), mar = rep(0, 4), cex.axis = 0.75, xticks = NA, yticks = NA)
+```
+
+### Sample Events at Bins : `cut_events()`, `sample_events()`
+
+`sample_events()` computes event table variables for the specified sampling intervals, or "bins". The sampling functions to use are passed as a series of list arguments in the format `list(FUN, data.cols.first, ..., by = group.cols, ...)`, where: 
+
+  - `FUN` — The first element is the function to use. It must compute a single value from one or more vectors of the same length. Functions commonly used on single numeric variables include `sum()`, `mean()`, `sd()`, `min()` and `max()`. Functions commonly used on multiple variables include `weighted.mean()`.
+
+  - `data.cols.first` — The next (unnamed) element is a vector specifying the event column names or indices to pass in turn as the first argument of the function. Names are interpreted as regular expressions (regex) matching full column names. 
+  
+  - `...` — Any additional unnamed elements are vectors specifying event columns to pass as the second, third, ... argument of the function. 
+  
+  - `by = group.cols` — The first element named `by` is a vector of event column names or indices used as grouping variables. 
+  
+  - `...` — Any additional named arguments are passed directly to the function unchanged.
+
+Binning begins by cutting events at bin endpoints using `cut_events()`. When events are cut, event variables can be rescaled by the relative lengths of the resulting event segments by naming them in the argument `scaled.cols`. This is typically the desired bevavior when computing sums, since otherwise events will contribute their full total to each bin they intersect.
+
+With the `simple` event table as an example:
+
+```{r}
+e = simple
+bins = seq_bin_events(event_range(e), bin.count = 1)
+```
+
+Compute the sum of x and y, ignoring NA values and rescaling both at cuts:
+
+```{r}
+e.bins = sample_events(e, bins, list(sum, c('x', 'y'), na.rm = TRUE), scaled.cols = c('x', 'y'))
+```
+```{r, echo = FALSE, results = 'asis'}
+row.names(e.bins) = NULL
+knitr::kable(e.bins)
+```
+
+Compute the mean of x with weights y, ignoring NA values:
+
+```{r}
+e.bins = sample_events(e, bins, list(weighted.mean, 'x', 'y', na.rm = TRUE))
+```
+```{r, echo = FALSE, results = 'asis'}
+row.names(e.bins) = NULL
+knitr::kable(e.bins)
+```
+
+Paste together all unique values of factor (using a custom function):
+
+```{r}
+fun = function(x) paste0(unique(x), collapse = '.')
+e.bins = sample_events(e, bins, list(fun, 'factor'))
+```
+```{r, echo = FALSE, results = 'asis'}
+row.names(e.bins) = NULL
+knitr::kable(e.bins)
+```
+
+### Plot the Binned Data : `plot_events()`
+
+`plot_events()` plots an event table as a grid of bar plots. Given a groupping variable for the rows of the event table (e.g., groups of bins of different sizes), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column group. If a column group contains multiple event columns, they are plotted together as stacked bars. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is better to use `sample_events()` with groups of non-overlapping bins to flatten the data to 1-dimensions before plotting. Many arguments are available to control the appearance of the plot grid. The default output looks like the following:
+
+```{r fig.height = 4, fig.width = 5}
+e = simple
+bins = seq_bin_events(event_range(e), bin.count = c(1, 4, 16)) # appends a "group" column
+e.bins = sample_events(e, bins, list(mean, c('x', 'y'), na.rm = TRUE), list(sum, 'x', na.rm = TRUE))
+plot_events(e.bins, group.col = 'group')
+```

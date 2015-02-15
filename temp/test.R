@@ -1,13 +1,20 @@
+
 ### Simple Stupid
 
-from = c(0,5,20,30,45)
-to = c(10,15,30,40,50)
-x = c(1,2,3,NA,1)
-f = c('a','b',NA,'b','a')
-e = event.table(from, to, x, f)
-b = seq.bin.event.table(event.coverage(e), 4)
-eb = sample.events(e, b, list(sum, 'x', na.rm = T), list(sum, 'x', by = 'f', na.rm = T))
-plot.events(eb, 3)
+from = c(0, 10, 15, 25)
+to = c(10, 20, 25, 40)
+x = c(1, 2, 3, 1)
+f = c('a', 'b', 'b', 'a')
+e = events(from, to, x, f)
+b = seq_bin_events(event_coverage(e), 4)
+eb = sample_events(e, b, list(sum, 'x', na.rm = T))
+plot_events_single(eb, 'x')
+
+plot(as.numeric(event_range(eb)), range(eb$x), type = 'n', axes = FALSE, xlab = '', ylab = '')
+rect(eb$from, rep(0, nrow(eb)), eb$to, eb$x, col = 'grey')
+
+
+
 
 
 df <- data.frame(grp = c("a", "a", "b", "b", "c", "c", "c"),
@@ -186,23 +193,25 @@ citation("linbin")
 packageDescription("linbin")
 packageVersion("linbin")
 
-## Load and verify data
-v = TRUE
+## Functions
 # create
-test = data.frame(from = c(1,2,3), to = c(2,3,4), data = c(0.1,0.2,0.3))
-events = EventTable(FROM = test$from, TO = test$to, data = test$data, verbose = v)
-events = as.EventTable(test, fromCol = "from", toCol = "to", verbose = v)
-# import
-events = import.EventTable('test.csv', fromCol = 'FROM_M', toCol = 'TO_M', sep = ',', verbose = v)
-# verify
-is.EventTable(events, verbose = v)
-validate.EventTable(events, verbose = v)
-validate.binEventTable(events, verbose = v)
+example(events)
+example(as_events)
+#example(read_events)
+example(is_events)
+# metrics
+example(event_range)
+example(event_coverage)
+example(event_gaps)
+# operations
+example(fill_event_gaps)
+example(sort_events)
+example(transform_events)
+example(crop_events)
+example(cut_events)
 
-## Logical indices
-find.points(events, verbose = v)
-find.lines(events, verbose = v)
-find.intersecting(c(100,200), events, verbose = v)
+example(find_intersecting_events)
+example(seq_bin_events)
 
 ## Measurements
 range.EventTable(events, verbose = v)
