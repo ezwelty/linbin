@@ -1,0 +1,54 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = ">",
+  fig.path = "README-",
+  fig.align = 'center',
+  fig.show = 'hold'
+)
+```
+
+# linbin
+
+Short for "linear binning", linbin is an [R](http://www.r-project.org/) package for manipulating, binning, and plotting linearly referenced data. Although developed for data collected on river networks, it can be used with any interval or point data referenced to a 1-dimensional coordinate system. Flexible bin generation and batch processing makes it easy to compute and visualize variables at multiple scales, useful for identifying patterns within and between variables and investigating the influence of scale of observation on data interpretation.
+
+To install in R:
+
+* the latest released version: `install.packages("linbin")`
+* the latest development version: [devtools](https://github.com/hadley/devtools)::`install_github("ezwelty/linbin")`
+
+Find out more by reading the illustrated [vignettes]() (*coming soon!*) or the original [journal article]() (*coming soon!*).
+
+### ...
+
+```{r, echo = FALSE}
+library(linbin)
+```
+
+```{r, echo = FALSE, fig.width = 7, fig.height = 6}
+# Load event data
+e <- quinault
+
+# Design bins
+bin.lengths <- c(100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600) # m
+bins <- seq_events(event_range(e), by = bin.lengths / 1000) # km
+
+# Sample events at bins
+e.bins <- sample_events(e, bins, list(sum, "ONXX.*"), scaled.cols = "ONXX.*")
+
+# Plot binned data
+plot_events(e.bins, group.col = "group", data.cols = "ONXX.total", 
+            main = paste0("Bin length = ", prettyNum(bin.lengths, ","), " m"), 
+            xlabs = "Distance upstream (km)", ylabs = "Trout abundance",
+            dim = c(3, 3), byrow = TRUE, oma = c(3, 3, 2, 2))
+```
+
+> *Longitudinal profiles of trout abundance throughout the Quinault River, Washington, USA plotted at a range of bin lengths.*

@@ -1,16 +1,4 @@
-citHeader("To cite package 'linbin' in publications, use either or both of the following:")
-
-# CRAN
-year = sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE) 
-vers = paste("R package version", meta$Version)
-title = paste(meta$Package, ": ", meta$Title, sep="")  
-citEntry(
-	entry = "Manual",
-	title = title,
-	author = personList(person("Ethan Z.", "Welty")),
-	year = year,
-	note = vers,
-	textVersion = paste("Ethan Z. Welty (", year, "). ", title, ". ", vers, ".", sep=""))
+citHeader("To cite package 'linbin' in publications, please cite the original journal article if possible:")
 
 # NAJFM
 citEntry(
@@ -21,6 +9,20 @@ citEntry(
 						          as.person("Samuel J. Brenkman"), 
 						          as.person("Jeffrey D. Duda "),
                       as.person("Jonathan B. Armstrong")), 
-	year = 2015,
+	year = "In review",
 	journal = "North American Journal of Fisheries Management",
-	textVersion = "Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey D. Duda, and Jonathan B. Armstrong. 2015. Multiscale analysis of river networks using the linbin R package. North American Journal of Fisheries Management.")
+	textVersion = "Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey D. Duda, and Jonathan B. Armstrong. In review. Multiscale analysis of river networks using the linbin R package. North American Journal of Fisheries Management.")
+
+# CRAN
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
+vers <- paste("R package version", meta$Version)
+title <- paste(meta$Package, ": ", meta$Title, sep = "")  
+url <- "https://github.com/ezwelty/linbin"
+citEntry(
+  entry = "Manual",
+	title = title,
+	author = personList(person("Ethan Z.", "Welty")),
+	year = year,
+	note = vers,
+  url = url,
+	textVersion = paste("Ethan Z. Welty. ", year, ". ", title, ". ", vers, ". ", url, sep = ""))

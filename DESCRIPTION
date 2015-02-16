@@ -1,6 +1,6 @@
 Package: linbin
 Version: 0.1.0
-Date: 2015-02-13
+Date: 2015-02-16
 Authors@R: c(
     person("Ethan Z.", "Welty", email = "ethan.welty+linbin@gmail.com", role = c("aut", "cre")),
     person("Christian E.", "Torgersen", role = "ctb", comment = "Contributed direction to the author."),
@@ -8,10 +8,17 @@ Authors@R: c(
     person("Jeffrey J.", "Duda", role = "ctb", comment = "Contributed the elwha dataset."),
     person("Jonathan B.", "Armstrong", role = "ctb", comment = "Contributed the fishmotion dataset."))
 Type: Package
-Depends: R (>= 2.10)
+Depends: R (>= 3.0.1)
 License: AGPL-3
 Title: Binning and Plotting of Linearly Referenced Data
-Description: Although originally developed for flattening, resampling, and visualizing data from surveys of braided rivers, linbin is intended for any interval data referenced to a linear coordinate system. Abitrarily complex, overlapping combinations of point and line events are split, merged, and resampled as desired to construct 1-dimensional transects of survey parameters. Batch binning and plotting allows the user to quickly visualize multivariate data at multiple scales, useful for identifying patterns within and between variables, and investigating the influence of scale of observation on data interpretation.
+Description: Short for "linear binning", the linbin package provides functions for manipulating,
+  binning, and plotting linearly referenced data. Although developed for data collected on river
+  networks, it can be used with any interval or point data referenced to a 1-dimensional coordinate 
+  system. Flexible bin generation and batch processing makes it easy to compute and visualize 
+  variables at multiple scales, useful for identifying patterns within and between variables and
+  investigating the influence of scale of observation on data interpretation.
 LazyData: true
 Suggests: knitr
 VignetteBuilder: knitr
+URL: https://github.com/ezwelty/linbin
+BugReports: https://github.com/ezwelty/linbin/issues

@@ -80,7 +80,7 @@ transform_events <- function(e, scale = 1, translate = 0) {
 #' crop_events(e, events(c(0, 15)))
 #' crop_events(e, events(c(0, 5, 15)))
 #' crop_events(e, events(c(0, 5, 15)), scaled.cols = "x")
-#' crop_events(e, events(c(0, 5, 5, 15)), scaled.cols = "x")   # creates new point events inside line events
+#' crop_events(e, events(c(0, 5, 5, 15)), scaled.cols = "x")   # creates new points inside lines
 #' crop_events(e, events(c(0, 10, 10, 15)), scaled.cols = "x") # but not at line event endpoints
 crop_events <- function(e, crops, scaled.cols = NULL) {  
   e.cut = cut_events(e, cuts = crops, scaled.cols = scaled.cols)
@@ -104,7 +104,7 @@ crop_events <- function(e, crops, scaled.cols = NULL) {
 #' e <- events(c(0, 10, 20), c(10, 20, 30), x = 10)
 #' cut_events(e, events(c(0, 5, 15)))
 #' cut_events(e, events(c(0, 5, 15)), scaled.cols = "x")
-#' cut_events(e, events(c(0, 5, 5, 15)), scaled.cols = "x")   # creates new point events inside line events
+#' cut_events(e, events(c(0, 5, 5, 15)), scaled.cols = "x")   # creates new points inside lines
 #' cut_events(e, events(c(0, 10, 10, 15)), scaled.cols = "x") # but not at line event endpoints
 cut_events <- function(e, cuts, scaled.cols = NULL) {
   # Initialize inputs

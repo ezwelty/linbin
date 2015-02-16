@@ -23,11 +23,12 @@ event_range <- function(e) {
 #' @seealso \code{\link{event_gaps}} for gaps (the inverse of coverage), \code{\link{event_range}} for range (coverage with gaps ignored).
 #' @export
 #' @examples
-#' event_coverage(events(c(1, 2, 4, 8), c(3, 4, 5, 10)), closed = TRUE)  # retains breaks
-#' event_coverage(events(c(1, 2, 4, 8), c(3, 4, 5, 10)), closed = FALSE) # drops breaks
-#' e = events(c(0, 2, 2, 2, 8, 10), c(0, 2, 2, 6, 10, 10))
-#' event_coverage(e, closed = TRUE)  # retains isolated points, drops duplicate points and points adjacent to lines
-#' event_coverage(e, closed = FALSE) # retains isolated points and points adjacent to lines, drops duplicate points
+#' e <- events(c(1, 2, 4, 8), c(3, 4, 5, 10))
+#' event_coverage(e, closed = TRUE)  # retains breaks
+#' event_coverage(e, closed = FALSE) # drops breaks
+#' e <- events(c(0, 2, 2, 2, 8, 10), c(0, 2, 2, 6, 10, 10))
+#' event_coverage(e, closed = TRUE)  # retains isolated points
+#' event_coverage(e, closed = FALSE) # retains isolated points and points adjacent to lines
 event_coverage <- function(e, closed = TRUE) {
   e.range <- event_range(e)
   e.gaps <- event_gaps(e, closed = closed)

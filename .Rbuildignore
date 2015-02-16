@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^cran_comments.*$
+^temp$
+^README\.Rmd$
+^README-*\.png$
+^NEWS\.md$

@@ -14,6 +14,7 @@
 #' find_intersecting_events(ex, events(5), closed = TRUE)        # adjacent events intersect
 #' find_intersecting_events(ex, ex)
 find_intersecting_events <- function(ex, ey, equal.points = TRUE, closed = FALSE) {
+  # FIXME: Slow, naive approach. Try speeding up by sorting first.
   inbins = apply(ex[c("from", "to")], 1, function(ex.each) {
     if (closed) {
       inbin <- ex.each[1] <= ey$to & ex.each[2] >= ey$from
@@ -59,7 +60,8 @@ find_intersecting_events <- function(ex, ey, equal.points = TRUE, closed = FALSE
 #' @seealso \code{\link{seq_events}} to generate sequential bins.
 #' @export
 #' @examples
-#' e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
+#' e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), 
+#'             x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
 #' bins <- rbind(seq_events(event_coverage(e), 4), c(18, 18))
 #' sample_events(e, bins, list(sum, 'length'))
 #' sample_events(e, bins, list(sum, 'length'), scaled.cols = 'length')
@@ -109,7 +111,8 @@ sample_events <- function(e, bins, ..., scaled.cols = NULL, col.names = NULL, dr
   
   ### Prepare final output
   # Row bind list of outputs
-  # FIXME: Slow! Use conversion to numeric instead? Or use data.table (rbindlist).
+  # FIXME: Can be slow for many/large output!
+  # Convert to matrix (restoring factors) or use data.table (rbindlist)?
   # http://stackoverflow.com/questions/5980240/performance-of-rbind-data-frame
   D <- do.call(rbind, L)
   # Reorder result by original bin index and drop index

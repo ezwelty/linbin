@@ -38,7 +38,8 @@ list(sum, c('x', 'y'), by = 3:4) => list(sum, 'x'), list(sum, 'y') grouped into 
 Using the latter example above, column names are taken from the first argument (e.g. \code{x, y}), and all grouping variables are appended (e.g. \code{x.a, y.a, x.b, y.b}), where \code{a} and \code{b} are the levels of columns 3 and 4. \code{NA} is also treated as a factor level. Columns are added left to right in order of the sampling function arguments. Finally, names are made unique by appending sequence numbers to duplicates (using \code{\link{make.unique}}).
 }
 \examples{
-e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
+e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15),
+            x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
 bins <- rbind(seq_events(event_coverage(e), 4), c(18, 18))
 sample_events(e, bins, list(sum, 'length'))
 sample_events(e, bins, list(sum, 'length'), scaled.cols = 'length')

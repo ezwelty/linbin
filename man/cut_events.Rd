@@ -23,7 +23,7 @@ Line events straddling cut locations are cut into multiple event segments. Colum
 e <- events(c(0, 10, 20), c(10, 20, 30), x = 10)
 cut_events(e, events(c(0, 5, 15)))
 cut_events(e, events(c(0, 5, 15)), scaled.cols = "x")
-cut_events(e, events(c(0, 5, 5, 15)), scaled.cols = "x")   # creates new point events inside line events
+cut_events(e, events(c(0, 5, 5, 15)), scaled.cols = "x")   # creates new points inside lines
 cut_events(e, events(c(0, 10, 10, 15)), scaled.cols = "x") # but not at line event endpoints
 }
 \seealso{
