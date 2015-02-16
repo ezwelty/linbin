@@ -37,9 +37,9 @@ e.filled <- fill_event_gaps(e, max.length = 1) # fill small gaps for the variabl
 
 # Design bins using different strategies
 bins.a <- event_overlaps(e)[1:2]
-bins.b <- seq_bin_events(event_range(e), bin.count = 33, adaptive = FALSE)
-bins.c <- seq_bin_events(event_coverage(e), bin.count = 20, adaptive = FALSE)
-bins.d <- seq_bin_events(event_coverage(e.filled), bin.count = 20, adaptive = TRUE)
+bins.b <- seq_events(event_range(e), length.out = 33, adaptive = FALSE)
+bins.c <- seq_events(event_coverage(e), length.out = 20, adaptive = FALSE)
+bins.d <- seq_events(event_coverage(e.filled), length.out = 20, adaptive = TRUE)
 bins <- rbind(cbind(bins.a, g = 1), cbind(bins.b, g = 2), cbind(bins.c, g = 3), cbind(bins.d, g = 4))
 
 # Sample events at bins
@@ -50,9 +50,8 @@ e.bins <- sample_events(e, bins, list(weighted.mean, "mean.width", "unit.length"
 plot_events(e.bins, group.col = "g", data.cols = "mean.width", col = "grey", border = "#666666", 
             main = c("(a) Flattened original data", "(b) Equal length bins", 
                      "(c) Equal coverage bins", "(d) Variable length bins"),
+            xlabs = "Distance upstream (km)", ylabs = "Wetted width (m)",
             dim = c(4, 1), ylim = c(0, 56), xpd = NA)
-mtext('Distance upstream (km)', side = 1, outer = TRUE, cex = 0.9)
-mtext('Wetted width (m)', side = 2, outer = TRUE, cex = 0.9)
 ```
 
 ### Quinault River : `quinault`
@@ -65,7 +64,7 @@ e <- quinault
 
 # Design bins
 bin.lengths <- c(100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600) # m
-bins <- seq_bin_events(event_range(e), bin.length = bin.lengths / 1000) # km
+bins <- seq_events(event_range(e), by = bin.lengths / 1000) # km
 
 # Sample events at bins
 e.bins <- sample_events(e, bins, list(sum, "ONXX.*"), scaled.cols = "ONXX.*")
@@ -73,9 +72,8 @@ e.bins <- sample_events(e, bins, list(sum, "ONXX.*"), scaled.cols = "ONXX.*")
 # Plot binned data
 plot_events(e.bins, group.col = "group", data.cols = "ONXX.total", 
             main = paste0("Bin length = ", prettyNum(bin.lengths, ","), " m"), 
+            xlabs = "Distance upstream (km)", ylabs = "Trout abundance",
             dim = c(3, 3), byrow = TRUE, oma = c(3, 3, 2, 2))
-mtext('Distance upstream (km)', side = 1, line = 1, outer = TRUE)
-mtext('Trout abundance', side = 2, line = 1, outer = TRUE)
 ```
 
 Rather than plotting the total count, the individual size classes (10 - 20 cm, 20 - 30 cm, > 30 cm) are stacked together in the barplots:
@@ -83,9 +81,8 @@ Rather than plotting the total count, the individual size classes (10 - 20 cm, 2
 ```{r, fig.width = 6, fig.height = 6}
 plot_events(e.bins, group.col = "group", data.cols = "ONXX.[0-9]+", 
             main = paste0("Bin length = ", prettyNum(bin.lengths, ","), " m"), 
+            xlabs = "Distance upstream (km)", ylabs = "Trout abundance",
             dim = c(3, 3), byrow = TRUE, oma = c(3, 3, 2, 2), col = heat.colors(3), border = NA)
-mtext('Distance upstream (km)', side = 1, line = 1, outer = TRUE)
-mtext('Trout abundance', side = 2, line = 1, outer = TRUE)
 ```
 
 ### NetMap : `netmap`
@@ -107,7 +104,7 @@ e.main <- d[d$CHAN_ID == 1, ]
 e.net <- d
 
 # Design bins
-bins = seq_bin_events(event_range(e.net), bin.count = 10)
+bins = seq_events(event_range(e.net), length.out = 10)
 
 # Sample events at bins
 fields = c("IP_CHINOOK", "IP_COHO", "IP_STEELHD", "BeavHab", "DEPTH_M")
@@ -118,12 +115,10 @@ e.bins.net = sample_events(e.net, bins, list(weighted.mean, fields, "LENGTH_M"),
 e.bins = rbind(cbind(e.bins.main, group = 1), cbind(e.bins.net, group = 2))
 
 # Plot binned data
-plot_events(e.bins, group.col = 'group', data.cols = fields, 
-            oma = c(3, 3, 2, 2), mar = c(2, 4, 1.5, 0.5))
-mtext(c('Distance upstream (km)\nmainstem', 'Distance upstream (km)\nnetwork'), 
-      side = 1, line = 2, outer = TRUE, at = c(0.25, 0.75))
-mtext(c('Depth (m)', 'Proportion', 'IP', 'IP', 'IP'), 
-      side = 2, line = 1, outer = TRUE, at = seq(0, 0.8, 0.2) + 0.1)
+plot_events(e.bins, group.col = 'group', data.cols = fields, sigfigs = c(3, 2),
+            xlabs = c('Distance upstream (km)\nmainstem', 'Distance upstream (km)\nnetwork'),
+            ylabs = c('Depth (m)', 'Proportion', 'IP', 'IP', 'IP'),
+            oma = c(4, 3, 2, 2), mar = c(2, 4, 1.5, 0.5))
 ```
 
 ### Fish Movements : `fishmotion`
@@ -138,7 +133,7 @@ e.origin = d[[2]]
 
 # Design hourly bins
 # (endpoints are in seconds since 1970-01-01 UTC)
-bins = seq_bin_events(event_range(e.motion), bin.length = 3600)
+bins = seq_events(event_range(e.motion), by = 3600)
 
 # Sample events at bins
 e.motion.bins = sample_events(e.motion, bins, list(length, 'region', by = 'region'))
@@ -155,10 +150,9 @@ week.labels = format(week.ticks, '%b-%d')
 
 # Plot binned data
 plot_events(e.motion.bins, data.cols = "fish.1.norm", yticks = c(0, 1, 2), 
-            col = par("fg"), ylim = c(0, 2), plot.grid = TRUE, xpd = FALSE, main = '',
-            xticks = week.ticks, xlabels = week.labels, cex.axis = 0.9, oma = c(3, 2, 1, 2))
-mtext('Date (2008)', side = 1, line = 1, outer = TRUE)
-mtext('Relative abundance', side = 2, outer = TRUE)
+            col = par("fg"), ylim = c(0, 2), plot.grid = TRUE, xpd = FALSE, 
+            main = NA, xlabs = "Date (2008)", ylabs = "Relative abundance",
+            xticks = week.ticks, xtick.labels = week.labels, oma = c(3, 2, 1, 2))
 
 # Add daily vertical lines
 days = seq(trunc(min(bins$from.date), "day"), trunc(max(bins$from.date), "day"), by = "day")

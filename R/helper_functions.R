@@ -2,10 +2,10 @@
 #' 
 #' Recursive wrapper for \code{grep} returning only full matches to elements of a character vector.
 #' 
-#' @param patterns character vector containing regular expressions to be matched.
-#' @param x a character vector where matches are sought, or an object which can be coerced by \code{as.character} to a character vector.
-#' @param ... additional arguments to \code{\link{grep}}.
-#' @param simplify if \code{TRUE}, the result is simplified from a list to a vector or matrix if appropriate.
+#' @param patterns Character vector containing regular expressions to be matched.
+#' @param x Character vector where matches are sought, or an object which can be coerced by \code{as.character} to a character vector.
+#' @param ... Additional arguments to \code{\link{grep}}.
+#' @param simplify If \code{TRUE}, the result is simplified from a list to a vector or matrix if appropriate.
 #' @return List, matrix, or vector of the indices of the elements of \code{x} that yielded a match to each element of \code{patterns}.
 #' @keywords internal
 rgrep_exact <- function(patterns, x, ..., simplify = FALSE) {
@@ -16,7 +16,7 @@ rgrep_exact <- function(patterns, x, ..., simplify = FALSE) {
 #' 
 #' Tests whether a vector is empty, non-numeric, or contains any non-integer numbers.
 #' 
-#' @param x an R object.
+#' @param x An R object.
 #' @return \code{FALSE} if \code{x} is a numeric vector containing only whole numbers, \code{TRUE} otherwise.
 #' @keywords internal
 is_not_integer <- function(x) {
@@ -27,9 +27,9 @@ is_not_integer <- function(x) {
 #' 
 #' Returns different values depending on whether a test is \code{TRUE} or \code{FALSE}.
 #' 
-#' @param test an object which can be coerced to a logical value.
-#' @param yes value returned if \code{test} is \code{TRUE}
-#' @param no value returned if \code{test} is \code{FALSE}
+#' @param test An object which can be coerced to a logical value.
+#' @param yes Value returned if \code{test} is \code{TRUE}.
+#' @param no Value returned if \code{test} is \code{FALSE}.
 #' @seealso \code{\link{ifelse}}
 #' @keywords internal
 if_else <- function(test, yes, no) {

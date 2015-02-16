@@ -10,13 +10,13 @@ sort_events(e)
 is_unsorted_events(e)
 }
 \arguments{
-\item{e}{an event table}
+\item{e}{An event table.}
 }
 \description{
 \code{sort_events} sorts events by ascending \code{from}, then ascending \code{to}. \code{is_unsorted_events} tests whether the events are not sorted, without the cost of sorting them.
 }
 \examples{
-e = events(c(1, 1, 3, 2), c(2, 1, 4, 3))
+e <- events(c(1, 1, 3, 2), c(2, 1, 4, 3))
 is_unsorted_events(e)
 sort_events(e)
 }

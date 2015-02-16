@@ -7,11 +7,11 @@
 find_intersecting_events(ex, ey, equal.points = TRUE, closed = FALSE)
 }
 \arguments{
-\item{ex,ey}{event tables.}
+\item{ex,ey}{Event tables.}
 
-\item{equal.points}{if \code{TRUE}, equal-valued points are considered intersecting. This is always \code{TRUE} if \code{closed = TRUE}.}
+\item{equal.points}{If \code{TRUE}, equal-valued points are considered intersecting. This is always \code{TRUE} if \code{closed = TRUE}.}
 
-\item{closed}{if \code{TRUE}, events are interpreted as closed and events sharing only an endpoint are also reported as intersecting.}
+\item{closed}{If \code{TRUE}, events are interpreted as closed intervals and events sharing only an endpoint are reported as intersecting.}
 }
 \value{
 A logical matrix with \code{ey} events as rows and \code{ex} events as columns.
@@ -20,7 +20,7 @@ A logical matrix with \code{ey} events as rows and \code{ex} events as columns.
 Returns a logical matrix indicating whether or not each pair of events intersect.
 }
 \examples{
-ex = events(c(0, 5, 5, 10))
+ex <- events(c(0, 5, 5, 10))
 find_intersecting_events(ex, events(5), equal.points = FALSE) # equal points don't intersect
 find_intersecting_events(ex, events(5), equal.points = TRUE)  # equal points do intersect
 find_intersecting_events(ex, events(5), closed = TRUE)        # adjacent events intersect

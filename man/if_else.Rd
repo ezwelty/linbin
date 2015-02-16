@@ -7,11 +7,11 @@
 if_else(test, yes, no)
 }
 \arguments{
-\item{test}{an object which can be coerced to a logical value.}
+\item{test}{An object which can be coerced to a logical value.}
 
-\item{yes}{value returned if \code{test} is \code{TRUE}}
+\item{yes}{Value returned if \code{test} is \code{TRUE}.}
 
-\item{no}{value returned if \code{test} is \code{FALSE}}
+\item{no}{Value returned if \code{test} is \code{FALSE}.}
 }
 \description{
 Returns different values depending on whether a test is \code{TRUE} or \code{FALSE}.

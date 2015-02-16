@@ -7,9 +7,9 @@
 events(from = numeric(), to = numeric(), ...)
 }
 \arguments{
-\item{from,to}{event endpoints, in any format coercible to single data frame columns. \code{from} and \code{to} are swapped as needed so that \code{to} > or = \code{from} on all rows. If \code{from} is the only argument, \code{\link{as_events}} is dispatched for object coercion.}
+\item{from,to}{Event endpoints, in any format coercible to single data frame columns. \code{from} and \code{to} are swapped as needed so that \code{to} > or = \code{from} on all rows. If \code{from} is the only non-empty argument, \code{\link{as_events}} is dispatched for object coercion.}
 
-\item{...}{additional arguments, either of the form \code{value} or \code{tag = value}, to be passed directly to \code{\link{data.frame}} following \code{from} and \code{to}. Component names are created based on the tag (if present) or the deparsed argument itself.}
+\item{...}{Additional arguments, either of the form \code{value} or \code{tag = value}, to be passed directly to \code{\link{data.frame}} following \code{from} and \code{to}. Component names are created based on the tag (if present) or the deparsed argument itself.}
 }
 \value{
 An event table, the \code{data.frame} object used by \code{linbin} to describe interval data.
@@ -18,7 +18,7 @@ An event table, the \code{data.frame} object used by \code{linbin} to describe i
 This function creates an event table, a custom \code{data.frame} used throughout the \code{linbin} package to store and manipulate linearly referenced data. Each row includes an event's endpoints \code{from} and \code{to} (which can be equal, to describe a point, or non-equal, to describe a line) and the values of any variables measured on that interval.
 }
 \details{
-Event endpoints (and any additional arguments) are coerced to a data frame with \code{\link{data.frame}}, then coerced to an event table with \code{\link{as_events}}. A valid event table has two columns named "from" and "to" containing only finite numeric values (i.e., no \code{NA}, \code{NaN}, or \code{Inf}) and ordered such that \code{to} > or = \code{from}. \code{\link{is_events}} tests for these requirements. The other columns in the event table can be of any type supported by the \code{data.frame} class. The core routines of \code{linbin}, particularly \code{\link{sample_events}} and \code{\link{plot_events}}, rely on "bins", event tables consisting of only non-overlapping, line events to summarize and plot event data. \code{\link{is_bin_events}} tests for the additional requirements.
+Event endpoints (and any additional arguments) are coerced to a data frame with \code{\link{data.frame}}, then coerced to an event table with \code{\link{as_events}}. A valid event table has two columns named "from" and "to" containing only finite numeric values (i.e., no \code{NA}, \code{NaN}, or \code{Inf}) and ordered such that \code{to} > or = \code{from}. \code{\link{is_events}} tests for these requirements. The other columns in the event table can be of any type supported by the \code{data.frame} class.
 }
 \examples{
 events(1, 5)
@@ -28,6 +28,6 @@ events(c(0, 15, 25), c(10, 30, 35), x = 1, y = c('a', 'b', 'c'))
 \seealso{
 \code{\link{data.frame}}.
 
-\code{\link{as_events}} and \code{\link{read_events}} for coercing objects and files to event tables, \code{\link{is_events}} to validate event tables, and \code{\link{is_bin_events}} to validate bin event tables.
+\code{\link{as_events}} and \code{\link{read_events}} for coercing objects and files to event tables, \code{\link{is_events}} to validate event tables.
 }
 

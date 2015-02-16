@@ -7,7 +7,7 @@
 is_not_integer(x)
 }
 \arguments{
-\item{x}{an R object.}
+\item{x}{An R object.}
 }
 \value{
 \code{FALSE} if \code{x} is a numeric vector containing only whole numbers, \code{TRUE} otherwise.

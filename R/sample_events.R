@@ -2,9 +2,9 @@
 #' 
 #' Returns a logical matrix indicating whether or not each pair of events intersect.
 #' 
-#' @param ex,ey event tables.
-#' @param equal.points if \code{TRUE}, equal-valued points are considered intersecting. This is always \code{TRUE} if \code{closed = TRUE}.
-#' @param closed if \code{TRUE}, events are interpreted as closed and events sharing only an endpoint are also reported as intersecting.
+#' @param ex,ey Event tables.
+#' @param equal.points If \code{TRUE}, equal-valued points are considered intersecting. This is always \code{TRUE} if \code{closed = TRUE}.
+#' @param closed If \code{TRUE}, events are interpreted as closed intervals and events sharing only an endpoint are reported as intersecting.
 #' @return A logical matrix with \code{ey} events as rows and \code{ex} events as columns.
 #' @export
 #' @examples
@@ -19,14 +19,16 @@ find_intersecting_events <- function(ex, ey, equal.points = TRUE, closed = FALSE
       inbin <- ex.each[1] <= ey$to & ex.each[2] >= ey$from
     } else {
       inbin <- ex.each[1] < ey$to & ex.each[2] > ey$from
-      if (equal.points) 
+      if (equal.points) {
         inbin <- inbin | (ex.each[1] == ey$from & ex.each[2] == ey$to)
+      }
     }
     return(inbin)
   })
   # Prevent returning a vector
-  if (is.vector(inbins))
+  if (is.vector(inbins)) {
     inbins <- as.matrix(inbins)
+  }
   return(inbins)
   # Converting from logical to a row column 
   # (for single matches): apply(inbins, 1, function(x) match(TRUE, x))
@@ -37,7 +39,7 @@ find_intersecting_events <- function(ex, ey, equal.points = TRUE, closed = FALSE
 #' 
 #' Computes event table variables over the specified sampling intervals, or "bins".
 #' 
-#' Events are cut at bin endpoints, and any \code{scaled.cols} columns are rescaled to the length of the resulting event segments. The event segments falling into each bin are passed to the sampling functions to compute the variables for each bin. By default, bins sample from events with whom they share more than one endpoint (see \code{\link{find_intersecting_events}}).
+#' Events are cut at bin endpoints, and any \code{scaled.cols} columns are rescaled to the length of the resulting event segments. The event segments falling into each bin are passed to the sampling functions to compute the variables for each bin. Bins sample from events they overlap: line events with whom they share more than an endpoint, or point events with equal endpoints (if the bin itself is a point).
 #' 
 #' Sampling functions are specified in lists with the format \code{list(FUN, data.cols, by = group.cols, ...)}. The first element in the list is the function to use. It must compute a single value from one or more vectors of the same length. The following unnamed element is a vector specifying the event column names or indices to recursively pass as the first argument of the function. Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names. Additional unnamed elements are vectors specifying additional event columns to pass as the second, third, ... argument of the function. The first "by" element is a vector of event column names or indices used as grouping variables. Any additional named arguments are passed directly to the function. For example:
 #' 
@@ -45,20 +47,20 @@ find_intersecting_events <- function(ex, ey, equal.points = TRUE, closed = FALSE
 #' list(sum, 1, 3:4, 5) => sum(events[1], events[3], events[4], events[5]), ...
 #' list(sum, c('x', 'y'), by = 3:4) => list(sum, 'x'), list(sum, 'y') grouped into all combinations of columns 3 and 4
 #' 
-#' Using the latter example above, column names are taken from the first argument (e.g. \code{x, y}), and all grouping variables are appended (e.g. \code{x.a.a, x.a.b, x.b.a, y.b.b}), where \code{a} and \code{b} are the levels of columns 3 and 4. \code{NA} is also treated as a factor level. Columns are added left to right in order of the sampling function arguments. Finally, names are made unique by appending sequence numbers to duplicates (using \code{\link{make.unique}}).
+#' Using the latter example above, column names are taken from the first argument (e.g. \code{x, y}), and all grouping variables are appended (e.g. \code{x.a, y.a, x.b, y.b}), where \code{a} and \code{b} are the levels of columns 3 and 4. \code{NA} is also treated as a factor level. Columns are added left to right in order of the sampling function arguments. Finally, names are made unique by appending sequence numbers to duplicates (using \code{\link{make.unique}}).
 #' 
-#' @param e an event table.
-#' @param bins an event table specifying the intervals for sampling.
-#' @param ... lists specifying the sampling functions and parameters to be used (see the \code{Details}).
-#' @param scaled.cols names or indices of the event columns to be rescaled after cutting (see \code{\link{cut_events}}). Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names.
-#' @param col.names a character vector of names for the columns output by the sampling functions. If \code{NULL}, the columns are named automatically (see the \code{Details}).
-#' @param drop.empty if \code{TRUE}, bins not intersecting any events are dropped.
-#' @return A bin event table with data columns appended.
-#' @seealso \code{\link{seq_bin_events}} to generate sequential bins.
+#' @param e An event table.
+#' @param bins An event table specifying the intervals for sampling.
+#' @param ... Lists specifying the sampling functions and parameters to be used (see the \code{Details}).
+#' @param scaled.cols Names or indices of the event columns to be rescaled after cutting (see \code{\link{cut_events}}). Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names.
+#' @param col.names Character vector of names for the columns output by the sampling functions. If \code{NULL}, the columns are named automatically (see the \code{Details}).
+#' @param drop.empty If \code{TRUE}, bins not intersecting any events are dropped.
+#' @return The \code{bins} event table with the columns output by the sampling functions appended.
+#' @seealso \code{\link{seq_events}} to generate sequential bins.
 #' @export
 #' @examples
 #' e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
-#' bins <- rbind(seq_bin_events(event_coverage(e), 4), c(18, 18))
+#' bins <- rbind(seq_events(event_coverage(e), 4), c(18, 18))
 #' sample_events(e, bins, list(sum, 'length'))
 #' sample_events(e, bins, list(sum, 'length'), scaled.cols = 'length')
 #' sample_events(e, bins, list(sum, 'length', by = 'f'), scaled.cols = 'length')
@@ -103,7 +105,6 @@ sample_events <- function(e, bins, ..., scaled.cols = NULL, col.names = NULL, dr
     }
     # Append bin info
     return(cbind(bins, d))
-    
   })
   
   ### Prepare final output
@@ -125,12 +126,12 @@ sample_events <- function(e, bins, ..., scaled.cols = NULL, col.names = NULL, dr
 #' 
 #' Helper function for \code{\link{sampling_functions}}. Builds a function call in a enclosed environment with all fixed arguments and column indices so that the function can later be passed row subsets of an event table for sampling.
 #' 
-#' @param fun function to use.
-#' @param bin.col column defining the groupping of bins.
-#' @param data.cols columns to each be passed as first argument to the function.
-#' @param arg.cols columns to be passed as the second, third, ... arguments of the function.
-#' @param group.cols columns to be used as factors.
-#' @param arglist additional arguments to pass to function \code{fun}.
+#' @param fun Function to use.
+#' @param bin.col Column defining the groupping of bins.
+#' @param data.cols Columns to each be passed as first argument to the function.
+#' @param arg.cols Columns to be passed as the second, third, ... arguments of the function.
+#' @param group.cols Columns to be used as factors.
+#' @param arglist Additional arguments to pass to function \code{fun}.
 #' @return A function whose parent environment encloses all of its fixed arguments.
 #' @keywords internal
 build_function_call <- function(fun, bin.col, data.cols, arg.cols = NULL, group.cols = NULL, arglist = NULL) {
@@ -171,13 +172,12 @@ build_function_call <- function(fun, bin.col, data.cols, arg.cols = NULL, group.
     e.data <- e[data.cols]
     z <- lapply(e.data, function(e.data.col) {
       args <- c(
-        FUN <- fun, 
+        FUN = fun, 
         list((split(e.data.col, grp))),
         var.args,
-        MoreArgs <- list(arglist)
+        MoreArgs = list(arglist)
       )
-      ans <- do.call(mapply, args)
-      return(ans)
+      return(do.call(mapply, args))
     })
     
     # Assemble back into named dataframe
@@ -196,11 +196,7 @@ build_function_call <- function(fun, bin.col, data.cols, arg.cols = NULL, group.
     }
     
     # Drop bin (id) column
-    y <- y[-1]
-    
-    # Sort data columns x.a, x.b, y.a, y.b
-    # (rather than x.a, y.a, x.b, y.b)
-    return(y[order(names(y))])
+    return(y[-1])
   }
   
   # Return function call
@@ -213,8 +209,8 @@ build_function_call <- function(fun, bin.col, data.cols, arg.cols = NULL, group.
 #' 
 #' NOTE: Assumes bin assignments will be appended to the end of the event table.
 #' 
-#' @param col.names names of columns, for converting column name indices to numeric colum indices.
-#' @param ... lists of sampling function parameters (see \code{\link{sample_events}}).
+#' @param col.names Names of columns, for converting column name indices to numeric colum indices.
+#' @param ... Lists of sampling function parameters (see \code{\link{sample_events}}).
 #' @return A list of functions.
 #' @keywords internal
 sampling_functions <- function(col.names, ...) {
@@ -245,19 +241,19 @@ sampling_functions <- function(col.names, ...) {
     # Flatten to single level list (just in case)
     args[!fixed] <- lapply(args[!fixed], unlist)
     # Replace field names with corresponding numeric indices
-    args[!fixed] <- lapply(rapply(args[!fixed], rgrep_exact, classes = c("character"), how = "replace", x = col.names), unlist)
+    args[!fixed] <- lapply(rapply(args[!fixed], rgrep_exact, classes = "character", how = "replace", x = col.names), unlist)
     # Require integer numeric indices
     if (any(unlist(lapply(args[!fixed], is_not_integer))))
       stop('could not match names to column names')
     
     ## Build function call
     functions[[i]] <- build_function_call(
-      fun <- call[[1]], 
-      bin.col <- length(col.names) + 1,
-      data.cols <- args[!fixed][[1]],
-      group.cols <- unlist(group.cols),
-      arg.cols <- unlist(args[!fixed][-1]),
-      arglist <- args[fixed]
+      fun = call[[1]], 
+      bin.col = length(col.names) + 1,
+      data.cols = args[!fixed][[1]],
+      group.cols = unlist(group.cols),
+      arg.cols = unlist(args[!fixed][-1]),
+      arglist = args[fixed]
     )
   }
   

@@ -5,49 +5,47 @@
 \title{Plot Events as Bars}
 \usage{
 plot_events_single(e, cols, xlim = NULL, ylim = NULL, xticks = NULL,
-  yticks = NULL, xlabels = NULL, ylabels = NULL, main = NULL,
-  xlab = NULL, ylab = NULL, plot.grid = FALSE, sigfigs = c(3, 3),
+  yticks = NULL, xtick.labels = NULL, ytick.labels = NULL, main = NA,
+  xlab = NA, ylab = NA, plot.grid = FALSE, sigfigs = c(3, 3),
   col = grey.colors(length(cols)), border = par("fg"), lty = par("lty"),
   lwd = par("lwd"), xpd = FALSE, ...)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 
-\item{cols}{names or indices of the event table columns to plot together as stacked bars.}
+\item{cols}{Names or indices of the event table columns to plot together as stacked bars.}
 
-\item{xlim,ylim}{limits for the x and y axes. If \code{NULL}, limits are set to the range of the data and the y limits extended as needed to include 0.}
+\item{xlim,ylim}{Limits for the x and y axes. If \code{NULL}, limits are set to the range of the data and the y limits extended as needed to include 0.}
 
-\item{xticks,yticks}{the values to label on the x and y axes. If \code{NULL}, only the min and max x and y are labeled (and 0 as needed for y). If \code{\link{axTicks}}, the function will be used to generate R default tick marks.}
+\item{xticks,yticks}{The values to label on the x and y axes. If \code{NULL}, only the min and max x and y are labeled (and 0 as needed for y). If \code{\link{axTicks}}, the function will be used to generate R default tick marks.}
 
-\item{main}{an overall title for the plot.}
+\item{xtick.labels,ytick.labels}{Labels for the x and y tick positions.}
 
-\item{xlab,ylab}{titles for the x and y axes.}
+\item{main}{An overall title for the plot.}
 
-\item{plot.grid}{if \code{TRUE}, a lined horizontal grid is plotted at the yticks.}
+\item{xlab,ylab}{Titles for the x and y axes.}
 
-\item{sigfigs}{the maximum significant figures of x and y axis labels.}
+\item{plot.grid}{If \code{TRUE}, a lined horizontal grid is plotted at the yticks.}
 
-\item{col}{color(s) for the bars. If \code{NULL}, bars are transparent. By default, a grey palette is used.}
+\item{sigfigs}{The maximum significant figures to use for the x and y axis labels.}
 
-\item{border}{color(s) for bar borders. Use border = NA to omit borders.}
+\item{col}{Color(s) for the bars. If \code{NULL}, bars are transparent. By default, a grey palette is used.}
 
-\item{lty}{line type(s) for bar borders.}
+\item{border}{Color(s) for bar borders. Use border = NA to omit borders.}
 
-\item{lwd}{line width(s) for bar borders.}
+\item{lty}{Line type(s) for bar borders.}
 
-\item{xpd}{logical value or \code{NA}. If \code{FALSE}, all plotting is clipped to the plot region, if \code{TRUE}, all plotting is clipped to the figure region, and if \code{NA}, all plotting is clipped to the device region.}
+\item{lwd}{Line width(s) for bar borders.}
 
-\item{...}{additional arguments passed to \code{\link{plot}}.}
+\item{xpd}{Logical value or \code{NA}. If \code{FALSE}, all plotting is clipped to the plot region, if \code{TRUE}, all plotting is clipped to the figure region, and if \code{NA}, all plotting is clipped to the device region.}
+
+\item{...}{Additional arguments passed to \code{\link{plot}}.}
 }
 \description{
 Plots event table columns as vertical bars.
 }
 \details{
-The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} first to flatten the data before plotting.
-}
-\examples{
-e = events(from = c(0, 10, 20, 30), to = c(10, 20, 30, 40), x = c(2, -1, -1, NA) * 100, y = c(1, 1, -1, 0))
-plot_events_single(e, c("x", "y"), plot.grid = TRUE, yticks = axTicks, xticks = axTicks, main = "Hello")
+The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
 }
 \seealso{
 \code{\link{plot_events}}.

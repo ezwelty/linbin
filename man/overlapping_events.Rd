@@ -10,23 +10,26 @@ group_nonoverlapping_events(e)
 has_overlapping_events(e)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 }
 \description{
-\code{group_nonoverlapping_events} assigns each event to a group such that each group contains no overlaps. \code{has_overlapping_events} checks whether an event table has overlapping events.
+\code{group_nonoverlapping_events} assigns each event to a group such that each group contains no overlaps. \code{has_overlapping_events} checks whether an event table has events that overlap.
 }
 \details{
 By convention in \code{linbin}, events are considered overlapping if they are line events that share more than an endpoint, or point events that have equal endpoints. Point events on line event endpoints are not considered overlaps.
 }
 \examples{
-e = events(c(0, 2, 3), c(3, 4, 5))
+e <- events(c(0, 2, 3), c(3, 4, 5))
 cbind(group = group_nonoverlapping_events(e), e)  # adjacent lines do not overlap
-e = events(c(0, 0, 0, 1, 1), c(0, 0, 1, 1, 2))
+e <- events(c(0, 0, 0, 1, 1), c(0, 0, 1, 1, 2))
 cbind(group = group_nonoverlapping_events(e), e)  # equal points do overlap
 has_overlapping_events(events(c(0, 2), c(2, 4)))  # adjacent lines
 has_overlapping_events(events(c(0, 2), c(3, 4)))  # has overlapping lines
 has_overlapping_events(events(c(0, 5, 5, 10)))    # points adjcent to lines
 has_overlapping_events(events(c(0, 5, 5, 5, 10))) # has overlapping points
+}
+\seealso{
+\code{\link{event_overlaps}}
 }
 \keyword{internal}
 

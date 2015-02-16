@@ -8,26 +8,26 @@ sample_events(e, bins, ..., scaled.cols = NULL, col.names = NULL,
   drop.empty = FALSE)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 
-\item{bins}{an event table specifying the intervals for sampling.}
+\item{bins}{An event table specifying the intervals for sampling.}
 
-\item{...}{lists specifying the sampling functions and parameters to be used (see the \code{Details}).}
+\item{...}{Lists specifying the sampling functions and parameters to be used (see the \code{Details}).}
 
-\item{scaled.cols}{names or indices of the event columns to be rescaled after cutting (see \code{\link{cut_events}}). Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names.}
+\item{scaled.cols}{Names or indices of the event columns to be rescaled after cutting (see \code{\link{cut_events}}). Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names.}
 
-\item{col.names}{a character vector of names for the columns output by the sampling functions. If \code{NULL}, the columns are named automatically (see the \code{Details}).}
+\item{col.names}{Character vector of names for the columns output by the sampling functions. If \code{NULL}, the columns are named automatically (see the \code{Details}).}
 
-\item{drop.empty}{if \code{TRUE}, bins not intersecting any events are dropped.}
+\item{drop.empty}{If \code{TRUE}, bins not intersecting any events are dropped.}
 }
 \value{
-A bin event table with data columns appended.
+The \code{bins} event table with the columns output by the sampling functions appended.
 }
 \description{
 Computes event table variables over the specified sampling intervals, or "bins".
 }
 \details{
-Events are cut at bin endpoints, and any \code{scaled.cols} columns are rescaled to the length of the resulting event segments. The event segments falling into each bin are passed to the sampling functions to compute the variables for each bin. By default, bins sample from events with whom they share more than one endpoint (see \code{\link{find_intersecting_events}}).
+Events are cut at bin endpoints, and any \code{scaled.cols} columns are rescaled to the length of the resulting event segments. The event segments falling into each bin are passed to the sampling functions to compute the variables for each bin. Bins sample from events they overlap: line events with whom they share more than an endpoint, or point events with equal endpoints (if the bin itself is a point).
 
 Sampling functions are specified in lists with the format \code{list(FUN, data.cols, by = group.cols, ...)}. The first element in the list is the function to use. It must compute a single value from one or more vectors of the same length. The following unnamed element is a vector specifying the event column names or indices to recursively pass as the first argument of the function. Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names. Additional unnamed elements are vectors specifying additional event columns to pass as the second, third, ... argument of the function. The first "by" element is a vector of event column names or indices used as grouping variables. Any additional named arguments are passed directly to the function. For example:
 
@@ -35,11 +35,11 @@ list(sum, 1:2, na.rm = TRUE) => sum(events[1], na.rm = TRUE), sum(events[2], na.
 list(sum, 1, 3:4, 5) => sum(events[1], events[3], events[4], events[5]), ...
 list(sum, c('x', 'y'), by = 3:4) => list(sum, 'x'), list(sum, 'y') grouped into all combinations of columns 3 and 4
 
-Using the latter example above, column names are taken from the first argument (e.g. \code{x, y}), and all grouping variables are appended (e.g. \code{x.a.a, x.a.b, x.b.a, y.b.b}), where \code{a} and \code{b} are the levels of columns 3 and 4. \code{NA} is also treated as a factor level. Columns are added left to right in order of the sampling function arguments. Finally, names are made unique by appending sequence numbers to duplicates (using \code{\link{make.unique}}).
+Using the latter example above, column names are taken from the first argument (e.g. \code{x, y}), and all grouping variables are appended (e.g. \code{x.a, y.a, x.b, y.b}), where \code{a} and \code{b} are the levels of columns 3 and 4. \code{NA} is also treated as a factor level. Columns are added left to right in order of the sampling function arguments. Finally, names are made unique by appending sequence numbers to duplicates (using \code{\link{make.unique}}).
 }
 \examples{
-e = events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
-bins = rbind(seq_bin_events(event_coverage(e), 4), c(18, 18))
+e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
+bins <- rbind(seq_events(event_coverage(e), 4), c(18, 18))
 sample_events(e, bins, list(sum, 'length'))
 sample_events(e, bins, list(sum, 'length'), scaled.cols = 'length')
 sample_events(e, bins, list(sum, 'length', by = 'f'), scaled.cols = 'length')
@@ -47,6 +47,6 @@ sample_events(e, bins, list(weighted.mean, 'x', 'length'), scaled.cols = 'length
 sample_events(e, bins, list(paste0, 'f', collapse = "."))
 }
 \seealso{
-\code{\link{seq_bin_events}} to generate sequential bins.
+\code{\link{seq_events}} to generate sequential bins.
 }
 

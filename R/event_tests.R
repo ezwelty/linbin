@@ -2,8 +2,8 @@
 #' 
 #' Tests whether the object meets the basic requirements of an event table, i.e. a data frame containing at least two numeric, finite columns named 'from' and 'to' ordered such that \code{to} > or = \code{from} on all rows.
 #' 
-#' @param x an R object.
-#' @param verbose logical value indicating whether to print the reason for test failure.
+#' @param x An R object.
+#' @param verbose Logical value indicating whether to print the reason for test failure.
 #' @seealso \code{\link{events}}, \code{\link{as_events}}, and \code{\link{read_events}} for creating valid event tables.
 #' @export
 #' @examples
@@ -44,43 +44,11 @@ is_events <- function(x, verbose = FALSE) {
   return(TRUE)
 }
 
-#' Validate Bin Event Table
-#' 
-#' Tests whether an object is an event table, plus whether the event table contains only groups of non-overlapping line events. FIXME: Deprecated, since only one function still actually requires this (\code{\link{seq_bin_events}}).
-#' 
-#' @param x an R object.
-#' @param group.col name or numeric index of the column defining the groupping of bins. If \code{NULL}, the bins are treated as one group. 
-#' @param verbose logical value indicating whether to print the reason for test failure.
-#' @seealso \code{\link{seq_bin_events}} and \code{\link{group_nonoverlapping_events}} for creating valid bin event tables.
-#' @keywords internal
-is_bin_events <- function(x, group.col = NULL, verbose = FALSE) {
-  if (!is_events(x, verbose = verbose)) {
-    if (verbose) cat("x is not an event table\n")
-    return(FALSE)
-  }
-  if (any(x$from == x$to)) {
-    if (verbose) cat("x contains point events\n")
-    return(FALSE)
-  }
-  if (!is.null(group.col)) {
-    if (is.character(group.col))
-      group.col <- match(group.col, names(x))
-    overlaps <- unlist(lapply(split(x, x[group.col]), has_overlapping_events))
-  } else {
-    overlaps <- has_overlapping_events(x)
-  }
-  if (any(overlaps)) {
-    if (verbose) cat("x contains overlapping events\n")
-    return(FALSE)
-  }
-  return(TRUE)
-}
-
 #' Sorted Events
 #' 
 #' \code{sort_events} sorts events by ascending \code{from}, then ascending \code{to}. \code{is_unsorted_events} tests whether the events are not sorted, without the cost of sorting them.
 #' 
-#' @param e an event table
+#' @param e An event table.
 #' @export
 #' @rdname sorted_events
 #' @examples
@@ -95,20 +63,22 @@ sort_events <- function(e) {
 #' @rdname sorted_events
 is_unsorted_events <- function(e) {
   n <- nrow(e)
-  if (n < 2)
+  if (n < 2) {
     return(FALSE)
-  else
+  } else {
     return(any(is.unsorted(e$from), any(diff(e$from) == 0 & diff(e$to) < 0)))
+  }
 }
 
 #' Overlapping Events
 #' 
-#' \code{group_nonoverlapping_events} assigns each event to a group such that each group contains no overlaps. \code{has_overlapping_events} checks whether an event table has overlapping events.
+#' \code{group_nonoverlapping_events} assigns each event to a group such that each group contains no overlaps. \code{has_overlapping_events} checks whether an event table has events that overlap.
 #' 
 #' By convention in \code{linbin}, events are considered overlapping if they are line events that share more than an endpoint, or point events that have equal endpoints. Point events on line event endpoints are not considered overlaps.
 #' 
-#' @param e an event table.
+#' @param e An event table.
 #' @export
+#' @seealso \code{\link{event_overlaps}}
 #' @keywords internal
 #' @rdname overlapping_events
 #' @examples

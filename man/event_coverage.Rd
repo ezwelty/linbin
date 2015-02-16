@@ -7,9 +7,9 @@
 event_coverage(e, closed = TRUE)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 
-\item{closed}{logical value indicating whether events should be interpreted as closed intervals. If \code{TRUE}, coverage is continuous at breaks between two adjacent events.}
+\item{closed}{Logical value indicating whether events should be interpreted as closed intervals. If \code{TRUE}, coverage is continuous at breaks between two adjacent events.}
 }
 \description{
 Returns the intervals over which the number of events is always one or greater.

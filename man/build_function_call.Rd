@@ -8,17 +8,17 @@ build_function_call(fun, bin.col, data.cols, arg.cols = NULL,
   group.cols = NULL, arglist = NULL)
 }
 \arguments{
-\item{fun}{function to use.}
+\item{fun}{Function to use.}
 
-\item{bin.col}{column defining the groupping of bins.}
+\item{bin.col}{Column defining the groupping of bins.}
 
-\item{data.cols}{columns to each be passed as first argument to the function.}
+\item{data.cols}{Columns to each be passed as first argument to the function.}
 
-\item{arg.cols}{columns to be passed as the second, third, ... arguments of the function.}
+\item{arg.cols}{Columns to be passed as the second, third, ... arguments of the function.}
 
-\item{group.cols}{columns to be used as factors.}
+\item{group.cols}{Columns to be used as factors.}
 
-\item{arglist}{additional arguments to pass to function \code{fun}.}
+\item{arglist}{Additional arguments to pass to function \code{fun}.}
 }
 \value{
 A function whose parent environment encloses all of its fixed arguments.

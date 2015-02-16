@@ -217,3 +217,36 @@ resample.EventTable = function(events, bins, totals = NULL, means = NULL, maximu
   }
   
 }
+
+
+#' Validate Bin Event Table
+#' 
+#' Tests whether an object is an event table, plus whether the event table contains only groups of non-overlapping line events. FIXME: Deprecated, since only one function still actually requires this (\code{\link{seq_events}}).
+#' 
+#' @param x an R object.
+#' @param group.col name or numeric index of the column defining the groupping of bins. If \code{NULL}, the bins are treated as one group. 
+#' @param verbose logical value indicating whether to print the reason for test failure.
+#' @seealso \code{\link{seq_events}} and \code{\link{group_nonoverlapping_events}} for creating valid bin event tables.
+#' @keywords internal
+is_bin_events <- function(x, group.col = NULL, verbose = FALSE) {
+  if (!is_events(x, verbose = verbose)) {
+    if (verbose) cat("x is not an event table\n")
+    return(FALSE)
+  }
+  if (any(x$from == x$to)) {
+    if (verbose) cat("x contains point events\n")
+    return(FALSE)
+  }
+  if (!is.null(group.col)) {
+    if (is.character(group.col))
+      group.col <- match(group.col, names(x))
+    overlaps <- unlist(lapply(split(x, x[group.col]), has_overlapping_events))
+  } else {
+    overlaps <- has_overlapping_events(x)
+  }
+  if (any(overlaps)) {
+    if (verbose) cat("x contains overlapping events\n")
+    return(FALSE)
+  }
+  return(TRUE)
+}

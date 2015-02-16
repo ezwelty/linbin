@@ -7,9 +7,9 @@
 sampling_functions(col.names, ...)
 }
 \arguments{
-\item{col.names}{names of columns, for converting column name indices to numeric colum indices.}
+\item{col.names}{Names of columns, for converting column name indices to numeric colum indices.}
 
-\item{...}{lists of sampling function parameters (see \code{\link{sample_events}}).}
+\item{...}{Lists of sampling function parameters (see \code{\link{sample_events}}).}
 }
 \value{
 A list of functions.

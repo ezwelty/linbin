@@ -8,15 +8,15 @@ read_events(file, from.col = 1, to.col = 2, sep = "", header = TRUE,
   ...)
 }
 \arguments{
-\item{file}{name, \code{\link{connection}}, or \code{\link{url}} of the file to be read as an event table.}
+\item{file}{Name, \code{\link{connection}}, or \code{\link{url}} of the file to be read as an event table.}
 
-\item{from.col,to.col}{names or indices of the columns containing event endpoints. Values are swapped as needed to ensure that \code{to > or = from} on all rows.}
+\item{from.col,to.col}{Names or indices of the columns containing event endpoints. Values are swapped as needed to ensure that \code{to > or = from} on all rows.}
 
-\item{sep}{character seperating values on each line of the file. If \code{sep = ""} (the default), the separator is 'white space' (that is, any combination of one or more spaces, tabs, newlines and carriage returns).}
+\item{sep}{Character seperating values on each line of the file. If \code{sep = ""} (the default), the separator is 'white space' (that is, any combination of one or more spaces, tabs, newlines and carriage returns).}
 
-\item{header}{logical value indicating whether the file contains column names as its first line. If \code{FALSE}, columns will be named "V" followed by the column number, unless \code{col.names} (a vector of optional column names) is provided as an additional argument.}
+\item{header}{Logical value indicating whether the file contains column names as its first line. If \code{FALSE}, columns will be named "V" followed by the column number, unless \code{col.names} (a vector of optional column names) is provided as an additional argument.}
 
-\item{...}{additional arguments, of the form \code{tag = value}, to be passed directly to \code{\link{read.table}} to control how the file is read.}
+\item{...}{Additional arguments, of the form \code{tag = value}, to be passed directly to \code{\link{read.table}} to control how the file is read.}
 }
 \description{
 Reads a file in table format and attempts to coerce it to an event table.

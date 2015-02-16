@@ -2,7 +2,7 @@
 #' 
 #' Returns the minimum and maximum endpoints of all the events in an event table.
 #' 
-#' @param e an event table.
+#' @param e An event table.
 #' @seealso \code{\link{event_coverage}} for an alternative that accounts for gaps.
 #' @export
 #' @examples
@@ -18,8 +18,8 @@ event_range <- function(e) {
 #' 
 #'  If \code{closed = TRUE}, breaks between adjacent events are dropped. If \code{closed = FALSE}, breaks between adjacent events are retained, including point events on line event endpoints. Duplicate points are dropped in both cases.
 #'
-#' @param e an event table.
-#' @param closed logical value indicating whether events should be interpreted as closed intervals. If \code{TRUE}, coverage is continuous at breaks between two adjacent events.
+#' @param e An event table.
+#' @param closed Logical value indicating whether events should be interpreted as closed intervals. If \code{TRUE}, coverage is continuous at breaks between two adjacent events.
 #' @seealso \code{\link{event_gaps}} for gaps (the inverse of coverage), \code{\link{event_range}} for range (coverage with gaps ignored).
 #' @export
 #' @examples
@@ -39,8 +39,9 @@ event_coverage <- function(e, closed = TRUE) {
     add[1] <- add[1] || any(rowSums(e[c("from", "to")] == e.range[[1]]) == 2)
     add[2] <- add[2] || any(rowSums(e[c("from", "to")] == e.range[[2]]) == 2)
   }
-  if (any(add))
+  if (any(add)) {
     e.coverage <- rbind(if_else(add[[1]], rep(e.range[[1]], 2), NULL), e.coverage, if_else(add[[2]], rep(e.range[[2]], 2), NULL))
+  }
   return(e.coverage)
 }
 
@@ -48,9 +49,9 @@ event_coverage <- function(e, closed = TRUE) {
 #' 
 #' Returns the intervals over which there are no events.
 #'
-#' @param e an event table.
-#' @param closed logical value indicating whether events should be interpreted as closed intervals. If \code{TRUE}, no gaps are returned at breaks between two adjacent events.
-#' @param range an event table specifying, by its \code{\link{event_range}}, the interval within which to check for gaps. If \code{NULL}, the range of \code{e} is used.
+#' @param e An event table.
+#' @param closed Logical value indicating whether events should be interpreted as closed intervals. If \code{TRUE}, no gaps are returned at breaks between two adjacent events.
+#' @param range An event table specifying, by its \code{\link{event_range}}, the interval within which to check for gaps. If \code{NULL}, the range of \code{e} is used.
 #' @seealso \code{\link{event_coverage}} for coverage (the inverse of gaps), \code{\link{fill_event_gaps}} for filling gaps with empty events.
 #' @export
 #' @examples
@@ -62,23 +63,28 @@ event_gaps <- function(e, closed = TRUE, range = NULL) {
   # Crop to bounds if not event range
   if (!is.null(range)) {
     range <- event_range(range)
-    if (!nrow(e))
+    if (!nrow(e)) {
       # no data in range
       return(range)
+    }
     e.range <- event_range(e)
-    if (!(range$from <= e.range$from && range$to >= e.range$to))
+    if (!(range$from <= e.range$from && range$to >= e.range$to)) {
       # bounds intersect event range
       e <- crop_events(e, range)
-    if (range$from < e.range$from)
+    }
+    if (range$from < e.range$from) {
       # bounds extend past event range (from)
       e <- rbind(rep(range$from, 2), e[c("from", "to")])
-    if (range$to > e.range$to)
+    }
+    if (range$to > e.range$to) {
       # bounds extend past event range (to)
       e <- rbind(e[c("from", "to")], rep(range$to, 2))
+    }
   }
   # Track overlaps by extending events by cumulative max
-  if (is_unsorted_events(e))
+  if (is_unsorted_events(e)) {
     e <- sort_events(e)
+  }
   e$to <- cummax(e$to)
   # Gaps occur when from[i+1] > to[i] if closed intervals
   # (and when == if open intervals)
@@ -98,7 +104,7 @@ event_gaps <- function(e, closed = TRUE, range = NULL) {
 #' 
 #' Point events are preserved and line events are cut as necessary at the endpoints of other point or line events.
 #' 
-#' @param e an event table.
+#' @param e An event table.
 #' @return An endpoint-only event table with column "n" listing the number of overlapping events on that interval.
 #' @seealso \code{\link{event_coverage}}.
 #' @export

@@ -7,13 +7,13 @@
 rgrep_exact(patterns, x, ..., simplify = FALSE)
 }
 \arguments{
-\item{patterns}{character vector containing regular expressions to be matched.}
+\item{patterns}{Character vector containing regular expressions to be matched.}
 
-\item{x}{a character vector where matches are sought, or an object which can be coerced by \code{as.character} to a character vector.}
+\item{x}{Character vector where matches are sought, or an object which can be coerced by \code{as.character} to a character vector.}
 
-\item{...}{additional arguments to \code{\link{grep}}.}
+\item{...}{Additional arguments to \code{\link{grep}}.}
 
-\item{simplify}{if \code{TRUE}, the result is simplified from a list to a vector or matrix if appropriate.}
+\item{simplify}{If \code{TRUE}, the result is simplified from a list to a vector or matrix if appropriate.}
 }
 \value{
 List, matrix, or vector of the indices of the elements of \code{x} that yielded a match to each element of \code{patterns}.

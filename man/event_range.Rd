@@ -7,7 +7,7 @@
 event_range(e)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 }
 \description{
 Returns the minimum and maximum endpoints of all the events in an event table.

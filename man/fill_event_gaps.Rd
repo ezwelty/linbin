@@ -10,15 +10,15 @@ fill_event_gaps(e, max.length = Inf)
 collapse_event_gaps(e, max.length = Inf)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 
-\item{max.length}{the maximum length of gaps to be filled or closed.}
+\item{max.length}{The maximum length of gaps to be filled or closed.}
 }
 \description{
 \code{fill_event_gaps} fills gaps below a maximum length with empty events. \code{collapse_event_gaps} shifts event endpoints to close gaps below a maximum length.
 }
 \examples{
-e = events(c(1, 4), c(2, 5), x = 1)
+e <- events(c(1, 4), c(2, 5), x = 1)
 fill_event_gaps(e)
 fill_event_gaps(e, max.length = 1)
 collapse_event_gaps(e)

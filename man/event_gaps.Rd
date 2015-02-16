@@ -7,11 +7,11 @@
 event_gaps(e, closed = TRUE, range = NULL)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 
-\item{closed}{logical value indicating whether events should be interpreted as closed intervals. If \code{TRUE}, no gaps are returned at breaks between two adjacent events.}
+\item{closed}{Logical value indicating whether events should be interpreted as closed intervals. If \code{TRUE}, no gaps are returned at breaks between two adjacent events.}
 
-\item{range}{an event table specifying, by its \code{\link{event_range}}, the interval within which to check for gaps. If \code{NULL}, the range of \code{e} is used.}
+\item{range}{An event table specifying, by its \code{\link{event_range}}, the interval within which to check for gaps. If \code{NULL}, the range of \code{e} is used.}
 }
 \description{
 Returns the intervals over which there are no events.

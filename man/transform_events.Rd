@@ -7,16 +7,17 @@
 transform_events(e, scale = 1, translate = 0)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 
-\item{scale}{amount by which event endpoints should be scaled.}
+\item{scale}{Number by which event endpoints should be scaled.}
 
-\item{translate}{amount by which event endpoints should be translated.}
+\item{translate}{Number by which event endpoints should be translated.}
 }
 \description{
 Transforms events by scaling, then translating their endpoint positions. That is, the transformed \code{[from, to] = scale * [from, to] + translate}.
 }
 \examples{
-transform_events(events(c(10, 100), c(100, 1000)), scale = 2, translate = 1)
+e <- events(c(10, 100), c(100, 1000))
+transform_events(e, scale = 2, translate = 1)
 }
 

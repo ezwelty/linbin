@@ -7,15 +7,15 @@
 is_events(x, verbose = FALSE)
 }
 \arguments{
-\item{x}{an R object.}
+\item{x}{An R object.}
 
-\item{verbose}{logical value indicating whether to print the reason for test failure.}
+\item{verbose}{Logical value indicating whether to print the reason for test failure.}
 }
 \description{
 Tests whether the object meets the basic requirements of an event table, i.e. a data frame containing at least two numeric, finite columns named 'from' and 'to' ordered such that \code{to} > or = \code{from} on all rows.
 }
 \examples{
-verbose = TRUE
+verbose <- TRUE
 is_events(c(1, 3), verbose)
 is_events(data.frame(from = 1, t = 3), verbose)
 is_events(data.frame(from = 1, from = 1, to = 3), verbose)

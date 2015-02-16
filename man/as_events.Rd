@@ -16,11 +16,11 @@ as_events(x, ...)
 \method{as_events}{data.frame}(x, from.col = 1, to.col = 2, ...)
 }
 \arguments{
-\item{x}{object to be coerced to an event table.}
+\item{x}{Object to be coerced to an event table.}
 
 \item{...}{Additional arguments passed to or used by methods.}
 
-\item{from.col,to.col}{names or indices of the columns in \code{x} containing the event endpoints. Values are swapped as needed to ensure that \code{to > or = from} on all rows.}
+\item{from.col,to.col}{Names or indices of the columns in \code{x} containing the event endpoints. Values are swapped as needed to ensure that \code{to > or = from} on all rows.}
 }
 \description{
 Attempts to coerce an object to an event table.

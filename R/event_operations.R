@@ -2,8 +2,8 @@
 #' 
 #' \code{fill_event_gaps} fills gaps below a maximum length with empty events. \code{collapse_event_gaps} shifts event endpoints to close gaps below a maximum length.
 #' 
-#' @param e an event table.
-#' @param max.length the maximum length of gaps to be filled or closed.
+#' @param e An event table.
+#' @param max.length The maximum length of gaps to be filled or closed.
 #' @seealso \code{\link{event_gaps}}
 #' @export
 #' @rdname fill_event_gaps
@@ -54,9 +54,9 @@ collapse_event_gaps <- function(e, max.length = Inf) {
 #' 
 #' Transforms events by scaling, then translating their endpoint positions. That is, the transformed \code{[from, to] = scale * [from, to] + translate}.
 #' 
-#' @param e an event table.
-#' @param scale amount by which event endpoints should be scaled.
-#' @param translate amount by which event endpoints should be translated.
+#' @param e An event table.
+#' @param scale Number by which event endpoints should be scaled.
+#' @param translate Number by which event endpoints should be translated.
 #' @export
 #' @examples
 #' e <- events(c(10, 100), c(100, 1000))
@@ -70,9 +70,9 @@ transform_events <- function(e, scale = 1, translate = 0) {
 #' 
 #' Crops events to the specified intervals. Events are cut at interval endpoints and any whole or partial events lying outside the intervals are removed.
 #'
-#' @param e an event table.
-#' @param crops an event table specifying the intervals for cropping. Point intervals are allowed, and will create new point events where they intersect the interior, but not the endpoints, of line events.
-#' @param scaled.cols names or indices of the columns of the event table to be rescaled after cutting (see \code{\link{cut_events}}). Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names.
+#' @param e An event table.
+#' @param crops An event table specifying the intervals for cropping. Point intervals are allowed, and will create new point events where they intersect the interior, but not the endpoints, of line events.
+#' @param scaled.cols Names or indices of the columns of the event table to be rescaled after cutting (see \code{\link{cut_events}}). Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names.
 #' @seealso \code{\link{cut_events}} for only cutting events.
 #' @export
 #' @examples
@@ -94,8 +94,6 @@ crop_events <- function(e, crops, scaled.cols = NULL) {
 #' Cuts events at the specified locations.
 #'
 #' Line events straddling cut locations are cut into multiple event segments. Columns \code{scaled.cols} are scaled by the fraction of the original event length in each resulting event (which assumes that these variables were uniformly distributed over the original interval). To have a record of the parents of the resulting event segments, append an unique identification field to the event table before calling this function.
-#' 
-#' # FIXME: add cut.points = FALSE switch to cut_events.
 #'
 #' @param e an event table.
 #' @param cuts the cut locations. Can be either a numeric vector or an event table. If an event table that contains points, point events will be created where they intersect the interior, but not the endpoints, of line events in \code{e}.
@@ -124,10 +122,12 @@ cut_events <- function(e, cuts, scaled.cols = NULL) {
     reps$lengths[reps$lengths > 2] = 2
     cuts <- rep(reps$value, reps$lengths)
   }
-  if (is.character(scaled.cols))
+  if (is.character(scaled.cols)) {
     scaled.cols <- unique(unlist(rgrep_exact(scaled.cols, names(e))))
-  if (!length(scaled.cols))
+  }
+  if (!length(scaled.cols)) {
     scaled.cols <- NULL
+  }
   # Find events straddling the cuts
   # (leave point events out of this)
   incuts <- find_intersecting_events(events(cuts, cuts), e, equal.points = FALSE)

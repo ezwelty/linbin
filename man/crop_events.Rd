@@ -7,17 +7,17 @@
 crop_events(e, crops, scaled.cols = NULL)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 
-\item{crops}{an event table specifying the intervals for cropping. Point intervals are allowed, and will create new point events where they intersect the interior, but not the endpoints, of line events.}
+\item{crops}{An event table specifying the intervals for cropping. Point intervals are allowed, and will create new point events where they intersect the interior, but not the endpoints, of line events.}
 
-\item{scaled.cols}{names or indices of the columns of the event table to be rescaled after cutting (see \code{\link{cut_events}}). Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names.}
+\item{scaled.cols}{Names or indices of the columns of the event table to be rescaled after cutting (see \code{\link{cut_events}}). Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names.}
 }
 \description{
 Crops events to the specified intervals. Events are cut at interval endpoints and any whole or partial events lying outside the intervals are removed.
 }
 \examples{
-e = events(c(0, 10, 20), c(10, 20, 30), x = 10)
+e <- events(c(0, 10, 20), c(10, 20, 30), x = 10)
 crop_events(e, events(c(0, 15)))
 crop_events(e, events(c(0, 5, 15)))
 crop_events(e, events(c(0, 5, 15)), scaled.cols = "x")

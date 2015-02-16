@@ -7,7 +7,7 @@
 event_overlaps(e)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 }
 \value{
 An endpoint-only event table with column "n" listing the number of overlapping events on that interval.
@@ -19,7 +19,7 @@ Returns the number of events on each interval. Useful for sampling the original 
 Point events are preserved and line events are cut as necessary at the endpoints of other point or line events.
 }
 \examples{
-e = events(c(0, 10, 15, 25, 30), c(10, 20, 25, 40, 30))
+e <- events(c(0, 10, 15, 25, 30), c(10, 20, 25, 40, 30))
 event_overlaps(e)
 }
 \seealso{

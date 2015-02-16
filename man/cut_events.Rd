@@ -20,7 +20,7 @@ Cuts events at the specified locations.
 Line events straddling cut locations are cut into multiple event segments. Columns \code{scaled.cols} are scaled by the fraction of the original event length in each resulting event (which assumes that these variables were uniformly distributed over the original interval). To have a record of the parents of the resulting event segments, append an unique identification field to the event table before calling this function.
 }
 \examples{
-e = events(c(0, 10, 20), c(10, 20, 30), x = 10)
+e <- events(c(0, 10, 20), c(10, 20, 30), x = 10)
 cut_events(e, events(c(0, 5, 15)))
 cut_events(e, events(c(0, 5, 15)), scaled.cols = "x")
 cut_events(e, events(c(0, 5, 5, 15)), scaled.cols = "x")   # creates new point events inside line events

@@ -5,66 +5,69 @@
 \title{Plot Events as Bar Plots}
 \usage{
 plot_events(e, group.col = NULL, groups = NULL, data.cols = NULL,
-  dim = NULL, byrow = FALSE, main = NULL, xlim = NULL, ylim = NULL,
-  xticks = NULL, yticks = NULL, xlabels = NULL, ylabels = NULL,
+  dim = NULL, byrow = TRUE, main = NULL, xlabs = character(),
+  ylabs = character(), xlim = NULL, ylim = NULL, xticks = NULL,
+  yticks = NULL, xtick.labels = NULL, ytick.labels = NULL,
   plot.grid = FALSE, sigfigs = c(3, 3), col = NULL, border = par("fg"),
   lty = par("lty"), lwd = par("lwd"), xpd = FALSE, mar = c(2.1, 2.75,
-  1.5, 0.5), oma = rep(2, 4), ...)
+  1.5, 0.5), oma = c(2, 2, 2, 2), ...)
 }
 \arguments{
-\item{e}{an event table.}
+\item{e}{An event table.}
 
-\item{group.col}{name or index of event table column defining the event groupping for plotting. If \code{NULL}, the events are treated as one group. Group \code{NA} is not plotted.}
+\item{group.col}{Name or index of column defining the event groupping for plotting. If \code{NULL}, the events are treated as one group. Group \code{NA} is not plotted.}
 
-\item{groups}{vector of values from \code{group.col} specifying which groups to plot. If \code{NULL}, all groups are plotted by order of first appearance in \code{group.col}.}
+\item{groups}{Vector of values from \code{group.col} specifying which groups to plot. If \code{NULL}, all groups are plotted by order of first appearance in \code{group.col}.}
 
-\item{data.cols}{names or indices of columns to plot, given as a list of character or numeric vectors. If multiple columns are specified, their bars are stacked together in one plot. Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names. If \code{NULL}, all columns not named \code{from}, \code{to}, or \code{group.col} are each plotted seperately.}
+\item{data.cols}{Names or indices of columns to plot, given as a list of character or numeric vectors. If multiple columns are specified, their bars are stacked together in one plot. Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names. If \code{NULL}, all columns not named \code{from}, \code{to}, or \code{group.col} are each plotted individually in order of appearance.}
 
-\item{dim}{the row and column dimensions of the grid. If \code{NULL}, the grid is column groups (rows) by event groups (columns).}
+\item{dim}{The row and column dimensions of the grid. If \code{NULL}, the grid is column groups (rows) by event groups (columns) if \code{byrow = TRUE}, and event groups (rows) by column groups (columns) if \code{byrow = FALSE}.}
 
-\item{byrow}{if \code{TRUE}, plots will be added by rows, rather than columns, to the grid.}
+\item{byrow}{Plots are added by column group, then bin group. If \code{TRUE}, plots are added by rows, rather than columns, to the grid.}
 
-\item{main}{titles for each plot (recycled as necessary). If \code{NULL}, plots are titled by the column names. Set \code{main = ""} to hide.}
+\item{main}{Titles for each plot. If \code{NULL}, plots are titled by the column names, pasted together with seperator " + ". Set \code{main = NA} to not title the plots.}
 
-\item{xlim,ylim}{limits for the x and y axes for all plots. If \code{NULL}, limits are set to the range of the data and the y limits extended as needed to include 0.}
+\item{xlabs,ylabs}{Labels arranged at equal intervals along the bottom and left side of the plot grid. These are drawn in the outer margins of the figure, so \code{oma[1]} and \code{oma[2]} must be non-zero.}
 
-\item{xticks,yticks}{the values to label on the x and y axes of all plots. If \code{NULL}, only the min and max x and y are labeled (and 0 as needed for y). If \code{\link{axTicks}}, the function will be used to generate R default tick marks.}
+\item{xlim,ylim}{Limits for the x and y axes of all plots. If \code{NULL}, limits are set to the range of the data and the y limits extended as needed to include 0.}
 
-\item{xlabels,ylabels}{the character strings to display at the xticks and yticks, coerced to character vectors and recyled as necessary. If \code{NULL}, the coordinate positions of the ticks (user or auto) are used as labels, modified by \code{sigfigs}.}
+\item{xticks,yticks}{The positions of x and y tick marks for all plots. If \code{NULL}, only the min and max x and y are ticked (and 0 as needed for y). If \code{\link{axTicks}}, that function will be used to calculate R default tick mark positions. If \code{NA}, no ticks are drawn.}
 
-\item{plot.grid}{if \code{TRUE}, a lined horizontal grid is plotted at the yticks.}
+\item{xtick.labels,ytick.labels}{The labels for the x and y tick marks, coerced to character vectors and recyled as necessary. If \code{NULL}, the positions of the ticks are used as the labels, formatted with \code{sigfigs}. If \code{NA}, the tick marks are not labeled.}
 
-\item{sigfigs}{the maximum significant figures of x and y axis labels.}
+\item{plot.grid}{If \code{TRUE}, a lined horizontal grid is plotted at the yticks.}
 
-\item{col}{color(s) for the bars in each plot. If \code{NULL}, bars are transparent. By default, a grey palette is used.}
+\item{sigfigs}{The maximum significant figures of the x and y axis labels.}
 
-\item{border}{color(s) for bar borders in each plot. Use border = NA to omit borders.}
+\item{col}{Color(s) for the bars in each plot. If \code{NA}, bars are transparent. If \code{NULL}, a grey palette is used.}
 
-\item{lty}{line type(s) for bar borders in each plot.}
+\item{border}{Color(s) for bar borders in each plot. If \code{NA}, borders are omitted.}
 
-\item{lwd}{line width(s) for bar borders in each plot.}
+\item{lty}{Line type(s) for bar borders in each plot.}
 
-\item{xpd}{logical value or \code{NA}. If \code{FALSE}, all plotting is clipped to the plot region, if \code{TRUE}, all plotting is clipped to the figure region, and if \code{NA}, all plotting is clipped to the device region.}
+\item{lwd}{Line width(s) for bar borders in each plot.}
 
-\item{mar}{numerical vector of the form c(bottom, left, top, right) giving the size of the inner margins for each plot in lines of text.}
+\item{xpd}{Logical value or \code{NA}. If \code{FALSE}, all plotting is clipped to the plot region, if \code{TRUE}, all plotting is clipped to the figure region, and if \code{NA}, all plotting is clipped to the device region.}
 
-\item{oma}{numeric vector of the form c(bottom, left, top, right) giving the size of the outer margins in lines of text.}
+\item{mar}{Numerical vector of the form c(bottom, left, top, right) giving the size of the inner margins of each plot in lines of text.}
 
-\item{...}{additional arguments passed to \code{\link{plot}}.}
+\item{oma}{Numeric vector of the form c(bottom, left, top, right) giving the size of the outer figure margins in lines of text.}
+
+\item{...}{Additional arguments passed to \code{\link{plot}}.}
 }
 \description{
 Plots an event table as a grid of bar plots.
 }
 \details{
-This function is intended for plotting the output of \code{\link{sample_events}}. Given a groupping variable for the rows of the event table (e.g., groups of bins of different sizes), and groups of columns to plot, bar plots are drawn for each combination onto a grid event groups high by column groups wide. In each plot, the specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} first to flatten the data before plotting.
+Given a groupping variable for the rows of the event table (e.g., groups of bins of different sizes used in \code{\link{sample_events}}), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column groups. In each plot, the specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
 }
 \examples{
-e = events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
-b = seq_bin_events(event_coverage(e), c(8, 4, 2, 1))
-bins = sample_events(e, b, list(sum, 'length'), scaled.cols = 'length')
-plot_events(bins, group.col = 'group', data.cols = 'length', dim = c(2,2))
+e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15), x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
+bins <- seq_events(event_coverage(e), c(8, 4, 2, 1))
+e.bins <- sample_events(e, bins, list(sum, c('x', 'length')), scaled.cols = 'length')
+plot_events(e.bins, group.col = 'group')
 }
 \seealso{
-\code{\link{seq_bin_events}} for generating groups of sequential bins, \code{\link{sample_events}} to populate bins with event data.
+\code{\link{seq_events}} for generating groups of sequential bins, \code{\link{sample_events}} to populate groups of bins with event data.
 }
 
