@@ -3,15 +3,15 @@ Version: 0.1.0
 Date: 2015-02-16
 Authors@R: c(
     person("Ethan Z.", "Welty", email = "ethan.welty+linbin@gmail.com", role = c("aut", "cre")),
-    person("Christian E.", "Torgersen", role = "ctb", comment = "Contributed direction to the author."),
-    person("Samuel J.", "Brenkman", role = "ctb", comment = "Contributed the elwha and quinault datasets."),
-    person("Jeffrey J.", "Duda", role = "ctb", comment = "Contributed the elwha dataset."),
-    person("Jonathan B.", "Armstrong", role = "ctb", comment = "Contributed the fishmotion dataset."))
+    person("Christian E.", "Torgersen", role = "ctb", comment = "author support and guidance"),
+    person("Samuel J.", "Brenkman", role = "ctb", comment = "elwha and quinault datasets"),
+    person("Jeffrey J.", "Duda", role = "ctb", comment = "elwha dataset"),
+    person("Jonathan B.", "Armstrong", role = "ctb", comment = "fishmotion dataset"))
 Type: Package
 Depends: R (>= 3.0.1)
 License: AGPL-3
 Title: Binning and Plotting of Linearly Referenced Data
-Description: Short for "linear binning", the linbin package provides functions for manipulating,
+Description: Short for 'linear binning', the linbin package provides functions for manipulating,
   binning, and plotting linearly referenced data. Although developed for data collected on river
   networks, it can be used with any interval or point data referenced to a 1-dimensional coordinate 
   system. Flexible bin generation and batch processing makes it easy to compute and visualize 

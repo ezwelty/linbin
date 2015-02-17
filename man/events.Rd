@@ -15,7 +15,7 @@ events(from = numeric(), to = numeric(), ...)
 An event table, the \code{data.frame} object used by \code{linbin} to describe interval data.
 }
 \description{
-This function creates an event table, a custom \code{data.frame} used throughout the \code{linbin} package to store and manipulate linearly referenced data. Each row includes an event's endpoints \code{from} and \code{to} (which can be equal, to describe a point, or non-equal, to describe a line) and the values of any variables measured on that interval.
+Creates an event table, a custom \code{data.frame} used throughout the \code{linbin} package to store and manipulate linearly referenced data. Each row includes an event's endpoints \code{from} and \code{to} (which can be equal, to describe a point, or non-equal, to describe a line) and the values of any variables measured on that interval.
 }
 \details{
 Event endpoints (and any additional arguments) are coerced to a data frame with \code{\link{data.frame}}, then coerced to an event table with \code{\link{as_events}}. A valid event table has two columns named "from" and "to" containing only finite numeric values (i.e., no \code{NA}, \code{NaN}, or \code{Inf}) and ordered such that \code{to} > or = \code{from}. \code{\link{is_events}} tests for these requirements. The other columns in the event table can be of any type supported by the \code{data.frame} class.
