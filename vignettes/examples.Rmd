@@ -24,7 +24,7 @@ library(linbin)
 
 The examples that follow use the datasets built into the linbin package to recreate the figures in the paper:
 
-> Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey D. Duda, and Jonathan B. Armstrong. 2015. Multiscale analysis of river networks using the linbin R package. North American Journal of Fisheries Management.
+> Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey D. Duda, and Jonathan B. Armstrong. In review. Multiscale analysis of river networks using the linbin R package. North American Journal of Fisheries Management.
   
 ### Elwha River : `elwha`
 
@@ -56,7 +56,7 @@ plot_events(e.bins, group.col = "g", data.cols = "mean.width", col = "grey", bor
 
 ### Quinault River : `quinault`
 
-A survey of the Quinault River (Washington, USA) was conducted in August 2009 to collect physical variables and fish counts for hundreds of hydrologic units throughout the river mainstem. Total trout abundance (Oncorhynchus sp.) is plotted for a range of bin lengths:
+A survey of the Quinault River (Washington, USA) was conducted in August 2009 to collect physical variables and fish counts for hundreds of hydrologic units throughout the river mainstem. Total trout abundance (*Oncorhynchus sp.*) is plotted for a range of bin lengths:
 
 ```{r, fig.width = 6, fig.height = 6}
 # Load event data
@@ -123,7 +123,7 @@ plot_events(e.bins, group.col = 'group', data.cols = fields, sigfigs = c(3, 2),
 
 ### Fish Movements : `fishmotion`
 
-This dataset contains a pair of event tables (in a list) documenting the movements of passive integrated transponder (PIT) tagged Coho Salmon (Oncorhynchus kisutch) in the downstream 1-km of Bear Creek (Southwest Alaska, USA) for 29 July - 19 August 2008. The first (`$motion`) lists individual fish residence time intervals in each of three stream regions, while the second (`$origin`) lists the study-wide residence time of each fish and the stream region in which the fish was first tagged. Event endpoints correspond to start and end times stored as seconds since 1970-01-01 UTC (POSIXct). The number of fish in region 1, normalized by the study-wide number of fish first tagged in region 1, is plotted below in 1-hour bins: 
+This dataset contains a pair of event tables (in a list) documenting the movements of passive integrated transponder (PIT) tagged Coho Salmon (*Oncorhynchus kisutch*) in the downstream 1-km of Bear Creek (Southwest Alaska, USA) for 29 July - 19 August 2008. The first (`$motion`) lists individual fish residence time intervals in each of three stream regions, while the second (`$origin`) lists the study-wide residence time of each fish and the stream region in which the fish was first tagged. Event endpoints correspond to start and end times stored as seconds since 1970-01-01 UTC (POSIXct). The number of fish in region 1, normalized by the study-wide number of fish first tagged in region 1, is plotted below in 1-hour bins: 
 
 ```{r, fig.width = 6, fig.height = 4}
 # Load event data

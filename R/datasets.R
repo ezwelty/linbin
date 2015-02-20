@@ -34,13 +34,13 @@ NULL
 #'   \item boulder.cover - channel area covered by boulders [\%]
 #'   \item jams - number of log jams
 #'   \item jam.area - total area of log jams [m^2]
-#'   \item SACO.10/20/30/40/total - number of Bull Trout (Salvelinus confluentus) sized 10 - 20 cm / 20 - 30 cm / 30 - 40 cm / > 40 cm / total, respectively.
-#'   \item ONXX.10/20/30/40/total - number of trout (Oncorhynchus sp.) sized 10 - 20 cm / 20 - 30 cm / 30 - 40 cm / > 40 cm / total, respectively.
-#'   \item SAFO - number of Brook Trout (Salvelinus fontinalis)
-#'   \item ONTS - number of Chinook Salmon (Oncorhynchus tshawytscha)
-#'   \item ONNE - number of Sockeye Salmon (Oncorhynchus nerka)
-#'   \item LATR - number of Pacific Lamprey (Lampetra tridentata)
-#'   \item ONKI - number of Coho Salmon (Oncorhynchus kisutch)
+#'   \item SACO.10/20/30/40/total - number of Bull Trout (\emph{Salvelinus confluentus}) sized 10 - 20 cm / 20 - 30 cm / 30 - 40 cm / > 40 cm / total, respectively.
+#'   \item ONXX.10/20/30/40/total - number of trout (\emph{Oncorhynchus sp.}) sized 10 - 20 cm / 20 - 30 cm / 30 - 40 cm / > 40 cm / total, respectively.
+#'   \item SAFO - number of Brook Trout (\emph{Salvelinus fontinalis})
+#'   \item ONTS - number of Chinook Salmon (\emph{Oncorhynchus tshawytscha})
+#'   \item ONNE - number of Sockeye Salmon (\emph{Oncorhynchus nerka})
+#'   \item LATR - number of Pacific Lamprey (\emph{Lampetra tridentata})
+#'   \item ONKI - number of Coho Salmon (\emph{Oncorhynchus kisutch})
 #' }
 #'
 #' @format A data frame with 249 rows and 33 variables.
@@ -65,21 +65,21 @@ NULL
 #'   \item boulder.cover - channel area covered by boulders [\%]
 #'   \item jams - number of log jams
 #'   \item jam.area - total area of log jams [m^2]
-#'   \item SACO.10/20/30/50/total - number of Bull Trout (Salvelinus confluentus) sized 10 - 20 cm / 20 - 30 cm / 30 - 50 cm / > 50 cm / total, respectively.
-#'   \item ONXX.10/20/30/total - number of trout (Oncorhynchus sp.) sized 10 - 20 cm / 20 - 30 cm / > 30 cm / total, respectively.
-#'   \item PRWI - number of Mountain Whitefish (Prosopium williamsoni)
-#'   \item ONTS - number of Chinook Salmon (Oncorhynchus tshawytscha)
-#'   \item ONMY - number of Rainbow Trout (Oncorhynchus mykiss)
-#'   \item ONKI - number of Coho Salmon (Oncorhynchus kisutch)
-#'   \item ONNE - number of Sockeye Salmon (Oncorhynchus nerka)
-#'   \item ONGO - number of Pink Salmon (Oncorhynchus gorbushcha)
-#'   \item ONKE - number of Chum Salmon (Oncorhynchus keta)
-#'   \item CAMA - number of Largescale Sucker (Catostomus macrocheilus)
-#'   \item LATR - number of Pacific Lamprey (Lampetra tridentata)
+#'   \item SACO.10/20/30/50/total - number of Bull Trout (\emph{Salvelinus confluentus}) sized 10 - 20 cm / 20 - 30 cm / 30 - 50 cm / > 50 cm / total, respectively.
+#'   \item ONXX.10/20/30/total - number of trout (\emph{Oncorhynchus sp.}) sized 10 - 20 cm / 20 - 30 cm / > 30 cm / total, respectively.
+#'   \item PRWI - number of Mountain Whitefish (\emph{Prosopium williamsoni})
+#'   \item ONTS - number of Chinook Salmon (\emph{Oncorhynchus tshawytscha})
+#'   \item ONMY - number of Rainbow Trout (\emph{Oncorhynchus mykiss})
+#'   \item ONKI - number of Coho Salmon (\emph{Oncorhynchus kisutch})
+#'   \item ONNE - number of Sockeye Salmon (\emph{Oncorhynchus nerka})
+#'   \item ONGO - number of Pink Salmon (\emph{Oncorhynchus gorbushcha})
+#'   \item ONKE - number of Chum Salmon (\emph{Oncorhynchus keta})
+#'   \item CAMA - number of Largescale Sucker (\emph{Catostomus macrocheilus})
+#'   \item LATR - number of Pacific Lamprey (\emph{Lampetra tridentata})
 #' }
 #'
 #' @format A data frame with 363 rows and 31 variables.
-#' @source Not published elsewhere.
+#' @source Samuel J. Brenkman (National Park Service, Olympic National Park, Washington, USA), unpublished data.
 #' @name quinault
 NULL
 
@@ -101,7 +101,7 @@ NULL
 
 #' Fish Movements
 #' 
-#' A pair of event tables (in a list) documenting the movements of tagged Coho Salmon (Oncorhynchus kisutch) in Bear Creek (Southwest Alaska, USA) for 29 July - 19 August 2008. Table \code{motion} lists individual fish residence time intervals in each of three stream regions, while table \code{origin} lists the study-wide residence time of each fish and the stream region in which the fish was first tagged.
+#' A pair of event tables (in a list) documenting the movements of tagged Coho Salmon (\emph{Oncorhynchus kisutch}) in Bear Creek (Southwest Alaska, USA) for 29 July - 19 August 2008. Table \code{motion} lists individual fish residence time intervals in each of three stream regions, while table \code{origin} lists the study-wide residence time of each fish and the stream region in which the fish was first tagged.
 #' 
 #' \itemize{
 #'   \item from, to - start and end times as seconds since 1970-01-01 UTC (POSIXct)

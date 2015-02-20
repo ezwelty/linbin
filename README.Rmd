@@ -25,7 +25,7 @@ To install in R:
 * the latest released version: `install.packages("linbin")`
 * the latest development version: [devtools](https://github.com/hadley/devtools)::`install_github("ezwelty/linbin")`
 
-Find out more by reading the illustrated [vignettes]() (*coming soon!*) or the original [journal article]() (*coming soon!*).
+Find out more by reading the illustrated [introduction](http://cran.r-project.org/web/packages/linbin/vignettes/introduction.html) and [examples](http://cran.r-project.org/web/packages/linbin/vignettes/examples.html) vignettes. For detailed function and dataset documentation, see the [reference manual](http://cran.r-project.org/web/packages/linbin/linbin.pdf). For the application of linbin to the study of stream fishes, see the original journal article (*in review!*).
 
 ### ...
 

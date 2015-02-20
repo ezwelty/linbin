@@ -17,7 +17,7 @@ citEntry(
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
 vers <- paste("R package version", meta$Version)
 title <- paste(meta$Package, ": ", meta$Title, sep = "")  
-url <- "https://github.com/ezwelty/linbin"
+url <- "http://cran.r-project.org/web/packages/linbin/"
 citEntry(
   entry = "Manual",
 	title = title,
