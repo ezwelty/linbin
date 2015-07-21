@@ -11,7 +11,7 @@ To install in R:
 
 Find out more by reading the illustrated [introduction](http://cran.r-project.org/web/packages/linbin/vignettes/introduction.html) and [examples](http://cran.r-project.org/web/packages/linbin/vignettes/examples.html) vignettes. For detailed function and dataset documentation, see the [reference manual](http://cran.r-project.org/web/packages/linbin/linbin.pdf). For the application of linbin to the study of stream fishes, see the original [journal article](http://www.tandfonline.com/doi/full/10.1080/02755947.2015.1044764):
 
-Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey J. Duda, Jonathan B. Armstrong (2015). Multiscale analysis of river networks using the R package linbin. North American Journal of Fisheries Management, 35(4):802–809. doi: [10.1080/02755947.2015.1044764](http://doi.org/10.1080/02755947.2015.1044764)
+*Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey J. Duda, Jonathan B. Armstrong (2015). Multiscale analysis of river networks using the R package linbin. North American Journal of Fisheries Management, 35(4):802–809. doi: [10.1080/02755947.2015.1044764](http://doi.org/10.1080/02755947.2015.1044764)*
 
 ### ...
 
