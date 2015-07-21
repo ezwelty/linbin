@@ -3,15 +3,20 @@ citHeader("To cite package 'linbin' in publications, please cite the original jo
 # NAJFM
 citEntry(
 	entry = "Article",
-	title = "Multiscale analysis of river networks using the linbin R package",
+	title = "Multiscale analysis of river networks using the R package linbin",
 	author = personList(as.person("Ethan Z. Welty"), 
 						          as.person("Christian E. Torgersen"), 
 						          as.person("Samuel J. Brenkman"), 
 						          as.person("Jeffrey D. Duda "),
                       as.person("Jonathan B. Armstrong")), 
-	year = "In review",
+	year = 2015,
 	journal = "North American Journal of Fisheries Management",
-	textVersion = "Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey D. Duda, and Jonathan B. Armstrong. In review. Multiscale analysis of river networks using the linbin R package. North American Journal of Fisheries Management.")
+	volume = 35,
+	number = 4,
+	pages = "802-809",
+	url = "http://doi.org/10.1080/02755947.2015.1044764",
+	textVersion = "Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey D. Duda, and Jonathan B. Armstrong (2015). Multiscale analysis of river networks using the R package linbin. North American Journal of Fisheries Management, 35(4):802-809. doi:10.1080/02755947.2015.1044764"
+	)
 
 # CRAN
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
@@ -25,4 +30,5 @@ citEntry(
 	year = year,
 	note = vers,
   url = url,
-	textVersion = paste("Ethan Z. Welty. ", year, ". ", title, ". ", vers, ". ", url, sep = ""))
+	textVersion = paste("Ethan Z. Welty. ", year, ". ", title, ". ", vers, ". ", url, sep = "")
+	)

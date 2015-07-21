@@ -24,7 +24,7 @@ library(linbin)
 
 The examples that follow use the datasets built into the linbin package to recreate the figures in the paper:
 
-> Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey D. Duda, and Jonathan B. Armstrong. In review. Multiscale analysis of river networks using the linbin R package. North American Journal of Fisheries Management.
+> Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey J. Duda, Jonathan B. Armstrong (2015). Multiscale analysis of river networks using the R package linbin. North American Journal of Fisheries Management, 35(4):802–809. doi: [10.1080/02755947.2015.1044764](http://doi.org/10.1080/02755947.2015.1044764)
   
 ### Elwha River : `elwha`
 
@@ -87,7 +87,7 @@ plot_events(e.bins, group.col = "group", data.cols = "ONXX.[0-9]+",
 
 ### NetMap : `netmap`
 
-NetMap ([terrainworks.com]{http://terrainworks.com}) employs digital elevation models to generate detailed river networks and compute biophysical variables for spatially continuous hydrologic units throughout the networks. The included dataset contains standard NetMap output for the entire network of the Dungeness River (Washington, USA). In this example, NetMap variables are plotted by distance upstream from the river mouth both for the mainstem and for the entire network. The variables are binned as means weighted by stream length, and include intrinsic potential (IP, a modeled estimate of likelihood of occurrence) for Chinook Salmon (IP\_CHINOOK), Coho Salmon (IP\_COHO), and steelhead (IP\_STEELHD), the fraction of favorable beaver habitat (BeavHab), and mean channel depth (DEPTH\_M):
+NetMap ([terrainworks.com](http://terrainworks.com)) employs digital elevation models to generate detailed river networks and compute biophysical variables for spatially continuous hydrologic units throughout the networks. The included dataset contains standard NetMap output for the entire network of the Dungeness River (Washington, USA). In this example, NetMap variables are plotted by distance upstream from the river mouth both for the mainstem and for the entire network. The variables are binned as means weighted by stream length, and include intrinsic potential (IP, a modeled estimate of likelihood of occurrence) for Chinook Salmon (IP\_CHINOOK), Coho Salmon (IP\_COHO), and steelhead (IP\_STEELHD), the fraction of favorable beaver habitat (BeavHab), and mean channel depth (DEPTH\_M):
 
 ```{r, fig.width = 5, fig.height = 5}
 # Load NetMap data
