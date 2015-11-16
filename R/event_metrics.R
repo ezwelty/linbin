@@ -120,7 +120,7 @@ event_overlaps <- function(e) {
   # Cut events at event endpoints
   # (don't cut new points out points, just cut lines)
   e.cut <- cut_events(e, c(e$from, e$to))
-  temp <- aggregate(e.cut$from, by = e.cut[c("from","to")], FUN = length)
+  temp <- stats::aggregate(e.cut$from, by = e.cut[c("from","to")], FUN = length)
   names(temp)[3] <- "n"
   return(temp)
 }

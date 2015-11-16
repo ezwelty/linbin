@@ -27,6 +27,7 @@
 #' @param ... Additional arguments passed to \code{\link{plot}}.
 #' @seealso \code{\link{seq_events}} for generating groups of sequential bins, \code{\link{sample_events}} to populate groups of bins with event data.
 #' @export
+#' @import graphics
 #' @examples
 #' e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15),
 #'             x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
@@ -81,7 +82,7 @@ plot_events <- function(e, group.col = NULL, groups = NULL, data.cols = NULL, di
   ### Plot each combination
   j <- 1
   for (i in seq_along(data.cols)) {
-    plot.col = if_else(is.null(col), grey.colors(length(data.cols[[i]])), col)
+    plot.col = if_else(is.null(col), grDevices::grey.colors(length(data.cols[[i]])), col)
     for (group in groups) {
       ind <- group == group.seq
       plot_events_single(e[ind, , drop = FALSE], data.cols[[i]], main = main[j], xlim = xlim, ylim = ylim, xticks = xticks, yticks = yticks, sigfigs = sigfigs, col = plot.col, border = border, lty = lty, lwd = lwd, xpd = xpd, plot.grid = plot.grid, xtick.labels = xtick.labels, ytick.labels = ytick.labels, ...)
@@ -127,7 +128,8 @@ plot_events <- function(e, group.col = NULL, groups = NULL, data.cols = NULL, di
 #' @param ... Additional arguments passed to \code{\link{plot}}.
 #' @seealso \code{\link{plot_events}}.
 #' @keywords internal
-plot_events_single <- function(e, cols, xlim = NULL, ylim = NULL, xticks = NULL, yticks = NULL, xtick.labels = NULL, ytick.labels = NULL, main = NA, xlab = NA, ylab = NA, plot.grid = FALSE, sigfigs = c(3, 3), col = grey.colors(length(cols)), border = par("fg"), lty = par("lty"), lwd = par("lwd"), xpd = FALSE, ...) {
+#' @import graphics
+plot_events_single <- function(e, cols, xlim = NULL, ylim = NULL, xticks = NULL, yticks = NULL, xtick.labels = NULL, ytick.labels = NULL, main = NA, xlab = NA, ylab = NA, plot.grid = FALSE, sigfigs = c(3, 3), col = grDevices::grey.colors(length(cols)), border = par("fg"), lty = par("lty"), lwd = par("lwd"), xpd = FALSE, ...) {
   
   # Compute plot limits
   if (is.null(xlim)) {

@@ -195,7 +195,7 @@ build_function_call <- function(fun, bin.col, data.cols, arg.cols = NULL, group.
       groups <- seq_along(group.cols) + 1
       y <- cbind(y, do.call(paste, c(y[groups], sep = ".")))
       # Reshape
-      y <- reshape(y[-groups], idvar = names(y[1]), timevar = names(y[length(y)]), direction = 'wide')
+      y <- stats::reshape(y[-groups], idvar = names(y[1]), timevar = names(y[length(y)]), direction = 'wide')
     }
     
     # Drop bin (id) column

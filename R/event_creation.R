@@ -114,7 +114,7 @@ as_events.data.frame <- function(x, from.col = 1, to.col = 2, ...) {
 #' @seealso \code{\link{events}} and \code{\link{as_events}} for creating event tables from existing objects.
 #' @export
 read_events <- function(file, from.col = 1, to.col = 2, sep = "", header = TRUE, ...) {
-  x <- read.table(file, sep = sep, header = header, ...)
+  x <- utils::read.table(file, sep = sep, header = header, ...)
   return(as_events(x, from.col, to.col))
 }
 
@@ -174,7 +174,7 @@ seq_events <- function(coverage, length.out = NULL, by = NULL, adaptive = FALSE)
         # Locate start of gaps in bin sequence
         pos <- findInterval(gaps$from, binseq, rightmost.closed = TRUE)
         temp <- numeric(length(binseq))
-        temp[unique(pos) + 1] <- aggregate(gap.length, by = list(pos), sum)$x
+        temp[unique(pos) + 1] <- stats::aggregate(gap.length, by = list(pos), sum)$x
         binseq <- binseq + cumsum(temp)
       }
       return(cbind(binseq[-length(binseq)], binseq[-1]))
