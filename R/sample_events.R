@@ -198,6 +198,9 @@ build_function_call <- function(fun, bin.col, data.cols, arg.cols = NULL, group.
       y <- stats::reshape(y[-groups], idvar = names(y[1]), timevar = names(y[length(y)]), direction = 'wide')
     }
     
+    # Sort by bin (id) column
+    y <- y[order(y[, 1]), ]
+    
     # Drop bin (id) column
     return(y[-1])
   }
