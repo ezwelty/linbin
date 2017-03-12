@@ -1,6 +1,6 @@
 Package: linbin
-Version: 0.1.1
-Date: 2015-11-16
+Version: 0.1.2
+Date: 2017-03-12
 Authors@R: c(
     person("Ethan Z.", "Welty", email = "ethan.welty+linbin@gmail.com", role = c("aut", "cre")),
     person("Christian E.", "Torgersen", role = "ctb", comment = "author support and guidance"),

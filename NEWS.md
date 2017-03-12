@@ -1,3 +1,7 @@
+# linbin 0.1.2
+
+* Fixes a bug that caused results from `sample_events()` to be returned out of order in certain cases when `by = ` was used in a sampling function.
+
 # linbin 0.1.1
 
 * Functions from core packages are now called explicitly, i.e. `package::function()`, with the exception of `graphics` functions which are all imported to the namespace.
