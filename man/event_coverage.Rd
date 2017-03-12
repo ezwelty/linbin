@@ -28,4 +28,3 @@ event_coverage(e, closed = FALSE) # retains isolated points and points adjacent 
 \seealso{
 \code{\link{event_gaps}} for gaps (the inverse of coverage), \code{\link{event_range}} for range (coverage with gaps ignored).
 }
-

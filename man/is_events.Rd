@@ -27,4 +27,3 @@ is_events(data.frame(from = 1, to = 3), verbose)   # TRUE
 \seealso{
 \code{\link{events}}, \code{\link{as_events}}, and \code{\link{read_events}} for creating valid event tables.
 }
-

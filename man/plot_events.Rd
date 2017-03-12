@@ -15,7 +15,7 @@ plot_events(e, group.col = NULL, groups = NULL, data.cols = NULL,
 \arguments{
 \item{e}{An event table.}
 
-\item{group.col}{Name or index of column defining the event groupping for plotting. If \code{NULL}, the events are treated as one group. Group \code{NA} is not plotted.}
+\item{group.col}{Name or index of column defining the event grouping for plotting. If \code{NULL}, the events are treated as one group. Group \code{NA} is not plotted.}
 
 \item{groups}{Vector of values from \code{group.col} specifying which groups to plot. If \code{NULL}, all groups are plotted by order of first appearance in \code{group.col}.}
 
@@ -59,7 +59,7 @@ plot_events(e, group.col = NULL, groups = NULL, data.cols = NULL,
 Plots an event table as a grid of bar plots.
 }
 \details{
-Given a groupping variable for the rows of the event table (e.g., groups of bins of different sizes used in \code{\link{sample_events}}), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column groups. In each plot, the specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
+Given a grouping variable for the rows of the event table (e.g., groups of bins of different sizes used in \code{\link{sample_events}}), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column groups. In each plot, the specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
 }
 \examples{
 e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15),
@@ -71,4 +71,3 @@ plot_events(e.bins, group.col = 'group')
 \seealso{
 \code{\link{seq_events}} for generating groups of sequential bins, \code{\link{sample_events}} to populate groups of bins with event data.
 }
-

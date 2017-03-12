@@ -26,4 +26,3 @@ find_intersecting_events(ex, events(5), equal.points = TRUE)  # equal points do 
 find_intersecting_events(ex, events(5), closed = TRUE)        # adjacent events intersect
 find_intersecting_events(ex, ex)
 }
-

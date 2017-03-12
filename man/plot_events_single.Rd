@@ -51,4 +51,3 @@ The specified event table columns are plotted together as stacked bars. Negative
 \code{\link{plot_events}}.
 }
 \keyword{internal}
-

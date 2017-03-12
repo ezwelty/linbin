@@ -19,4 +19,3 @@ event_range(events(c(1,5), c(1,5))) # gaps
 \seealso{
 \code{\link{event_coverage}} for an alternative that accounts for gaps.
 }
-

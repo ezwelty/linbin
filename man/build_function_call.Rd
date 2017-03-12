@@ -10,7 +10,7 @@ build_function_call(fun, bin.col, data.cols, arg.cols = NULL,
 \arguments{
 \item{fun}{Function to use.}
 
-\item{bin.col}{Column defining the groupping of bins.}
+\item{bin.col}{Column defining the grouping of bins.}
 
 \item{data.cols}{Columns to each be passed as first argument to the function.}
 
@@ -27,4 +27,3 @@ A function whose parent environment encloses all of its fixed arguments.
 Helper function for \code{\link{sampling_functions}}. Builds a function call in a enclosed environment with all fixed arguments and column indices so that the function can later be passed row subsets of an event table for sampling.
 }
 \keyword{internal}
-

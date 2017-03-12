@@ -29,4 +29,3 @@ The file is read into R by calling \code{\link{read.table}}. Any of its argument
 
 \code{\link{events}} and \code{\link{as_events}} for creating event tables from existing objects.
 }
-

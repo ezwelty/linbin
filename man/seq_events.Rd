@@ -35,4 +35,3 @@ seq_events(no.gaps, length.out = c(2, 4))              # "group" column added
 \seealso{
 \code{\link{event_range}}, \code{\link{event_coverage}}, and \code{\link{fill_event_gaps}} for building a \code{coverage} from an existing event table.
 }
-

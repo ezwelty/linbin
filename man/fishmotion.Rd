@@ -17,4 +17,3 @@ A pair of event tables (in a list) documenting the movements of tagged Coho Salm
   \item region - stream region (1 = 0 - 930 m, a cold downstream region with abundant and spawning sockeye salmon; 2 = 930 - 1360 m, a cold middle region with few if any sockeye salmon; 3 = > 1360 m, a warm upstream region where sockeye salmon were absent)
 }
 }
-

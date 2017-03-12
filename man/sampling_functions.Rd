@@ -7,7 +7,7 @@
 sampling_functions(col.names, ...)
 }
 \arguments{
-\item{col.names}{Names of columns, for converting column name indices to numeric colum indices.}
+\item{col.names}{Names of columns, for converting column name indices to numeric column indices.}
 
 \item{...}{Lists of sampling function parameters (see \code{\link{sample_events}}).}
 }
@@ -21,4 +21,3 @@ Helper function for \code{\link{sample_events}}. Parses function call parameters
 NOTE: Assumes bin assignments will be appended to the end of the event table.
 }
 \keyword{internal}
-

@@ -50,4 +50,3 @@ sample_events(e, bins, list(paste0, 'f', collapse = "."))
 \seealso{
 \code{\link{seq_events}} to generate sequential bins.
 }
-

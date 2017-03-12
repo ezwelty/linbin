@@ -22,4 +22,3 @@ List, matrix, or vector of the indices of the elements of \code{x} that yielded 
 Recursive wrapper for \code{grep} returning only full matches to elements of a character vector.
 }
 \keyword{internal}
-

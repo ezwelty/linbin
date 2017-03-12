@@ -30,4 +30,3 @@ events(c(0, 15, 25), c(10, 30, 35), x = 1, y = c('a', 'b', 'c'))
 
 \code{\link{as_events}} and \code{\link{read_events}} for coercing objects and files to event tables, \code{\link{is_events}} to validate event tables.
 }
-

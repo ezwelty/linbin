@@ -32,4 +32,3 @@ has_overlapping_events(events(c(0, 5, 5, 5, 10))) # has overlapping points
 \code{\link{event_overlaps}}
 }
 \keyword{internal}
-

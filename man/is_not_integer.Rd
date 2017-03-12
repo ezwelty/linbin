@@ -16,4 +16,3 @@ is_not_integer(x)
 Tests whether a vector is empty, non-numeric, or contains any non-integer numbers.
 }
 \keyword{internal}
-

@@ -20,4 +20,3 @@ Transforms events by scaling, then translating their endpoint positions. That is
 e <- events(c(10, 100), c(100, 1000))
 transform_events(e, scale = 2, translate = 1)
 }
-

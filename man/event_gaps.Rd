@@ -25,4 +25,3 @@ event_gaps(events(1:5), range = events(0, 6)) # gaps to edge of range
 \seealso{
 \code{\link{event_coverage}} for coverage (the inverse of gaps), \code{\link{fill_event_gaps}} for filling gaps with empty events.
 }
-

@@ -2,9 +2,9 @@
 % Please edit documentation in R/event_creation.R
 \name{as_events}
 \alias{as_events}
-\alias{as_events.data.frame}
-\alias{as_events.matrix}
 \alias{as_events.numeric}
+\alias{as_events.matrix}
+\alias{as_events.data.frame}
 \title{Coerce to an Event Table}
 \usage{
 as_events(x, ...)
@@ -33,6 +33,7 @@ Attempts to coerce an object to an event table.
 
 \item \code{data.frame}: Renames \code{from.col} and \code{to.col} to "from" and "to" as needed. Since these column names must be unique, other columns cannot also be called "from" or "to".
 }}
+
 \examples{
 as_events(1)
 as_events(1:5)
@@ -42,4 +43,3 @@ as_events(data.frame(x = 1, start = 1:5, stop = 1:5), "start", "stop")
 \seealso{
 \code{\link{events}} for creating event tables and \code{\link{read_events}} for reading files as event tables.
 }
-

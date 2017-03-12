@@ -18,4 +18,3 @@ NetMap (\href{http://www.terrainworks.com/}{terrainworks.com}) output for the en
   \item ... - see NetMap's \href{http://www.netmaptools.org/Pages/NetMapHelp/master_attribute_list.htm}{Master Attribute List}
 }
 }
-

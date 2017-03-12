@@ -25,4 +25,3 @@ event_overlaps(e)
 \seealso{
 \code{\link{event_coverage}}.
 }
-

@@ -20,4 +20,3 @@ Returns different values depending on whether a test is \code{TRUE} or \code{FAL
 \code{\link{ifelse}}
 }
 \keyword{internal}
-

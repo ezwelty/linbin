@@ -37,4 +37,3 @@ An event table containing the results of a survey of the Quinault River (Washing
   \item LATR - number of Pacific Lamprey (\emph{Lampetra tridentata})
 }
 }
-

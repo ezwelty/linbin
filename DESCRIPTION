@@ -30,4 +30,4 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/ezwelty/linbin
 BugReports: https://github.com/ezwelty/linbin/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

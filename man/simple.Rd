@@ -14,4 +14,3 @@ A simple, hypothetical event table.
   \item factor - a factor variable
 }
 }
-

@@ -38,4 +38,3 @@ An event table containing the results of a survey of the Elwha River (Washington
   \item ONKI - number of Coho Salmon (\emph{Oncorhynchus kisutch})
 }
 }
-

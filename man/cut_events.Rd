@@ -29,4 +29,3 @@ cut_events(e, events(c(0, 10, 10, 15)), scaled.cols = "x") # but not at line eve
 \seealso{
 \code{\link{crop_events}} for both cutting and removing events.
 }
-
