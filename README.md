@@ -15,6 +15,6 @@ Find out more by reading the illustrated [introduction](http://cran.r-project.or
 
 ### ...
 
-<img src="README-unnamed-chunk-3-1.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="tools/README-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 
 > *Longitudinal profiles of trout abundance throughout the Quinault River, Washington, USA plotted at a range of bin lengths.*

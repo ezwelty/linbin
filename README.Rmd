@@ -10,7 +10,7 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = ">",
-  fig.path = "README-",
+  fig.path = "tools/README-",
   fig.align = 'center',
   fig.show = 'hold'
 )
@@ -48,8 +48,8 @@ bins <- seq_events(event_range(e), by = bin.lengths / 1000) # km
 e.bins <- sample_events(e, bins, list(sum, "ONXX.*"), scaled.cols = "ONXX.*")
 
 # Plot binned data
-plot_events(e.bins, group.col = "group", data.cols = "ONXX.total", 
-            main = paste0("Bin length = ", prettyNum(bin.lengths, ","), " m"), 
+plot_events(e.bins, group.col = "group", data.cols = "ONXX.total",
+            main = paste0("Bin length = ", prettyNum(bin.lengths, ","), " m"),
             xlabs = "Distance upstream (km)", ylabs = "Trout abundance",
             dim = c(3, 3), byrow = TRUE, oma = c(3, 3, 2, 2))
 ```
