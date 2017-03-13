@@ -4,11 +4,11 @@ citHeader("To cite package 'linbin' in publications, please cite the original jo
 citEntry(
 	entry = "Article",
 	title = "Multiscale analysis of river networks using the R package linbin",
-	author = personList(as.person("Ethan Z. Welty"), 
-						          as.person("Christian E. Torgersen"), 
-						          as.person("Samuel J. Brenkman"), 
+	author = personList(as.person("Ethan Z. Welty"),
+						          as.person("Christian E. Torgersen"),
+						          as.person("Samuel J. Brenkman"),
 						          as.person("Jeffrey D. Duda "),
-                      as.person("Jonathan B. Armstrong")), 
+                      as.person("Jonathan B. Armstrong")),
 	year = 2015,
 	journal = "North American Journal of Fisheries Management",
 	volume = 35,
@@ -21,8 +21,8 @@ citEntry(
 # CRAN
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
 vers <- paste("R package version", meta$Version)
-title <- paste(meta$Package, ": ", meta$Title, sep = "")  
-url <- "http://cran.r-project.org/package=linbin"
+title <- paste(meta$Package, ": ", meta$Title, sep = "")
+url <- "https://cran.r-project.org/package=linbin"
 citEntry(
   entry = "Manual",
 	title = title,
