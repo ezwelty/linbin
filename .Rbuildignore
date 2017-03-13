@@ -2,6 +2,5 @@
 ^\.Rproj\.user$
 ^temp$
 ^README\.Rmd$
-^NEWS\.md$
 ^cran-comments\.md$
 ^README-.*\.png$
