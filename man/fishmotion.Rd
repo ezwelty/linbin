@@ -5,7 +5,7 @@
 \title{Fish Movements}
 \format{Two data frames \code{motion} and \code{origin} with 1,140 rows and 149 rows of 4 variables, respectively.}
 \source{
-Armstrong, J. B., D. E. Schindler, C. P. Ruff, G. T. Brooks, K. E. Bentley, and C. E. Torgersen. 2013. Diel horizontal migration in streams: juvenile fish exploit spatial heterogeneity in thermal and trophic resources. Ecology 94:2066-2075. DOI: \href{http://dx.doi.org/10.1890/12-1200.1}{10.1890/12-1200.1}
+Armstrong, J. B., D. E. Schindler, C. P. Ruff, G. T. Brooks, K. E. Bentley, and C. E. Torgersen. 2013. Diel horizontal migration in streams: juvenile fish exploit spatial heterogeneity in thermal and trophic resources. Ecology 94:2066-2075. DOI: \href{https://dx.doi.org/10.1890/12-1200.1}{10.1890/12-1200.1}
 }
 \description{
 A pair of event tables (in a list) documenting the movements of tagged Coho Salmon (\emph{Oncorhynchus kisutch}) in Bear Creek (Southwest Alaska, USA) for 29 July - 19 August 2008. Table \code{motion} lists individual fish residence time intervals in each of three stream regions, while table \code{origin} lists the study-wide residence time of each fish and the stream region in which the fish was first tagged.
