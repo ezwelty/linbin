@@ -3,4 +3,3 @@
 ^temp$
 ^README\.Rmd$
 ^cran-comments\.md$
-^README-.*\.png$
