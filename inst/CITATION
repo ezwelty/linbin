@@ -14,7 +14,7 @@ citEntry(
 	volume = 35,
 	number = 4,
 	pages = "802-809",
-	url = "http://doi.org/10.1080/02755947.2015.1044764",
+	url = "https://doi.org/10.1080/02755947.2015.1044764",
 	textVersion = "Ethan Z. Welty, Christian E. Torgersen, Samuel J. Brenkman, Jeffrey D. Duda, and Jonathan B. Armstrong (2015). Multiscale analysis of river networks using the R package linbin. North American Journal of Fisheries Management, 35(4):802-809. doi:10.1080/02755947.2015.1044764"
 	)
 
