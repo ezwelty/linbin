@@ -80,6 +80,8 @@ as_events.matrix <- function(x, from.col = 1, to.col = NULL, ...) {
 #' @describeIn as_events Renames \code{from.col} and \code{to.col} to "from" and "to" as needed. Since these column names must be unique, other columns cannot also be called "from" or "to".
 #' @export
 as_events.data.frame <- function(x, from.col = 1, to.col = NULL, ...) {
+  # Coerce to bare data.frame
+  x <- as.data.frame(x)
   # Ensure endpoint columns exist and are unique
   if (is.character(from.col)) {
     from.col <- which(names(x) %in% from.col)
