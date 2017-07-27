@@ -9,7 +9,7 @@
 #' event_range(events(1:5))            # no gaps
 #' event_range(events(c(1,5), c(1,5))) # gaps
 event_range <- function(e) {
-  return(as_events(range(e$from, e$to)))
+  as_events(range(e$from, e$to))
 }
 
 #' Event Coverage
@@ -43,7 +43,7 @@ event_coverage <- function(e, closed = TRUE) {
   if (any(add)) {
     e.coverage <- rbind(if_else(add[[1]], rep(e.range[[1]], 2), NULL), e.coverage, if_else(add[[2]], rep(e.range[[2]], 2), NULL))
   }
-  return(e.coverage)
+  e.coverage
 }
 
 #' Event Gaps
@@ -96,7 +96,7 @@ event_gaps <- function(e, closed = TRUE, range = NULL) {
   }
   # Build gaps event table
   # (remove possible duplicate point gaps)
-  return(unique(events(e$to[isgap], e$from[isgap + 1])))
+  unique(events(e$to[isgap], e$from[isgap + 1]))
 }
 
 #' Event Overlaps
@@ -122,5 +122,16 @@ event_overlaps <- function(e) {
   e.cut <- cut_events(e, c(e$from, e$to))
   temp <- stats::aggregate(e.cut$from, by = e.cut[c("from","to")], FUN = length)
   names(temp)[3] <- "n"
-  return(temp)
+  temp
+}
+
+#' Event midpoints
+#' 
+#' @param e Event table.
+#' @export
+#' @examples
+#' e <- events(c(0, 10, 15, 25, 30), c(10, 20, 25, 40, 30))
+#' event_midpoints(e)
+event_midpoints <- function(e) {
+  rowMeans(e[c("from", "to")])
 }

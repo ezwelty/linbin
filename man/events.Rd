@@ -4,7 +4,7 @@
 \alias{events}
 \title{Event Tables}
 \usage{
-events(from = numeric(), to = from, ...)
+events(from = numeric(), to = NULL, ...)
 }
 \arguments{
 \item{from, to}{Event endpoints, in any format coercible to single data frame columns. \code{from} and \code{to} are swapped as needed so that \code{to} > or = \code{from} on all rows. If \code{from} is the only non-empty argument, \code{\link{as_events}} is dispatched for object coercion.}

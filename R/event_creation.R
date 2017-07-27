@@ -14,14 +14,14 @@
 #' events(1, 5)
 #' events(1:5)
 #' events(c(0, 15, 25), c(10, 30, 35), x = 1, y = c('a', 'b', 'c'))
-events <- function(from = numeric(), to = from, ...) {
+events <- function(from = numeric(), to = NULL, ...) {
   # Attempt to coerce if only one non-empty argument
   if (!length(to) && !length(list(...)) && length(from)) {
-    return(as_events(from))
+    as_events(from)
+  } else {
+    # Otherwise, collect into data frame
+    as_events(data.frame(from, to, ...))
   }
-  # Otherwise, collect into data frame
-  x <- data.frame(from, to, ...)
-  return(as_events(x))
 }
 
 #' Coerce to an Event Table
@@ -40,7 +40,7 @@ events <- function(from = numeric(), to = from, ...) {
 #' as_events(data.frame(x = 1, start = 1:5, stop = 1:5), "start", "stop")
 as_events <- function(x, ...) {
   if (length(x) == 0) {
-    return(data.frame(from = numeric(), to = numeric()))
+    data.frame(from = numeric(), to = numeric())
   } else {
     UseMethod("as_events")
   }
@@ -56,16 +56,26 @@ as_events.numeric <- function(x, ...) {
     if (any(need.flip)) {
       e[need.flip, c("from", "to")] <- e[need.flip, c("to", "from")]
     }
-    return(e)
+    e
   } else {
     # Interpret as single point event
-    return(data.frame(from = x, to = x))
+    data.frame(from = x, to = x)
   }
+}
+#' @describeIn as_events Coerces to numeric before dispatching.
+#' @export
+as_events.POSIXt <- function(x, ...) {
+  as_events(as.numeric(x), ...)
+}
+#' @describeIn as_events Coerces to numeric before dispatching.
+#' @export
+as_events.Date <- function(x, ...) {
+  as_events(as.numeric(x), ...)
 }
 #' @describeIn as_events Converts the matrix to a data frame, then calls the \code{data.frame} method.
 #' @export
 as_events.matrix <- function(x, from.col = 1, to.col = NULL, ...) {
-  return(as_events(as.data.frame(x), from.col = from.col, to.col = to.col, ...))
+  as_events(as.data.frame(x), from.col = from.col, to.col = to.col, ...)
 }
 #' @describeIn as_events Renames \code{from.col} and \code{to.col} to "from" and "to" as needed. Since these column names must be unique, other columns cannot also be called "from" or "to".
 #' @export

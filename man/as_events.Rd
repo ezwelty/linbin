@@ -3,6 +3,8 @@
 \name{as_events}
 \alias{as_events}
 \alias{as_events.numeric}
+\alias{as_events.POSIXt}
+\alias{as_events.Date}
 \alias{as_events.matrix}
 \alias{as_events.data.frame}
 \title{Coerce to an Event Table}
@@ -10,6 +12,10 @@
 as_events(x, ...)
 
 \method{as_events}{numeric}(x, ...)
+
+\method{as_events}{POSIXt}(x, ...)
+
+\method{as_events}{Date}(x, ...)
 
 \method{as_events}{matrix}(x, from.col = 1, to.col = NULL, ...)
 
@@ -28,6 +34,10 @@ Attempts to coerce an object to an event table.
 \section{Methods (by class)}{
 \itemize{
 \item \code{numeric}: Expands a numeric vector into two columns of event endpoints.
+
+\item \code{POSIXt}: Coerces to numeric before dispatching.
+
+\item \code{Date}: Coerces to numeric before dispatching.
 
 \item \code{matrix}: Converts the matrix to a data frame, then calls the \code{data.frame} method.
 
