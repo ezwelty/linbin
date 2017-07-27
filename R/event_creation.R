@@ -14,7 +14,7 @@
 #' events(1, 5)
 #' events(1:5)
 #' events(c(0, 15, 25), c(10, 30, 35), x = 1, y = c('a', 'b', 'c'))
-events <- function(from = numeric(), to = numeric(), ...) {
+events <- function(from = numeric(), to = from, ...) {
   # Attempt to coerce if only one non-empty argument
   if (!length(to) && !length(list(...)) && length(from)) {
     return(as_events(from))
@@ -39,8 +39,8 @@ events <- function(from = numeric(), to = numeric(), ...) {
 #' as_events(cbind(1:5, 1:5), 1, 2)
 #' as_events(data.frame(x = 1, start = 1:5, stop = 1:5), "start", "stop")
 as_events <- function(x, ...) {
-  if (is.null(x)) {
-    return(data.frame(from = integer(), to = integer()))
+  if (length(x) == 0) {
+    return(data.frame(from = numeric(), to = numeric()))
   } else {
     UseMethod("as_events")
   }
@@ -64,18 +64,22 @@ as_events.numeric <- function(x, ...) {
 }
 #' @describeIn as_events Converts the matrix to a data frame, then calls the \code{data.frame} method.
 #' @export
-as_events.matrix <- function(x, from.col = 1, to.col = 2, ...) {
+as_events.matrix <- function(x, from.col = 1, to.col = min(from.col + 1, ncol(x)), ...) {
   return(as_events(as.data.frame(x), from.col = from.col, to.col = to.col, ...))
 }
 #' @describeIn as_events Renames \code{from.col} and \code{to.col} to "from" and "to" as needed. Since these column names must be unique, other columns cannot also be called "from" or "to".
 #' @export
-as_events.data.frame <- function(x, from.col = 1, to.col = 2, ...) {
+as_events.data.frame <- function(x, from.col = 1, to.col = min(from.col + 1, ncol(x)), ...) {
   # Ensure endpoint columns exist and are unique
   if (is.character(from.col)) {
     from.col <- which(names(x) %in% from.col)
   }
   if (is.character(to.col)) {
     to.col <- which(names(x) %in% to.col)
+  }
+  if (from.col == to.col) {
+    x[["to"]] <- x[[from.col]]
+    to.col <- ncol(x)
   }
   names(x)[c(from.col[1], to.col[1])] <- c("from", "to")
   occurrence <- lapply(rgrep_exact(c("from", "to"), names(x)), length)
