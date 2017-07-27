@@ -11,16 +11,16 @@ as_events(x, ...)
 
 \method{as_events}{numeric}(x, ...)
 
-\method{as_events}{matrix}(x, from.col = 1, to.col = 2, ...)
+\method{as_events}{matrix}(x, from.col = 1, to.col = NULL, ...)
 
-\method{as_events}{data.frame}(x, from.col = 1, to.col = 2, ...)
+\method{as_events}{data.frame}(x, from.col = 1, to.col = NULL, ...)
 }
 \arguments{
 \item{x}{Object to be coerced to an event table.}
 
 \item{...}{Additional arguments passed to or used by methods.}
 
-\item{from.col, to.col}{Names or indices of the columns in \code{x} containing the event endpoints. Values are swapped as needed to ensure that \code{to > or = from} on all rows.}
+\item{from.col, to.col}{Names or indices of the columns in \code{x} containing the event endpoints. Values are swapped as needed to ensure that \code{to > or = from} on all rows. If \code{NULL}, \code{to.col} defaults to \code{from.col + 1} (if column exists) or \code{from.col}.}
 }
 \description{
 Attempts to coerce an object to an event table.

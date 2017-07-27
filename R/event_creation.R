@@ -29,7 +29,7 @@ events <- function(from = numeric(), to = from, ...) {
 #' Attempts to coerce an object to an event table.
 #' 
 #' @param x Object to be coerced to an event table.
-#' @param from.col,to.col Names or indices of the columns in \code{x} containing the event endpoints. Values are swapped as needed to ensure that \code{to > or = from} on all rows.
+#' @param from.col,to.col Names or indices of the columns in \code{x} containing the event endpoints. Values are swapped as needed to ensure that \code{to > or = from} on all rows. If \code{NULL}, \code{to.col} defaults to \code{from.col + 1} (if column exists) or \code{from.col}.
 #' @param ... Additional arguments passed to or used by methods.
 #' @seealso \code{\link{events}} for creating event tables and \code{\link{read_events}} for reading files as event tables.
 #' @export
@@ -64,18 +64,21 @@ as_events.numeric <- function(x, ...) {
 }
 #' @describeIn as_events Converts the matrix to a data frame, then calls the \code{data.frame} method.
 #' @export
-as_events.matrix <- function(x, from.col = 1, to.col = min(from.col + 1, ncol(x)), ...) {
+as_events.matrix <- function(x, from.col = 1, to.col = NULL, ...) {
   return(as_events(as.data.frame(x), from.col = from.col, to.col = to.col, ...))
 }
 #' @describeIn as_events Renames \code{from.col} and \code{to.col} to "from" and "to" as needed. Since these column names must be unique, other columns cannot also be called "from" or "to".
 #' @export
-as_events.data.frame <- function(x, from.col = 1, to.col = min(from.col + 1, ncol(x)), ...) {
+as_events.data.frame <- function(x, from.col = 1, to.col = NULL, ...) {
   # Ensure endpoint columns exist and are unique
   if (is.character(from.col)) {
     from.col <- which(names(x) %in% from.col)
   }
   if (is.character(to.col)) {
     to.col <- which(names(x) %in% to.col)
+  }
+  if (is.null(to.col)) {
+    to.col <- pmin(from.col + 1, ncol(x))
   }
   if (from.col == to.col) {
     x[["to"]] <- x[[from.col]]
