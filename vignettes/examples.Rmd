@@ -87,7 +87,7 @@ plot_events(e.bins, group.col = "group", data.cols = "ONXX.[0-9]+",
 
 ### NetMap : `netmap`
 
-NetMap ([terrainworks.com](http://terrainworks.com)) employs digital elevation models to generate detailed river networks and compute biophysical variables for spatially continuous hydrologic units throughout the networks. The included dataset contains standard NetMap output for the entire network of the Dungeness River (Washington, USA). In this example, NetMap variables are plotted by distance upstream from the river mouth both for the mainstem and for the entire network. The variables are binned as means weighted by stream length, and include intrinsic potential (IP, a modeled estimate of likelihood of occurrence) for Chinook Salmon (IP\_CHINOOK), Coho Salmon (IP\_COHO), and steelhead (IP\_STEELHD), the fraction of favorable beaver habitat (BeavHab), and mean channel depth (DEPTH\_M):
+NetMap ([terrainworks.com](https://terrainworks.com)) employs digital elevation models to generate detailed river networks and compute biophysical variables for spatially continuous hydrologic units throughout the networks. The included dataset contains standard NetMap output for the entire network of the Dungeness River (Washington, USA). In this example, NetMap variables are plotted by distance upstream from the river mouth both for the mainstem and for the entire network. The variables are binned as means weighted by stream length, and include intrinsic potential (IP, a modeled estimate of likelihood of occurrence) for Chinook Salmon (IP\_CHINOOK), Coho Salmon (IP\_COHO), and steelhead (IP\_STEELHD), the fraction of favorable beaver habitat (BeavHab), and mean channel depth (DEPTH\_M):
 
 ```{r, fig.width = 5, fig.height = 5}
 # Load NetMap data

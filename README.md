@@ -18,7 +18,7 @@ To install in R:
 
 -   the latest released version: `install.packages("linbin")`
 -   the latest development version:
-    [devtools](https://github.com/hadley/devtools)::`install_github("ezwelty/linbin")`
+    [devtools](https://github.com/r-lib/devtools)::`install_github("ezwelty/linbin")`
 
 Find out more by reading the illustrated
 [introduction](https://CRAN.R-project.org/package=linbin/vignettes/introduction.html)
