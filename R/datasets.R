@@ -105,7 +105,7 @@ NULL
 #'
 #' \itemize{
 #'   \item from, to - start and end times as seconds since 1970-01-01 UTC (POSIXct)
-#'   \item fish.id - unique identifer for each fish
+#'   \item fish.id - unique identifier for each fish
 #'   \item region - stream region (1 = 0 - 930 m, a cold downstream region with abundant and spawning sockeye salmon; 2 = 930 - 1360 m, a cold middle region with few if any sockeye salmon; 3 = > 1360 m, a warm upstream region where sockeye salmon were absent)
 #' }
 #'
