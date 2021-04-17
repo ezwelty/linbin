@@ -91,13 +91,13 @@ plot_events <- function(e, group.col = NULL, groups = NULL, data.cols = NULL, di
   }
   
   ### Outer axis labels
-  if (!is.na(xlabs) && length(xlabs)) {
+  if (length(xlabs)) {
     n = length(xlabs)
     left = (0:(n - 1) / n) + par("plt")[1] * diff(par("fig")[1:2])
     right = ((1:n) / n) - (1 - par("plt")[2]) * diff(par("fig")[1:2])
     mtext(xlabs, side = 1, outer = TRUE, at = rowMeans(cbind(left, right)), cex = 0.95, line = max(0, par("oma")[1] - 2))
   }
-  if (!is.na(ylabs) && length(ylabs)) {
+  if (length(ylabs)) {
     n = length(ylabs)
     bottom = (0:(n - 1) / n) + par("plt")[3] * diff(par("fig")[3:4])
     top = ((1:n) / n) - (1 - par("plt")[4]) * diff(par("fig")[3:4])
