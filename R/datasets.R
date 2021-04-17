@@ -85,7 +85,7 @@ NULL
 
 #' Dungeness River (NetMap)
 #'
-#' NetMap (\href{http://www.terrainworks.com/}{terrainworks.com}) output for the entire fluvial network of the Dungeness River (Washington, USA). NetMap employs digital elevation models to generate detailed river networks and compute biophysical variables for spatially continuous hydrologic units throughout the networks.
+#' NetMap (\href{http://www.terrainworks.com}{terrainworks.com}) output for the entire fluvial network of the Dungeness River (Washington, USA). NetMap employs digital elevation models to generate detailed river networks and compute biophysical variables for spatially continuous hydrologic units throughout the networks.
 #'
 #' \itemize{
 #'   \item CHAN_ID - channel identifier (1 = mainstem, all others are tributaries)
@@ -95,7 +95,7 @@ NULL
 #' }
 #'
 #' @format A data frame with 16,616 rows and 47 variables.
-#' @source \url{http://www.terrainworks.com/netmap-demo-tools-download}
+#' @source \url{https://terrainworks.com}
 #' @name netmap
 NULL
 
