@@ -4,8 +4,14 @@
 \alias{sample_events}
 \title{Sample Events}
 \usage{
-sample_events(e, bins, ..., scaled.cols = NULL, col.names = NULL,
-  drop.empty = FALSE)
+sample_events(
+  e,
+  bins,
+  ...,
+  scaled.cols = NULL,
+  col.names = NULL,
+  drop.empty = FALSE
+)
 }
 \arguments{
 \item{e}{An event table.}

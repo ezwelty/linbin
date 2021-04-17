@@ -4,11 +4,27 @@
 \alias{plot_events_single}
 \title{Plot Events as Bars}
 \usage{
-plot_events_single(e, cols, xlim = NULL, ylim = NULL, xticks = NULL,
-  yticks = NULL, xtick.labels = NULL, ytick.labels = NULL, main = NA,
-  xlab = NA, ylab = NA, plot.grid = FALSE, sigfigs = c(3, 3),
-  col = grDevices::grey.colors(length(cols)), border = par("fg"),
-  lty = par("lty"), lwd = par("lwd"), xpd = FALSE, ...)
+plot_events_single(
+  e,
+  cols,
+  xlim = NULL,
+  ylim = NULL,
+  xticks = NULL,
+  yticks = NULL,
+  xtick.labels = NULL,
+  ytick.labels = NULL,
+  main = NA,
+  xlab = NA,
+  ylab = NA,
+  plot.grid = FALSE,
+  sigfigs = c(3, 3),
+  col = grDevices::grey.colors(length(cols)),
+  border = par("fg"),
+  lty = par("lty"),
+  lwd = par("lwd"),
+  xpd = FALSE,
+  ...
+)
 }
 \arguments{
 \item{e}{An event table.}

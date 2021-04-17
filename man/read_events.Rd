@@ -4,8 +4,7 @@
 \alias{read_events}
 \title{Read File as Event Table}
 \usage{
-read_events(file, from.col = 1, to.col = 2, sep = "", header = TRUE,
-  ...)
+read_events(file, from.col = 1, to.col = 2, sep = "", header = TRUE, ...)
 }
 \arguments{
 \item{file}{Name, \code{\link{connection}}, or \code{\link{url}} of the file to be read as an event table.}

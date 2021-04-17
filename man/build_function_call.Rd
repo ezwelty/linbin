@@ -4,8 +4,14 @@
 \alias{build_function_call}
 \title{Build Function Call}
 \usage{
-build_function_call(fun, bin.col, data.cols, arg.cols = NULL,
-  group.cols = NULL, arglist = NULL)
+build_function_call(
+  fun,
+  bin.col,
+  data.cols,
+  arg.cols = NULL,
+  group.cols = NULL,
+  arglist = NULL
+)
 }
 \arguments{
 \item{fun}{Function to use.}

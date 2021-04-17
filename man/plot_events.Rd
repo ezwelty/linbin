@@ -4,13 +4,33 @@
 \alias{plot_events}
 \title{Plot Events as Bar Plots}
 \usage{
-plot_events(e, group.col = NULL, groups = NULL, data.cols = NULL,
-  dim = NULL, byrow = TRUE, main = NULL, xlabs = character(),
-  ylabs = character(), xlim = NULL, ylim = NULL, xticks = NULL,
-  yticks = NULL, xtick.labels = NULL, ytick.labels = NULL,
-  plot.grid = FALSE, sigfigs = c(3, 3), col = NULL, border = par("fg"),
-  lty = par("lty"), lwd = par("lwd"), xpd = FALSE, mar = c(2.1, 2.75,
-  1.5, 0.5), oma = c(2, 2, 2, 2), ...)
+plot_events(
+  e,
+  group.col = NULL,
+  groups = NULL,
+  data.cols = NULL,
+  dim = NULL,
+  byrow = TRUE,
+  main = NULL,
+  xlabs = character(),
+  ylabs = character(),
+  xlim = NULL,
+  ylim = NULL,
+  xticks = NULL,
+  yticks = NULL,
+  xtick.labels = NULL,
+  ytick.labels = NULL,
+  plot.grid = FALSE,
+  sigfigs = c(3, 3),
+  col = NULL,
+  border = par("fg"),
+  lty = par("lty"),
+  lwd = par("lwd"),
+  xpd = FALSE,
+  mar = c(2.1, 2.75, 1.5, 0.5),
+  oma = c(2, 2, 2, 2),
+  ...
+)
 }
 \arguments{
 \item{e}{An event table.}

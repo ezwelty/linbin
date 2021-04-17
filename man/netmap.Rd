@@ -3,12 +3,14 @@
 \name{netmap}
 \alias{netmap}
 \title{Dungeness River (NetMap)}
-\format{A data frame with 16,616 rows and 47 variables.}
+\format{
+A data frame with 16,616 rows and 47 variables.
+}
 \source{
-\url{http://www.terrainworks.com/netmap-demo-tools-download}
+\url{https://terrainworks.com}
 }
 \description{
-NetMap (\href{http://www.terrainworks.com/}{terrainworks.com}) output for the entire fluvial network of the Dungeness River (Washington, USA). NetMap employs digital elevation models to generate detailed river networks and compute biophysical variables for spatially continuous hydrologic units throughout the networks.
+NetMap (\href{https://terrainworks.com}{terrainworks.com}) output for the entire fluvial network of the Dungeness River (Washington, USA). NetMap employs digital elevation models to generate detailed river networks and compute biophysical variables for spatially continuous hydrologic units throughout the networks.
 }
 \details{
 \itemize{

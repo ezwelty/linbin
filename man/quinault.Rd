@@ -3,7 +3,9 @@
 \name{quinault}
 \alias{quinault}
 \title{Quinault River Survey}
-\format{A data frame with 363 rows and 31 variables.}
+\format{
+A data frame with 363 rows and 31 variables.
+}
 \source{
 Samuel J. Brenkman (National Park Service, Olympic National Park, Washington, USA), unpublished data.
 }

@@ -3,7 +3,9 @@
 \name{fishmotion}
 \alias{fishmotion}
 \title{Fish Movements}
-\format{Two data frames \code{motion} and \code{origin} with 1,140 rows and 149 rows of 4 variables, respectively.}
+\format{
+Two data frames \code{motion} and \code{origin} with 1,140 rows and 149 rows of 4 variables, respectively.
+}
 \source{
 Armstrong, J. B., D. E. Schindler, C. P. Ruff, G. T. Brooks, K. E. Bentley, and C. E. Torgersen. 2013. Diel horizontal migration in streams: juvenile fish exploit spatial heterogeneity in thermal and trophic resources. Ecology 94:2066-2075. DOI: \href{https://dx.doi.org/10.1890/12-1200.1}{10.1890/12-1200.1}
 }

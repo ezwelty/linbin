@@ -3,7 +3,9 @@
 \name{simple}
 \alias{simple}
 \title{Simple Event Table}
-\format{A data frame with 11 rows and 7 variables.}
+\format{
+A data frame with 11 rows and 7 variables.
+}
 \description{
 A simple, hypothetical event table.
 }
