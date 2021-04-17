@@ -1,3 +1,8 @@
+# linbin 0.1.3
+
+* Declare `rmarkdown` as a soft dependency (see https://github.com/yihui/knitr/issues/1864).
+* Update external links to resolve redirects or to follow the CRAN canonical form.
+
 # linbin 0.1.2
 
 * Fixes a bug that caused results from `sample_events()` to be returned out of order in certain cases when `by = ` was used in a sampling function.
