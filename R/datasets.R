@@ -44,7 +44,7 @@ NULL
 #' }
 #'
 #' @format A data frame with 249 rows and 33 variables.
-#' @source Brenkman, S. J., J. J. Duda, C. E. Torgersen, E. Z. Welty, G. R. Pess, R. Peters, and M. L. McHenry. 2012. A riverscape perspective of Pacific salmonids and aquatic habitats prior to large-scale dam removal in the Elwha River, Washington, USA. Fisheries Management and Ecology 19:36-53. DOI: \href{http://doi.org/10.1111/j.1365-2400.2011.00815.x}{10.1111/j.1365-2400.2011.00815.x}
+#' @source Brenkman, S. J., J. J. Duda, C. E. Torgersen, E. Z. Welty, G. R. Pess, R. Peters, and M. L. McHenry. 2012. A riverscape perspective of Pacific salmonids and aquatic habitats prior to large-scale dam removal in the Elwha River, Washington, USA. Fisheries Management and Ecology 19:36-53. DOI: \doi{10.1111/j.1365-2400.2011.00815.x}
 #' @name elwha
 NULL
 
@@ -110,6 +110,6 @@ NULL
 #' }
 #'
 #' @format Two data frames \code{motion} and \code{origin} with 1,140 rows and 149 rows of 4 variables, respectively.
-#' @source Armstrong, J. B., D. E. Schindler, C. P. Ruff, G. T. Brooks, K. E. Bentley, and C. E. Torgersen. 2013. Diel horizontal migration in streams: juvenile fish exploit spatial heterogeneity in thermal and trophic resources. Ecology 94:2066-2075. DOI: \href{https://doi.org/10.1890/12-1200.1}{10.1890/12-1200.1}
+#' @source Armstrong, J. B., D. E. Schindler, C. P. Ruff, G. T. Brooks, K. E. Bentley, and C. E. Torgersen. 2013. Diel horizontal migration in streams: juvenile fish exploit spatial heterogeneity in thermal and trophic resources. Ecology 94:2066-2075. DOI: \doi{10.1890/12-1200.1}
 #' @name fishmotion
 NULL
