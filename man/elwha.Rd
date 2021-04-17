@@ -7,7 +7,7 @@
 A data frame with 249 rows and 33 variables.
 }
 \source{
-Brenkman, S. J., J. J. Duda, C. E. Torgersen, E. Z. Welty, G. R. Pess, R. Peters, and M. L. McHenry. 2012. A riverscape perspective of Pacific salmonids and aquatic habitats prior to large-scale dam removal in the Elwha River, Washington, USA. Fisheries Management and Ecology 19:36-53. DOI: \href{http://dx.doi.org/10.1111/j.1365-2400.2011.00815.x}{10.1111/j.1365-2400.2011.00815.x}
+Brenkman, S. J., J. J. Duda, C. E. Torgersen, E. Z. Welty, G. R. Pess, R. Peters, and M. L. McHenry. 2012. A riverscape perspective of Pacific salmonids and aquatic habitats prior to large-scale dam removal in the Elwha River, Washington, USA. Fisheries Management and Ecology 19:36-53. DOI: \href{http://doi.org/10.1111/j.1365-2400.2011.00815.x}{10.1111/j.1365-2400.2011.00815.x}
 }
 \description{
 An event table containing the results of a survey of the Elwha River (Washington, USA) carried out in August-September 2008. Both physical variables and fish counts were collected.
