@@ -159,7 +159,7 @@ plot_events(e.bins, data.cols = "mean.width", col = "grey", border = "#666666",
   
   - `...` — Any additional named arguments are passed directly to the function unchanged.
 
-Binning begins by cutting events at bin endpoints using `cut_events()`. When events are cut, event variables can be rescaled by the relative lengths of the resulting event segments by naming them in the argument `scaled.cols`. This is typically the desired bevavior when computing sums, since otherwise events will contribute their full total to each bin they intersect.
+Binning begins by cutting events at bin endpoints using `cut_events()`. When events are cut, event variables can be rescaled by the relative lengths of the resulting event segments by naming them in the argument `scaled.cols`. This is typically the desired behavior when computing sums, since otherwise events will contribute their full total to each bin they intersect.
 
 With the `simple` event table as an example:
 
@@ -201,7 +201,7 @@ knitr::kable(e.bins)
 
 ### Plot the Binned Data : `plot_events()`
 
-`plot_events()` plots an event table as a grid of bar plots. Given a groupping variable for the rows of the event table (e.g., groups of bins of different sizes), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column group. If a column group contains multiple event columns, they are plotted together as stacked bars. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is better to use `sample_events()` with groups of non-overlapping bins to flatten the data to 1-dimensions before plotting. Many arguments are available to control the appearance of the plot grid. The default output looks like the following:
+`plot_events()` plots an event table as a grid of bar plots. Given a grouping variable for the rows of the event table (e.g., groups of bins of different sizes), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column group. If a column group contains multiple event columns, they are plotted together as stacked bars. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is better to use `sample_events()` with groups of non-overlapping bins to flatten the data to 1-dimensions before plotting. Many arguments are available to control the appearance of the plot grid. The default output looks like the following:
 
 ```{r fig.height = 4, fig.width = 5}
 e <- simple

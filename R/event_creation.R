@@ -127,7 +127,7 @@ as_events.data.frame <- function(x, from.col = 1, to.col = NULL, ...) {
 #' @param file Name, \code{\link{connection}}, or \code{\link{url}} of the file to be read as an event table.
 #' @param from.col,to.col Names or indices of the columns containing event endpoints. Values are swapped as needed to ensure that \code{to > or = from} on all rows.
 #' @param header Logical value indicating whether the file contains column names as its first line. If \code{FALSE}, columns will be named "V" followed by the column number, unless \code{col.names} (a vector of optional column names) is provided as an additional argument.
-#' @param sep Character seperating values on each line of the file. If \code{sep = ""} (the default), the separator is 'white space' (that is, any combination of one or more spaces, tabs, newlines and carriage returns).
+#' @param sep Character separating values on each line of the file. If \code{sep = ""} (the default), the separator is 'white space' (that is, any combination of one or more spaces, tabs, newlines and carriage returns).
 #' @param ... Additional arguments, of the form \code{tag = value}, to be passed directly to \code{\link{read.table}} to control how the file is read.
 #' @seealso \code{\link{read.table}}.
 #' @seealso \code{\link{events}} and \code{\link{as_events}} for creating event tables from existing objects.

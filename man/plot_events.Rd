@@ -45,7 +45,7 @@ plot_events(
 
 \item{byrow}{Plots are added by column group, then bin group. If \code{TRUE}, plots are added by rows, rather than columns, to the grid.}
 
-\item{main}{Titles for each plot. If \code{NULL}, plots are titled by the column names, pasted together with seperator " + ". Set \code{main = NA} to not title the plots.}
+\item{main}{Titles for each plot. If \code{NULL}, plots are titled by the column names, pasted together with separator " + ". Set \code{main = NA} to not title the plots.}
 
 \item{xlabs, ylabs}{Labels arranged at equal intervals along the bottom and left side of the plot grid. These are drawn in the outer margins of the figure, so \code{oma[1]} and \code{oma[2]} must be non-zero.}
 
@@ -53,7 +53,7 @@ plot_events(
 
 \item{xticks, yticks}{The positions of x and y tick marks for all plots. If \code{NULL}, only the min and max x and y are ticked (and 0 as needed for y). If \code{\link{axTicks}}, that function will be used to calculate R default tick mark positions. If \code{NA}, no ticks are drawn.}
 
-\item{xtick.labels, ytick.labels}{The labels for the x and y tick marks, coerced to character vectors and recyled as necessary. If \code{NULL}, the positions of the ticks are used as the labels, formatted with \code{sigfigs}. If \code{NA}, the tick marks are not labeled.}
+\item{xtick.labels, ytick.labels}{The labels for the x and y tick marks, coerced to character vectors and recycled as necessary. If \code{NULL}, the positions of the ticks are used as the labels, formatted with \code{sigfigs}. If \code{NA}, the tick marks are not labeled.}
 
 \item{plot.grid}{If \code{TRUE}, a lined horizontal grid is plotted at the yticks.}
 
@@ -79,7 +79,7 @@ plot_events(
 Plots an event table as a grid of bar plots.
 }
 \details{
-Given a grouping variable for the rows of the event table (e.g., groups of bins of different sizes used in \code{\link{sample_events}}), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column groups. In each plot, the specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
+Given a grouping variable for the rows of the event table (e.g., groups of bins of different sizes used in \code{\link{sample_events}}), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column groups. In each plot, the specified event table columns are plotted together as stacked bars. Negative and positive values are stacked separately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
 }
 \examples{
 e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15),

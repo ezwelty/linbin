@@ -2,7 +2,7 @@
 #' 
 #' Plots an event table as a grid of bar plots.
 #' 
-#' Given a grouping variable for the rows of the event table (e.g., groups of bins of different sizes used in \code{\link{sample_events}}), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column groups. In each plot, the specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
+#' Given a grouping variable for the rows of the event table (e.g., groups of bins of different sizes used in \code{\link{sample_events}}), and groups of columns to plot, bar plots are drawn in a grid for each combination of event and column groups. In each plot, the specified event table columns are plotted together as stacked bars. Negative and positive values are stacked separately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
 #'
 #' @param e An event table.
 #' @param group.col Name or index of column defining the event grouping for plotting. If \code{NULL}, the events are treated as one group. Group \code{NA} is not plotted.
@@ -10,11 +10,11 @@
 #' @param data.cols Names or indices of columns to plot, given as a list of character or numeric vectors. If multiple columns are specified, their bars are stacked together in one plot. Names are interpreted as regular expressions (\code{\link{regex}}) matching full column names. If \code{NULL}, all columns not named \code{from}, \code{to}, or \code{group.col} are each plotted individually in order of appearance.
 #' @param dim The row and column dimensions of the grid. If \code{NULL}, the grid is column groups (rows) by event groups (columns) if \code{byrow = TRUE}, and event groups (rows) by column groups (columns) if \code{byrow = FALSE}.
 #' @param byrow Plots are added by column group, then bin group. If \code{TRUE}, plots are added by rows, rather than columns, to the grid.
-#' @param main Titles for each plot. If \code{NULL}, plots are titled by the column names, pasted together with seperator " + ". Set \code{main = NA} to not title the plots.
+#' @param main Titles for each plot. If \code{NULL}, plots are titled by the column names, pasted together with separator " + ". Set \code{main = NA} to not title the plots.
 #' @param xlabs,ylabs Labels arranged at equal intervals along the bottom and left side of the plot grid. These are drawn in the outer margins of the figure, so \code{oma[1]} and \code{oma[2]} must be non-zero.
 #' @param xlim,ylim Limits for the x and y axes of all plots. If \code{NULL}, limits are set to the range of the data and the y limits extended as needed to include 0.
 #' @param xticks,yticks The positions of x and y tick marks for all plots. If \code{NULL}, only the min and max x and y are ticked (and 0 as needed for y). If \code{\link{axTicks}}, that function will be used to calculate R default tick mark positions. If \code{NA}, no ticks are drawn.
-#' @param xtick.labels,ytick.labels The labels for the x and y tick marks, coerced to character vectors and recyled as necessary. If \code{NULL}, the positions of the ticks are used as the labels, formatted with \code{sigfigs}. If \code{NA}, the tick marks are not labeled.
+#' @param xtick.labels,ytick.labels The labels for the x and y tick marks, coerced to character vectors and recycled as necessary. If \code{NULL}, the positions of the ticks are used as the labels, formatted with \code{sigfigs}. If \code{NA}, the tick marks are not labeled.
 #' @param plot.grid If \code{TRUE}, a lined horizontal grid is plotted at the yticks.
 #' @param sigfigs The maximum significant figures of the x and y axis labels.
 #' @param col Color(s) for the bars in each plot. If \code{NA}, bars are transparent. If \code{NULL}, a grey palette is used.
@@ -109,7 +109,7 @@ plot_events <- function(e, group.col = NULL, groups = NULL, data.cols = NULL, di
 #' 
 #' Plots event table columns as vertical bars.
 #' 
-#' The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
+#' The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked separately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
 #' 
 #' @param e An event table.
 #' @param cols Names or indices of the event table columns to plot together as stacked bars.

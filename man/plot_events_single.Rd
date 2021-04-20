@@ -61,7 +61,7 @@ plot_events_single(
 Plots event table columns as vertical bars.
 }
 \details{
-The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked seperately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
+The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked separately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
 }
 \seealso{
 \code{\link{plot_events}}.
