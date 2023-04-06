@@ -89,5 +89,5 @@ e.bins <- sample_events(e, bins, list(sum, c('x', 'length')), scaled.cols = 'len
 plot_events(e.bins, group.col = 'group')
 }
 \seealso{
-\code{\link{seq_events}} for generating groups of sequential bins, \code{\link{sample_events}} to populate groups of bins with event data.
+\code{\link{plot_events_single}} for more control over individual plots, \code{\link{seq_events}} for generating groups of sequential bins, \code{\link{sample_events}} to populate groups of bins with event data.
 }

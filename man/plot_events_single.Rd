@@ -61,9 +61,15 @@ plot_events_single(
 Plots event table columns as vertical bars.
 }
 \details{
-The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked separately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
+The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked separately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting, then call this function for each bin group (if using multiple bin groups).
+}
+\examples{
+e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15),
+            x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
+bins <- seq_events(event_coverage(e), c(8, 4, 2, 1))
+e.bins <- sample_events(e, bins, list(sum, c('x', 'length')), scaled.cols = 'length')
+plot_events_single(e.bins[e.bins$group == 1, ], cols = 'x')
 }
 \seealso{
 \code{\link{plot_events}}.
 }
-\keyword{internal}

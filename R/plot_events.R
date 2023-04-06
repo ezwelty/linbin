@@ -25,7 +25,7 @@
 #' @param mar Numerical vector of the form c(bottom, left, top, right) giving the size of the inner margins of each plot in lines of text.
 #' @param oma Numeric vector of the form c(bottom, left, top, right) giving the size of the outer figure margins in lines of text.
 #' @param ... Additional arguments passed to \code{\link{plot}}.
-#' @seealso \code{\link{seq_events}} for generating groups of sequential bins, \code{\link{sample_events}} to populate groups of bins with event data.
+#' @seealso \code{\link{plot_events_single}} for more control over individual plots, \code{\link{seq_events}} for generating groups of sequential bins, \code{\link{sample_events}} to populate groups of bins with event data.
 #' @export
 #' @import graphics
 #' @examples
@@ -109,7 +109,7 @@ plot_events <- function(e, group.col = NULL, groups = NULL, data.cols = NULL, di
 #' 
 #' Plots event table columns as vertical bars.
 #' 
-#' The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked separately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting.
+#' The specified event table columns are plotted together as stacked bars. Negative and positive values are stacked separately from the \code{y = 0} baseline. Events with \code{NA} are not shown, differentiating them from zero-valued events which are drawn as thin black lines. Point events are drawn as thin vertical lines. Overlapping events are drawn as overlapping bars, so it is best to use \code{\link{sample_events}} with non-overlapping bins to flatten the data before plotting, then call this function for each bin group (if using multiple bin groups).
 #' 
 #' @param e An event table.
 #' @param cols Names or indices of the event table columns to plot together as stacked bars.
@@ -127,8 +127,14 @@ plot_events <- function(e, group.col = NULL, groups = NULL, data.cols = NULL, di
 #' @param xpd Logical value or \code{NA}. If \code{FALSE}, all plotting is clipped to the plot region, if \code{TRUE}, all plotting is clipped to the figure region, and if \code{NA}, all plotting is clipped to the device region.
 #' @param ... Additional arguments passed to \code{\link{plot}}.
 #' @seealso \code{\link{plot_events}}.
-#' @keywords internal
+#' @export
 #' @import graphics
+#' @examples
+#' e <- events(from = c(0, 10, 15, 25), to = c(10, 20, 25, 40), length = c(10, 10, 10, 15),
+#'             x = c(1, 2, 1, 1), f = c('a', 'b', 'a', 'a'))
+#' bins <- seq_events(event_coverage(e), c(8, 4, 2, 1))
+#' e.bins <- sample_events(e, bins, list(sum, c('x', 'length')), scaled.cols = 'length')
+#' plot_events_single(e.bins[e.bins$group == 1, ], cols = 'x')
 plot_events_single <- function(e, cols, xlim = NULL, ylim = NULL, xticks = NULL, yticks = NULL, xtick.labels = NULL, ytick.labels = NULL, main = NA, xlab = NA, ylab = NA, plot.grid = FALSE, sigfigs = c(3, 3), col = grDevices::grey.colors(length(cols)), border = par("fg"), lty = par("lty"), lwd = par("lwd"), xpd = FALSE, ...) {
   
   # Compute plot limits
